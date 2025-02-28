@@ -1,6 +1,6 @@
 import Produto from "./Produtos";
 
-export default interface Usuario {
+export default interface Restaurante {
   id: number;
   nome: string;
   usuario: string;
