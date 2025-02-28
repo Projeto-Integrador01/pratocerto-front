@@ -1,4 +1,21 @@
-function Navbar() {
+import { useContext } from "react";
+import { ToastAlerta } from "../../utils/ToastAlerta";
+import { AuthContext } from "../../contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+
+function Navbar() {    
+    
+    const navigate = useNavigate();
+
+    const { usuario, handleLogout } = useContext(AuthContext)
+
+    function logout() {
+
+        handleLogout()
+        ToastAlerta('O Usuário foi desconectado com sucesso!', 'info')
+        navigate('/')
+    }
+    
     return (
         <>
             <div className='w-full flex justify-center py-4
@@ -11,7 +28,7 @@ function Navbar() {
                         Categorias
                         Produtos
                         Vegetarianos
-                        Veganos
+                        <Link to='/produtos' className='hover:text-heavyorange'>Veganos</Link>
                         Restaurantes
                         Login
                         Sair
