@@ -21,9 +21,20 @@ export const login = async (url: string, dados: Object, setDados: Function) => {
 };
 
 export const buscar = async (url: string, setDados: Function) => {
+<<<<<<< HEAD
   const resposta = await api.get(url);
   setDados(resposta.data);
 };
+=======
+    const resposta = await api.get(url)
+    setDados(resposta.data)
+}
+
+export const buscarLogado = async (url: string, setDados: Function, header: object) => {
+    const resposta = await api.get(url, header)
+    setDados(resposta.data)
+}
+>>>>>>> developer
 
 export const buscarLogado = async (url: string, setDados: Function) => {
   const resposta = await api.get(url);
