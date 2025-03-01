@@ -5,18 +5,9 @@ interface CardProdutosProps {
   produto: Produto;
 }
 
-
- 
+const navigate = useNavigate();
 
 function CardProdutos({ produto }: CardProdutosProps) {
-
-  const navigate = useNavigate();
-
-  function retornar(){
-    navigate('/produtos');
-  }
-  
-
   return (
     <div className="border-slate-900 border flex flex-col rounded overflow-hidden justify-between">
       <div>
@@ -42,11 +33,12 @@ function CardProdutos({ produto }: CardProdutosProps) {
       </div>
 
       <div className="flex">
-      <button
-          onClick={retornar} // ✅ Correção: Agora é um botão normal chamando a função
-          className="w-full text-slate-100 bg-gray-400 hover:bg-gray-600 flex items-center justify-center py-2">
-          Cancelar
-        </button>
+        <Link
+          to={`/`}
+          className="w-full text-slate-100 bg-indigo-400 hover:bg-indigo-800 flex items-center justify-center py-2"
+        >
+          <button>Cancelar</button>
+        </Link>
         <Link
           to={`//${produto.id}`}
           className="text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center"

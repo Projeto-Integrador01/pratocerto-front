@@ -44,7 +44,8 @@ function CardProdutos({ produto }: CardProdutosProps) {
       <div className="flex">
       <button
           onClick={retornar} // ✅ Correção: Agora é um botão normal chamando a função
-          className="w-full text-slate-100 bg-gray-400 hover:bg-gray-600 flex items-center justify-center py-2">
+          className="w-full text-slate-100 bg-gray-400 hover:bg-gray-600 flex items-center justify-center py-2"
+        >
           Cancelar
         </button>
         <Link
