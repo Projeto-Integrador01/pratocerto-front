@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function Navbar() {
     return (
         <>
@@ -12,7 +14,7 @@ function Navbar() {
                         Produtos
                         Vegetarianos
                         Veganos
-                        Restaurantes
+                        <Link to='/restaurantes' className='hover:underline'>Restaurantes</Link>
                         Login
                         Sair
                     </div>
