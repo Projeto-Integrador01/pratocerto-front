@@ -26,7 +26,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         foto: "",
         endereco: "",
         token: "", 
-        produto: null
     })
 
     
