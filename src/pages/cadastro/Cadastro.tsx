@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Restaurante from "../../models/Restaurante";
 import { cadastrarRestaurante } from "../../services/Service";
 import { ToastAlerta } from "../../utils/ToastAlerta";
+import { RotatingLines } from "react-loader-spinner";
 
 function Cadastro () {
     const navigate = useNavigate()
@@ -57,7 +58,7 @@ function Cadastro () {
           }
 
           } else{
-            ToastAlerta("Os dados do Usuário estão inconsistentes!", "erro")
+            ToastAlerta("Os dados do restaurante estão inconsistentes!", "erro")
             setRestaurante({ ...restaurante, senha: '' })
             setConfirmaSenha('')
           }
@@ -80,7 +81,7 @@ function Cadastro () {
                       id="nome"
                       name="nome"
                       placeholder="Nome"
-                      className="border-2 border-heavyorange rounded p-2"
+                      className="border-2 border-black rounded p-2"
                      value = {restaurante.nome}
                      onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -92,7 +93,7 @@ function Cadastro () {
                       id="usuario"
                       name="usuario"
                       placeholder="Usuario"
-                      className="border-2 border-heavyorange rounded p-2"
+                      className="border-2 border-black rounded p-2"
                       value = {restaurante.usuario}
                      onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -104,7 +105,7 @@ function Cadastro () {
                       id="foto"
                       name="foto"
                       placeholder="Foto"
-                      className="border-2 border-heavyorange rounded p-2"
+                      className="border-2 border-black rounded p-2"
                       value = {restaurante.foto}
                      onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -116,7 +117,7 @@ function Cadastro () {
                       id="senha"
                       name="senha"
                       placeholder="Senha"
-                      className="border-2 border-heavyorange rounded p-2"
+                      className="border-2 border-black rounded p-2"
                       value = {restaurante.senha}
                      onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                     />
@@ -128,20 +129,30 @@ function Cadastro () {
                       id="confirmarSenha"
                       name="confirmarSenha"
                       placeholder="Confirmar Senha"
-                      className="border-2 border-heavyorange rounded p-2"
+                      className="border-2 border-black rounded p-2"
                       value={confirmaSenha}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => handleConfirmarSenha(e)}
                     />
                   </div>
+                  <div className="flex flex-col w-full">
+                    <label htmlFor="endereco">Endereço</label>
+                    <input
+                      type="text"
+                      id="endereco"
+                      name="endereco"
+                      placeholder="endereco"
+                      className="border-2 border-black rounded p-2"
+                      value = {restaurante.endereco}
+                     onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+                    />
+                  </div>
                   <div className="flex justify-around w-full gap-8">
-                    <button className='rounded text-white bg-superblack 
-                          hover:bg-superblack hover:opacity-80 w-1/2 py-2' onClick={retornar}>
+                    <button className='rounded text-white bg-black hover:opacity-80 w-1/2 py-2' onClick={retornar}>
                       Cancelar
                     </button>
                     <button 
                         type='submit'
-                        className='rounded text-white bg-darkorange 
-                                   hover:bg-darkorange hover:opacity-75 w-1/2 py-2
+                        className='rounded text-white bg-black hover:opacity-75 w-1/2 py-2
                                    flex justify-center' 
                         >
                           {isLoading ? <RotatingLines
