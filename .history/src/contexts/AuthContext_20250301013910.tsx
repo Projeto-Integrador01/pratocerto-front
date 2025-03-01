@@ -2,9 +2,11 @@ import { createContext, ReactNode, useState } from "react";
 import RestauranteLogin from "../models/RestauranteLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
 import { login } from "../services/Service";
+import Restaurante from "../models/Restaurante";
 
 interface AuthContextProps{
     usuario: RestauranteLogin
+    restaurante: Restaurante
     handleLogout(): void
     handleLogin(usuario: RestauranteLogin): Promise<void>
     isLoading: boolean
@@ -58,7 +60,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario,  handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ usuario, restaurante ,  handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     )

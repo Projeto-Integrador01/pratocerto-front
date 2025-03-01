@@ -22,7 +22,7 @@ function Navbar() {
                     <span>Veganos</span>
                     <span>Restaurantes</span>
 
-                    {usuario.id === 0 ? (
+s                    {usuario.id === 0 ? (
                         <Link to="/login">Login</Link>
                     ) : (
                         <button className="bg-red-500 px-3 py-1 rounded">Sair</button>

@@ -2,9 +2,11 @@ import { createContext, ReactNode, useState } from "react";
 import RestauranteLogin from "../models/RestauranteLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
 import { login } from "../services/Service";
+import Restaurante from "../models/Restaurante";
 
 interface AuthContextProps{
     usuario: RestauranteLogin
+    restaurante: Restaurante
     handleLogout(): void
     handleLogin(usuario: RestauranteLogin): Promise<void>
     isLoading: boolean
@@ -33,16 +35,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
       
     const [isLoading, setIsLoading] = useState(false)
 
-    async function handleLogin(restauranteLogin: RestauranteLogin) {
-        setIsLoading(true);
+    async function handleLogin (restauranteLogin: RestauranteLogin){
+        setIsLoading(true)
         try {
-            await login('/restaurantes/logar', restauranteLogin, setUsuario); // Aqui você vai preencher o 'usuario' com os dados do restaurante
-            ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso");
+            await login('/restaurantes/logar', restauranteLogin, (resposta: RestauranteLogin) => {
+                console.log("Resposta do backend:", resposta) // 🔍 Verifique o que está vindo
+                setUsuario(resposta)
+                setRestaurante({
+                    id: resposta.id,  // Pegamos o id do usuário logado
+                    nome: resposta.nome,
+                    usuario: resposta.usuario,
+                    senha: resposta.senha,
+                    foto: resposta.foto,
+                    endereco: resposta.endereco,
+                    produto: null
+                })
+            })
+            ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso")
         } catch (error) {
-            ToastAlerta("Os dados do Usuário estão inconsistentes", "erro");
+            ToastAlerta("Os dados do Usuário estão inconsistentes", "erro")
         }
-        setIsLoading(false);
+        setIsLoading(false)
     }
+    
     
 
     function handleLogout(){
@@ -58,7 +73,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario,  handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ usuario, restaurante ,  handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     )

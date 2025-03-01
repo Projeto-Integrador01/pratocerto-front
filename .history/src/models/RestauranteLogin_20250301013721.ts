@@ -1,5 +1,3 @@
-import Produto from "./Produtos";
-
 export default interface RestauranteLogin {
     id: number;
     nome: string;

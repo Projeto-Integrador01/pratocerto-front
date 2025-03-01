@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState } from "react";
 import RestauranteLogin from "../models/RestauranteLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
 import { login } from "../services/Service";
+import Restaurante from "../models/Restaurante";
 
 interface AuthContextProps{
     usuario: RestauranteLogin

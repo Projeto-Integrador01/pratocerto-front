@@ -57,8 +57,6 @@ function ListaProduto() {
                     wrapperClass="dna-wrapper mx-auto"
                 />
             )}
-                            {console.log("seila mano")}
-
             <div className="flex justify-center w-full my-4">
                 <div className="container flex flex-col mx-2">
                     <div className='container mx-auto my-4 

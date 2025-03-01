@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState } from "react";
 import RestauranteLogin from "../models/RestauranteLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
 import { login } from "../services/Service";
+import Restaurante from "../models/Restaurante";
 
 interface AuthContextProps{
     usuario: RestauranteLogin
@@ -25,25 +26,30 @@ export function AuthProvider({ children }: AuthProviderProps) {
         senha: "",
         foto: "",
         endereco: "",
-        token: "", 
-        produto: null
+        token: ""
     })
 
-    
+    const [restaurante, setRestaurante] = useState<Restaurante>({
+        id: 0,
+        nome: "",
+        usuario: "",
+        senha: "",
+        foto: "",
+        endereco: ""
+      });
       
     const [isLoading, setIsLoading] = useState(false)
 
-    async function handleLogin(restauranteLogin: RestauranteLogin) {
-        setIsLoading(true);
-        try {
-            await login('/restaurantes/logar', restauranteLogin, setUsuario); // Aqui você vai preencher o 'usuario' com os dados do restaurante
-            ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso");
-        } catch (error) {
-            ToastAlerta("Os dados do Usuário estão inconsistentes", "erro");
+    async function handleLogin (restauranteLogin: RestauranteLogin){
+        setIsLoading(true)
+        try{
+            await login ('/restaurantes/logar', restauranteLogin, setUsuario)
+            ToastAlerta ("Usuário foi autenticado com sucedido!", "sucesso")
+        } catch (error){
+            ToastAlerta ("Os dados do Usuário estão inconsistentes", "erro")
         }
-        setIsLoading(false);
+        setIsLoading(false)
     }
-    
 
     function handleLogout(){
         setUsuario({
@@ -58,7 +64,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario,  handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     )

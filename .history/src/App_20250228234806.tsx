@@ -8,7 +8,6 @@ import FormProduto from './components/produtos/formprodutos/FormProduto';
 import DeletarProduto from './components/produtos/deletarproduto/DeletarProduto';
 import Cadastro from './pages/cadastro/Cadastro';
 import Login from './pages/login/Login';
-import ListaProduto from './components/produtos/listaproduto/ListaProduto';
 
 
 function App() {
@@ -20,20 +19,15 @@ function App() {
           <Navbar />
           <div className='min-h-[80vh'>
             <Routes>
-              <Route path='/' element={<Login />} />
-              <Route path='/home' element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path='/' element={<Home />} />
+              <Route path='/' element={<Home />} />
               <Route path='/form' element={<FormProduto />} />
               <Route path='/deletar' element={<DeletarProduto />} />
-              <Route path="/produtos" element={<ListaProduto />} />
-              <Route path="/cadastrarproduto" element={<FormProduto />} />
-              <Route path="/editarproduto/:id" element={<FormProduto />} />
-              <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
-
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
             </Routes>
-          </div>
-          <Footer />
+            </div>
+            <Footer />
         </BrowserRouter>
       </AuthProvider>
     </>

@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-    const { usuario } = useContext(AuthContext);
+    const { usuario, restaurante } = useContext(AuthContext);
 
     return (
         <div className="w-full flex justify-center py-4 bg-yellow-500 text-black">
@@ -12,11 +12,13 @@ function Navbar() {
 
                 <div className="flex gap-4">
                     <span>Categorias</span>
+                    <Link to="/produtos">Produtos</Link>
 
-                    {usuario.id !== 0 && (
-                        <Link to="/listarprodutoslogado">Produto Logado</Link>
+                    {usuario.id === restaurante.id && usuario.id !== 0 && (
+                        <Link to="/listarprodutoslogado">Gerenciar Cardápio</Link>
                     )}
-                    {usuario.id === 0 && <Link to="/listarprodutos">Produto normal</Link>}
+
+                    {usuario.id === 0 && <Link to="/listarprodutos">Ver Cardápio</Link>}
 
                     <span>Vegetarianos</span>
                     <span>Veganos</span>

@@ -13,6 +13,7 @@ function Navbar() {
                 <div className="flex gap-4">
                     <span>Categorias</span>
 
+                    {/* Verifica se o usuário (restaurante) está logado e exibe os links apropriados /}
                     {usuario.id !== 0 && (
                         <Link to="/listarprodutoslogado">Produto Logado</Link>
                     )}
@@ -22,6 +23,7 @@ function Navbar() {
                     <span>Veganos</span>
                     <span>Restaurantes</span>
 
+                    {/ Exibe o botão de login ou logout baseado no estado do usuário */}
                     {usuario.id === 0 ? (
                         <Link to="/login">Login</Link>
                     ) : (

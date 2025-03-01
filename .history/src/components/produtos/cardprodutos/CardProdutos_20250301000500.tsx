@@ -1,25 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import Produto from "../../../models/Produtos";
-import { AuthContext } from "../../../contexts/AuthContext";
-import { useContext } from "react";
 
 interface CardProdutosProps {
   produto: Produto;
 }
 
 
-
+ 
 
 function CardProdutos({ produto }: CardProdutosProps) {
 
   const navigate = useNavigate();
 
-  function retornar() {
+  function retornar(){
     navigate('/produtos');
   }
-
-  const { usuario } = useContext(AuthContext)
-
+  
 
   return (
     <div className="border-slate-900 border flex flex-col rounded overflow-hidden justify-between">
@@ -45,24 +41,21 @@ function CardProdutos({ produto }: CardProdutosProps) {
         </div>
       </div>
 
-      {
-        produto.restaurante?.id === usuario.id &&
-        <div className="flex">
-          <button
-            onClick={retornar} // ✅ Correção: Agora é um botão normal chamando a função
-            className="w-full text-slate-100 bg-gray-400 hover:bg-gray-600 flex items-center justify-center py-2">
-            Cancelar
-          </button>
-          <Link
-            to={`//${produto.id}`}
-            className="text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center"
-          >
-            <button>Deletar</button>
-          </Link>
-        </div>
-      }
-    </div>
 
+      <div className="flex">
+      <button
+          onClick={retornar} // ✅ Correção: Agora é um botão normal chamando a função
+          className="w-full text-slate-100 bg-gray-400 hover:bg-gray-600 flex items-center justify-center py-2">
+          Cancelar
+        </button>
+        <Link
+          to={`//${produto.id}`}
+          className="text-white bg-red-400 hover:bg-red-700 w-full flex items-center justify-center"
+        >
+          <button>Deletar</button>
+        </Link>
+      </div>
+    </div>
   );
 }
 
