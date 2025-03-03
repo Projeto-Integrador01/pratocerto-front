@@ -1,72 +1,147 @@
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
+import ModalCategoriaDeletar from "../modalcategoria/ModalCategoriaDeletar";
+import Popup from "reactjs-popup";
+import ModalCategoriaEditar from "../modalcategoria/ModalCategoriaEditar";
 
 function ListaCategorias() {
-  const navigate = useNavigate();
-
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
-
-  async function buscarCategorias() {
-    try {
-      await buscar("/categorias", setCategorias, {
-        headers: token ? { Authorization: token } : {},
-      });
-    } catch (error: any) {
-      if (error.toString().includes("403")) {
-        handleLogout();
-      }
-    }
-  }
+  const { usuario } = useContext(AuthContext);
+  const token = usuario?.token || "";
 
   useEffect(() => {
     buscarCategorias();
-  }, [categorias.length]);
+  }, []);
 
-  function abrirCadastroCategoria() {
-    navigate("/cadastrarcategoria"); // Redireciona para a rota do formulário
+  async function buscarCategorias() {
+    try {
+      setLoading(true);
+      await buscar("/categorias", setCategorias, {
+        headers: { Authorization: token || "" },
+      });
+    } catch (error: any) {
+      console.error("Erro ao buscar categorias:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <>
-      {categorias.length === 0 && (
-        <DNA
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
+      {loading && (
+        <div className="flex justify-center items-center min-h-screen">
+          <DNA
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="dna-loading"
+          />
+        </div>
       )}
-      <div className="flex justify-center w-full my-4">
-        <div className="container flex flex-col items-center">
-          <div className="flex justify-between w-full px-6 mb-4">
-            <h1 className="text-2xl font-bold">Categorias</h1>
-            {token && (
-              <button
-                onClick={abrirCadastroCategoria}
-                className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800"
+
+      {!loading && (
+        <div className="flex justify-center w-full my-4">
+          <div className="container flex flex-col items-center">
+            <div className="flex px-8 py-4 w-full justify-center items-center">
+              <h1
+                className="w-[364px] h-[74px] flex-shrink-0 text-green-800 text-center 
+                        font-lexend text-[28px] font-semibold leading-none 
+                        flex rounded-lg items-center"
               >
-                Cadastrar
-              </button>
-            )}
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#f4f4f4] rounded-lg shadow-lg w-full">
-            {categorias.map((categoria) => (
-              <CardCategoria key={categoria.id} categoria={categoria} />
-            ))}
+                Categorias
+              </h1>
+
+              {token && (
+                <Popup
+                  trigger={
+                    <button
+                      className="w-[200px] h-[40px] bg-[#5A7D5A] text-white 
+                                text-center font-lexend text-[25px] font-semibold 
+                                rounded-lg transition items-center"
+                    >
+                      Nova Categoria
+                    </button>
+                  }
+                  modal
+                  overlayStyle={{
+                    background: "rgba(0, 0, 0, 0.5)",
+                  }}
+                >
+                  {(() => (
+                    <ModalCategoriaEditar
+                      categoriaId=""
+                      onClose={() => console.log("Fechando modal")}
+                      atualizarLista={buscarCategorias}
+                    />
+                  ))()}
+                </Popup>
+              )}
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#ffffff] w-full">
+              {categorias.map((categoria) => (
+                <div
+                  key={categoria.id}
+                  className="border p-4 rounded-lg shadow-md"
+                >
+                  <CardCategoria categoria={categoria} />
+
+                  {token && (
+                    <div className="flex w-full mt-4">
+                      <Popup
+                        trigger={
+                          <button className="w-1/2 text-white bg-[#5A7D5A] hover:bg-[#466046] py-1 text-center text-sm font-medium rounded-bl-lg transition duration-200">
+                            Editar
+                          </button>
+                        }
+                        modal
+                        overlayStyle={{
+                          background: "rgba(0, 0, 0, 0.5)", // Fundo semi-transparente
+                        }}
+                      >
+                        {(() => (
+                          <ModalCategoriaEditar
+                            categoriaId={categoria.id.toString()}
+                            onClose={() => console.log("Fechando modal")}
+                            atualizarLista={buscarCategorias}
+                          />
+                        ))()}
+                      </Popup>
+
+                      <Popup
+                        trigger={
+                          <button className="w-1/2 text-white bg-[#B85042] hover:bg-[#92372E] py-1 text-center text-sm font-medium rounded-br-lg transition duration-200">
+                            Deletar
+                          </button>
+                        }
+                        modal
+                        overlayStyle={{
+                          background: "rgba(0, 0, 0, 0.5)",
+                        }}
+                      >
+                        {(() => (
+                          <ModalCategoriaDeletar
+                            categoriaId={categoria.id.toString()}
+                            onClose={() => console.log("Fechando modal")}
+                            atualizarLista={buscarCategorias}
+                          />
+                        ))()}
+                      </Popup>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

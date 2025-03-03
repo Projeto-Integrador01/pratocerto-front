@@ -1,22 +1,33 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useContext, useEffect, ChangeEvent } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import { buscarLogado, deletar } from "../../../services/Service";
 import { RotatingLines } from "react-loader-spinner";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
-function DeletarCategoria() {
+interface ModalCategoriaDeletarProps {
+  categoriaId: string;
+  onClose: () => void;
+  atualizarLista: () => void;
+}
+
+function ModalCategoriaDeletar({
+  categoriaId,
+  onClose,
+  atualizarLista,
+}: ModalCategoriaDeletarProps) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-  const { id } = useParams<{ id: string }>();
   const { usuario, handleLogout } = useContext(AuthContext);
   const token = usuario.token;
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscarLogado(`/categorias/${id}`, setCategoria, {
+      await buscarLogado(`/categorias/${categoriaId}`, setCategoria, {
         headers: { Authorization: token },
       });
     } catch (error: any) {
@@ -27,51 +38,46 @@ function DeletarCategoria() {
   }
 
   useEffect(() => {
-    if (id !== undefined) {
-      buscarCategoriaPorId(id);
+    if (token === "") {
+      ToastAlerta("Você precisa estar logado", "erro");
+      navigate("/login");
     }
-  }, [id]);
+  }, [token]);
+
+  useEffect(() => {
+    if (categoriaId) {
+      buscarCategoriaPorId(categoriaId);
+    }
+  }, [categoriaId]);
 
   async function deletarCategoria(event: React.FormEvent) {
     event.preventDefault();
     setIsLoading(true);
 
     try {
-      await deletar(`/categorias/${id}`, {
+      await deletar(`/categorias/${categoriaId}`, {
         headers: {
           Authorization: token,
         },
       });
 
-      alert("Categoria apagada com sucesso");
+      ToastAlerta("Categoria apagada com sucesso", "sucesso");
 
       setIsLoading(false);
-      retornar();
+      onClose();
+      atualizarLista();
     } catch (error: any) {
       if (error.toString().includes("403")) {
         handleLogout();
       } else {
-        alert("Erro ao deletar a categoria.");
+        ToastAlerta("Erro ao deletar a categoria.", "erro");
       }
       setIsLoading(false);
     }
   }
 
-  function retornar() {
-    setTimeout(() => {
-      navigate("/categorias");
-    }, 500);
-  }
-
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setCategoria({
-      ...categoria,
-      [e.target.name]: e.target.value,
-    });
-  }
-
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden shadow-md">
       <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md relative">
         <h2 className="text-2xl font-bold text-[#2F4F2F] text-center mb-4">
           Deletar Categoria
@@ -89,8 +95,7 @@ function DeletarCategoria() {
             <input
               type="text"
               name="nome"
-              value={categoria.nome}
-              onChange={atualizarEstado}
+              value={categoria.nome || ""}
               placeholder="Digite o nome"
               className="w-full p-2 border border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
               disabled
@@ -104,8 +109,7 @@ function DeletarCategoria() {
             <input
               type="text"
               name="foto"
-              value={categoria.foto}
-              onChange={atualizarEstado}
+              value={categoria.foto || ""}
               placeholder="URL da imagem"
               className="w-full p-2 border border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
               disabled
@@ -115,7 +119,7 @@ function DeletarCategoria() {
           <div className="flex justify-between mt-4">
             <button
               type="button"
-              onClick={retornar}
+              onClick={onClose}
               className="bg-[#5A7D5A] text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-[#466046] transition"
             >
               Cancelar
@@ -150,4 +154,4 @@ function DeletarCategoria() {
   );
 }
 
-export default DeletarCategoria;
+export default ModalCategoriaDeletar;
