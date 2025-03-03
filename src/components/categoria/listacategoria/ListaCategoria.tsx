@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
@@ -48,18 +48,19 @@ function ListaCategorias() {
         />
       )}
       <div className="flex justify-center w-full my-4">
-        <div className="container flex flex-col">
-          <div className="flex justify-around gap-4">
+        <div className="container flex flex-col items-center">
+          <div className="flex justify-between w-full px-6 mb-4">
+            <h1 className="text-2xl font-bold">Categorias</h1>
             {token && (
               <button
                 onClick={abrirCadastroCategoria}
-                className="bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-800"
+                className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800"
               >
-                Nova Categoria
+                Cadastrar
               </button>
             )}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#f4f4f4] rounded-lg shadow-lg w-full">
             {categorias.map((categoria) => (
               <CardCategoria key={categoria.id} categoria={categoria} />
             ))}

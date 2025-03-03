@@ -1,8 +1,10 @@
 import Popup from "reactjs-popup";
 
+
 import "reactjs-popup/dist/index.css";
 import "./ModalPostagem.css";
 import FormCategoria from "../formcategoria/FormCategoria";
+
 
 function ModalCategoria() {
   return (

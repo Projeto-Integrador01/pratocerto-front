@@ -7,24 +7,24 @@ interface CardCategoriasProps {
 
 function CardCategoria({ categoria }: CardCategoriasProps) {
   return (
-    <div className="border-2 border-green-50 rounded-2xl overflow-hidden shadow-lg bg-white w-80 p-2 flex flex-col items-center">
+    <div className="border-2 border-green-800 rounded-2xl overflow-hidden shadow-md bg-[#D1B890] w-80 p-3 flex flex-col items-center transition duration-300 hover:shadow-xl">
       {/* Imagem */}
       <div className="w-full rounded-xl overflow-hidden">
         {categoria.foto ? (
           <img
             src={categoria.foto}
             alt="Categoria"
-            className="w-full h-48 object-cover"
+            className="w-full h-48 object-cover rounded-xl"
           />
         ) : (
-          <div className="w-full h-48 flex items-center justify-center bg-gray-200">
-            <span className="text-gray-500">Sem imagem</span>
+          <div className="w-full h-48 flex items-center justify-center bg-[#A8A878]">
+            <span className="text-white text-lg font-medium">Sem imagem</span>
           </div>
         )}
       </div>
 
       {/* Nome da Categoria */}
-      <p className="text-green-700 text-xl font-semibold text-center my-4">
+      <p className="text-[#2F4F2F] text-xl font-bold text-center my-4 uppercase">
         {categoria.nome}
       </p>
 
@@ -32,14 +32,14 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
       <div className="flex w-full">
         <Link
           to={`/editarcategoria/${categoria.id}`}
-          className="w-1/2 text-white bg-indigo-500 hover:bg-indigo-700 py-2 text-center rounded-bl-xl"
+          className="w-1/2 text-white bg-[#5A7D5A] hover:bg-[#466046] py-2 text-center font-medium rounded-bl-xl transition duration-200"
         >
           Editar
         </Link>
 
         <Link
           to={`/deletarcategoria/${categoria.id}`}
-          className="w-1/2 text-white bg-red-500 hover:bg-red-700 py-2 text-center rounded-br-xl"
+          className="w-1/2 text-white bg-[#B85042] hover:bg-[#92372E] py-2 text-center font-medium rounded-br-xl transition duration-200"
         >
           Deletar
         </Link>
