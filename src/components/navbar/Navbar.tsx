@@ -8,7 +8,7 @@ function Navbar() {
           <div>Prato Certo</div>
 
           <div className="flex gap-4">
-            <Link to="/categoria" className="hover:text-indigo-700">
+            <Link to="/categorias" className="hover:text-indigo-700">
               Categorias
             </Link>
 

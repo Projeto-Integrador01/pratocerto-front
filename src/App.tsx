@@ -7,7 +7,7 @@ import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
 import ListaCategoria from "./components/categoria/listacategoria/ListaCategoria";
 import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
-import EditarCategoria from "./components/categoria/editarcategoria/EditarCategoria";
+import FormCategoria from "./components/categoria/formcategoria/FormCategoria";
 
 function App() {
   return (
@@ -19,12 +19,13 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/categoria" element={<ListaCategoria />} />
+            <Route path="/categorias" element={<ListaCategoria />} />
+            <Route path="/cadastrarcategoria" element={<FormCategoria />} />
+            <Route path="/editarcategoria/:id" element={<FormCategoria />} />
             <Route
               path="/deletarcategoria/:id"
               element={<DeletarCategoria />}
             />
-            <Route path="/editarcategoria/:id" element={<EditarCategoria />} />
           </Routes>
           <Footer />
         </BrowserRouter>

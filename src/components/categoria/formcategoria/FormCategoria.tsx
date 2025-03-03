@@ -1,44 +1,138 @@
-import { Link } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState, useContext, useEffect, ChangeEvent } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
+import {
+  buscar,
+  atualizar,
+  cadastrar,
+  buscarLogado,
+} from "../../../services/Service";
+import { RotatingLines } from "react-loader-spinner";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
-interface CardCategoriaProps {
-  categoria: Categoria;
-}
+function FormCategoria() {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
-function FormCategoria({ categoria }: CardCategoriaProps) {
+  const { id } = useParams<{ id: string }>();
+
+  const { usuario, handleLogout } = useContext(AuthContext);
+  const token = usuario.token;
+
+  async function buscarCategoriaPorId(id: string) {
+    try {
+      await buscarLogado(`/categorias/${id}`, setCategoria, {
+        headers: { Authorization: token },
+      });
+    } catch (error: any) {
+      if (error.toString().includes("403")) {
+        handleLogout();
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (token === "") {
+      ToastAlerta("Você precisa estar logado", "erro");
+      navigate("/login");
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (id !== undefined) {
+      buscarCategoriaPorId(id);
+    }
+  }, [id]);
+
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    setCategoria({
+      ...categoria,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function retornar() {
+    navigate("/categorias");
+  }
+
+  async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsLoading(true);
+
+    if (id !== undefined) {
+      try {
+        await atualizar(`/categorias`, categoria, setCategoria, {
+          headers: { Authorization: token },
+        });
+        ToastAlerta("Categoria atualizada com sucesso", "sucesso");
+      } catch (error: any) {
+        ToastAlerta("Erro ao atualizar a Categoria", "erro");
+      }
+    } else {
+      try {
+        await cadastrar(`/categorias`, categoria, setCategoria, {
+          headers: { Authorization: token },
+        });
+        ToastAlerta("Categoria cadastrada com sucesso", "sucesso");
+      } catch (error: any) {
+        ToastAlerta("Erro ao cadastrar a Categoria", "erro");
+      }
+    }
+    setIsLoading(false);
+    retornar();
+  }
+
   return (
-    <div className="max-w-xl mx-8 border border-gray-300 rounded-lg overflow-hidden bg-gray-100 shadow-md">
-      <div className="flex w-full bg-[#ff9f00] py-3 px-5 items-center gap-4">
-        <h3 className="text-lg font-bold text-white uppercase">
-          {categoria.nome}
-        </h3>
-      </div>
-
-      {categoria.foto && (
-        <div className="flex justify-center p-4">
-          <img
-            src={categoria.foto}
-            alt={categoria.nome}
-            className="w-full h-48 object-cover rounded-lg"
+    <div className="container flex flex-col mx-auto items-center">
+      <h1 className="text-4xl text-center my-8">
+        {id !== undefined ? "Editar Categoria" : "Cadastrar Categoria"}
+      </h1>
+      <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovaCategoria}>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="nome">Nome da Categoria</label>
+          <input
+            type="text"
+            placeholder="Nome"
+            name="nome"
+            required
+            className="border-2 border-slate-700 rounded p-2"
+            value={categoria.nome}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
           />
         </div>
-      )}
-
-      <div className="flex justify-end">
-        <Link
-          to={`/editarcategoria/${categoria.id}`}
-          className="w-1/2 bg-[#2C2C2E] text-white hover:bg-gray-500 flex items-center justify-center py-2 transition"
+        <div className="flex flex-col gap-2">
+          <label htmlFor="nome">URL da Foto</label>
+          <input
+            type="text"
+            placeholder="Foto"
+            name="foto"
+            required
+            className="border-2 border-slate-700 rounded p-2"
+            value={categoria.foto}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
+          />
+        </div>
+        <button
+          type="submit"
+          className="rounded bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2 flex justify-center"
         >
-          <button>Editar</button>
-        </Link>
-
-        <Link
-          to={`/deletarcategoria/${categoria.id}`}
-          className="w-1/2 bg-[#ff9f00] text-white hover:bg-red-400 flex items-center justify-center py-2 transition"
-        >
-          <button>Deletar</button>
-        </Link>
-      </div>
+          {isLoading ? (
+            <RotatingLines
+              strokeColor="white"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="24"
+              visible={true}
+            />
+          ) : (
+            <span>{id !== undefined ? "Atualizar" : "Cadastrar"}</span>
+          )}
+        </button>
+      </form>
     </div>
   );
 }

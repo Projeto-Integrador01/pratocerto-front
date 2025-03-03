@@ -7,7 +7,7 @@ interface CardCategoriasProps {
 
 function CardCategoria({ categoria }: CardCategoriasProps) {
   return (
-    <div className="border-2 border-green-500 rounded-2xl overflow-hidden shadow-lg bg-white w-80 p-2 flex flex-col items-center">
+    <div className="border-2 border-green-50 rounded-2xl overflow-hidden shadow-lg bg-white w-80 p-2 flex flex-col items-center">
       {/* Imagem */}
       <div className="w-full rounded-xl overflow-hidden">
         {categoria.foto ? (

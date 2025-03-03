@@ -20,7 +20,7 @@ export const login = async (url: string, dados: Object, setDados: Function) => {
   setDados(resposta.data);
 };
 
-export const buscar = async (url: string, setDados: Function) => {
+export const buscar = async (url: string, setDados: Function, p0: { headers: { Authorization: string; }; }) => {
   const resposta = await api.get(url);
   setDados(resposta.data);
 };
