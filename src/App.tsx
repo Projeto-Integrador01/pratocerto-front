@@ -6,7 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cadastro from "./pages/cadastro/Cadastro";
 import Login from "./pages/login/Login";
 import ListaCategoria from "./components/categoria/listacategoria/ListaCategoria";
-import Modalcategoria from "./components/categoria/modalcategoria/ModalCategoria";
+import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCategoria";
+import EditarCategoria from "./components/categoria/editarcategoria/EditarCategoria";
 
 function App() {
   return (
@@ -19,7 +20,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/categoria" element={<ListaCategoria />} />
-            <Route path="/cadastrarcategoria" element={<Modalcategoria />} />
+            <Route
+              path="/deletarcategoria/:id"
+              element={<DeletarCategoria />}
+            />
+            <Route path="/editarcategoria/:id" element={<EditarCategoria />} />
           </Routes>
           <Footer />
         </BrowserRouter>

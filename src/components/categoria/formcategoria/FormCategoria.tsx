@@ -8,14 +8,12 @@ interface CardCategoriaProps {
 function FormCategoria({ categoria }: CardCategoriaProps) {
   return (
     <div className="max-w-xl mx-8 border border-gray-300 rounded-lg overflow-hidden bg-gray-100 shadow-md">
-      {/* Cabeçalho com Nome da Categoria */}
       <div className="flex w-full bg-[#ff9f00] py-3 px-5 items-center gap-4">
         <h3 className="text-lg font-bold text-white uppercase">
           {categoria.nome}
         </h3>
       </div>
 
-      {/* Foto da Categoria */}
       {categoria.foto && (
         <div className="flex justify-center p-4">
           <img
@@ -26,7 +24,6 @@ function FormCategoria({ categoria }: CardCategoriaProps) {
         </div>
       )}
 
-      {/* Ações */}
       <div className="flex justify-end">
         <Link
           to={`/editarcategoria/${categoria.id}`}

@@ -1,15 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Vortex } from "react-loader-spinner";
 import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../formcategoria/FormCategoria";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import Modalcategoria from "../modalcategoria/ModalCategoria";
+import { AuthContext } from "../../../contexts/AuthContext";
+import ModalCategoria from "../modalcategoria/ModalCategoria";
 
 function ListaCategorias() {
+  const { usuario } = useContext(AuthContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [reload, setReload] = useState(false); // Estado para atualizar lista
 
   async function buscarCategorias() {
     try {
@@ -21,7 +24,7 @@ function ListaCategorias() {
 
   useEffect(() => {
     buscarCategorias();
-  }, [categorias.length]);
+  }, [reload]);
 
   return (
     <div className="bg-white min-h-screen">
@@ -49,33 +52,35 @@ function ListaCategorias() {
       <div className="flex justify-between items-center px-8 py-4">
         <h1
           className="w-[364px] h-[74px] flex-shrink-0 text-green-800 text-center 
-                       font-lexend text-[28px] font-semibold leading-none 
-                       flex items-center justify-center rounded-xl"
+                     font-lexend text-[28px] font-semibold leading-none 
+                     flex items-center justify-center rounded-xl"
         >
           Categorias
         </h1>
 
-        {/* Modal de Cadastro */}
-        <Popup
-          trigger={
-            <button
-              className="w-[220px] h-[34px] bg-green-700 text-white 
-                               text-center font-lexend text-[28px] font-semibold 
-                               rounded-full hover:bg-green-800 transition"
-            >
-              Cadastrar
-            </button>
-          }
-          modal
-          contentStyle={{
-            background: "white",
-            borderRadius: "10px",
-            padding: "2px",
-            width: "400px",
-          }}
-        >
-          <Modalcategoria />
-        </Popup>
+        {/* Exibir botão apenas se o usuário estiver logado */}
+        {usuario.token && (
+          <Popup
+            trigger={
+              <button className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-800">
+                Cadastrar Categoria
+              </button>
+            }
+            modal
+            contentStyle={{
+              background: "white",
+              borderRadius: "10px",
+              padding: "2px",
+              width: "400px",
+            }}
+          >
+            <ModalCategoria
+              onCategoriaCadastrada={() => {
+                setReload(!reload); // Atualiza a lista
+              }}
+            />
+          </Popup>
+        )}
       </div>
 
       {/* Lista de categorias */}
