@@ -33,7 +33,7 @@ function Login() {
     return (
         <>
             <div className="ml-[730px] mt-[33px] w-[450px] h-[770px] bg-[#f2daac] rounded-[20px] border-8 border-[#327349] flex flex-col justify-center items-center p-2">
-
+        
                 <form className="flex justify-center items-center flex-col w-auto gap-12 flex-grow" onSubmit={login}>
                     <div className="w-[320px] h-[150px] text-center mt-15">
                         <h2 className="text-white text-[50px] font-semibold tracking-wide">Seja<br /></h2>
