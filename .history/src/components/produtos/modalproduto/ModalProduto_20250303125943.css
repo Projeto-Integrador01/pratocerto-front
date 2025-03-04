@@ -1,0 +1,18 @@
+.popup-content {
+    border-radius: 1rem;
+    padding-bottom: 2rem;
+    width: 600px; /* Defina um tamanho fixo ou máximo */
+    max-width: 90%; /* Para que o modal não ultrapasse a tela */
+    height: auto; /* Deixe o tamanho automático conforme o conteúdo */
+    max-height: 80%; /* Não ultrapassa 80% da altura da tela */
+    padding: 20px; /* Padding interno */
+    background-color: #fff; /* Fundo branco para o modal */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    z-index: 1050; /* Garante que o modal fique sobre os outros elementos */
+  }
+  
+  .popup-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 1040; /* Overlay com z-index abaixo do modal */
+  }
+  
