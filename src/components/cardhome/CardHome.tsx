@@ -10,7 +10,7 @@ interface Produto {
 
 const CardHome: React.FC<{ produto: Produto }> = ({ produto }) => {
     return (
-        <div className="bg-white border-4 border-verde-2 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 min-h-[450px] flex flex-col">
+        <div className="bg-white border-4 border-verde-2 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 min-h-[450px] flex flex-col">
             {/* Imagem do produto */}
             <img 
                 src={produto.imagem} 

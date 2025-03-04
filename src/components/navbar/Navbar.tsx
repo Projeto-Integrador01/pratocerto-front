@@ -20,8 +20,8 @@ function Navbar() {
                         <span>Vegetarianos</span>
                         <span>Veganos</span>
                         <span>Restaurantes</span>
-                        <span>Login</span>
-                        <span>Sair</span>
+                        <button  className="bg-verde-2 text-white px-4 py-0.5 rounded-md hover:bg-verde-4 transition duration-300">Login</button>
+                        <button  className="bg-verde-2 text-white px-4 py-0.5 rounded-md hover:bg-verde-4 transition duration-300">Sair</button>
                     </div>
                 </div>
             </div>
