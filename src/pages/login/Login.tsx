@@ -32,67 +32,54 @@ function Login() {
     }
     return (
         <>
-            <div className="ml-[730px] mt-[33px] w-[450px] h-[770px] bg-[#f2daac] rounded-[20px] border-8 border-[#327349] flex flex-col justify-center items-center p-2">
-        
-                <form className="flex justify-center items-center flex-col w-auto gap-12 flex-grow" onSubmit={login}>
-                    <div className="w-[320px] h-[150px] text-center mt-15">
-                        <h2 className="text-white text-[50px] font-semibold tracking-wide">Seja<br /></h2>
-                        <h2 className="text-[#327349] text-[50px] font-semibold tracking-wider">Bem-vindo</h2>
-                    </div>
+            <div className="w-[60vh] h-[90vh] m-auto mt-5 bg-[#f2daac] rounded-[20px] border-8 border-[#327349] flex flex-col justify-between items-center p-8">
+                <div className="text-center">
+                    <h2 className="text-white text-5xl font-semibold tracking-wide">Seja</h2>
+                    <h2 className="text-[#327349] text-5xl font-semibold tracking-wider">Bem-vindo</h2>
+                </div>
+                <form className="flex flex-col w-full gap-6" onSubmit={login}>
                     <div className="flex flex-col w-full">
                         <label htmlFor="usuario" className="text-[#327349] font-bold text-2xl">E-mail</label>
                         <input
                             type="text"
                             id="usuario"
                             name="usuario"
-                            placeholder=""
                             className="border-3 border-[#327349] rounded-[10px] p-2 bg-white"
                             value={restauranteLogin.usuario}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
-                    <div className="flex flex-col w-full gap">
-                        <label htmlFor="senha" className="text-[#327349] font-bold text-2xl">Senha</label>
+
+                    <div className="flex flex-col w-full">
+                        <label htmlFor="senha" className="text-[#327349] font-bold text-1xl">Senha</label>
                         <input
                             type="password"
                             id="senha"
                             name="senha"
-                            placeholder=""
                             className="border-3 border-[#327349] rounded-[10px] p-2 bg-white"
                             value={restauranteLogin.senha}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
-                    <button type='submit' className="rounded bg-[#327349] flex justify-center hover:bg-opacity-80 text-white w-1/2 py-2 font-semibold">
-                        {isLoading ? <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        /> : <span>Entrar</span>}
+
+                    <button type='submit' className="rounded bg-[#327349] hover:bg-opacity-80 text-white w-auto py-2 font-semibold flex justify-center items-center">
+                        {isLoading ? <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} /> : <span>Entrar</span>}
                     </button>
-
-                    <hr className="border-[#327349] w-full" />
-
-                    <p className="text-white font-semibold text-center text-2xl">
-                        Ainda não possui uma conta?{' '}
-                        <Link to="/cadastro" className="text-[#327349] text-center">
-                            <br />Clique aqui!
-                        </Link>
-                    </p>
-                    
                 </form>
 
-                <div className="mb-15">
-                    <img
-                        src="https://ik.imagekit.io/7fyx55ocq/pratocertologin.svg?updatedAt=1740885408831"
-                        className="w-[113px] h-[50px] object-cover rounded-2xl mt-8"
-                    />
-                </div>
+                <hr className="border-[#327349] w-full mt-4" />
 
-                <div className="fundoLogin hidden lg:block"></div>
-                
+                {/* Link de cadastro */}
+                <p className="text-white font-semibold text-center text-xl">
+                    Ainda não possui um cadastro? <br />
+                    <Link to="/cadastro" className="text-[#327349] font-bold">Clique aqui!</Link>
+                </p>
+
+                {/* Logo */}
+                <img
+                    src="https://ik.imagekit.io/7fyx55ocq/pratocertologin.svg?updatedAt=1740885408831"
+                    className="w-[113px] h-[50px] object-cover rounded-2xl mt-4"
+                />
             </div>
         </>
     );
