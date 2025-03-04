@@ -9,7 +9,7 @@ function Footer() {
         <>
             <div className="bg-verde-1 text-white p-4">
         <div className="container mx-auto py-8">
-        {/* Seção superior com os textos */}
+        {/* Seção superior com os textos precisamos colocar Links*/}
         <div className="flex justify-between items-start pb-4 text-bege-2">
             <div className="flex flex-col">
                 <p className="text-lg">| Sobre nós</p>
