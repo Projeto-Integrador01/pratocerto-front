@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -74,13 +73,13 @@ function ListaCategorias() {
                     background: "rgba(0, 0, 0, 0.5)",
                   }}
                 >
-                  {(() => (
+                  {(close: () => void) => (
                     <ModalCategoriaEditar
-                      categoriaId=""
-                      onClose={() => console.log("Fechando modal")}
+                      categoriaId={""}
+                      onClose={close}
                       atualizarLista={buscarCategorias}
                     />
-                  ))()}
+                  )}
                 </Popup>
               )}
             </div>
@@ -106,13 +105,13 @@ function ListaCategorias() {
                           background: "rgba(0, 0, 0, 0.5)", // Fundo semi-transparente
                         }}
                       >
-                        {(() => (
+                        {(close: () => void) => (
                           <ModalCategoriaEditar
                             categoriaId={categoria.id.toString()}
-                            onClose={() => console.log("Fechando modal")}
+                            onClose={close}
                             atualizarLista={buscarCategorias}
                           />
-                        ))()}
+                        )}
                       </Popup>
 
                       <Popup
@@ -126,13 +125,20 @@ function ListaCategorias() {
                           background: "rgba(0, 0, 0, 0.5)",
                         }}
                       >
-                        {(() => (
+                        {/* {(() => (
                           <ModalCategoriaDeletar
                             categoriaId={categoria.id.toString()}
-                            onClose={() => console.log("Fechando modal")}
+                            onClose={close}
                             atualizarLista={buscarCategorias}
                           />
-                        ))()}
+                        ))()} */}
+                        {(close: () => void) => (
+                          <ModalCategoriaDeletar
+                            categoriaId={categoria.id.toString()}
+                            onClose={close}
+                            atualizarLista={buscarCategorias}
+                          />
+                        )}
                       </Popup>
                     </div>
                   )}
