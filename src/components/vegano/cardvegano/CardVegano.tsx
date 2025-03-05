@@ -24,7 +24,7 @@ function CardVegano({produto}: CardVeganoProps){
   
         {/* Preço e Categoria */}
         <div className="flex justify-between items-center p-4">
-          <p className="text-green-600 font-bold">R$ {produto.preco}</p>
+          <p className="text-green-600 font-bold">R$ {String(produto.preco)}</p>
           <div className="text-sm text-gray-500">
             {produto.categoria?.nome || "Sem categoria"}
           </div>
