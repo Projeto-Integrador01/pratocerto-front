@@ -58,6 +58,7 @@ function ListaCategorias() {
                     </button>
                   }
                   modal
+                  closeOnDocumentClick
                   overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                 >
                   {(close: () => void) => (
@@ -71,7 +72,6 @@ function ListaCategorias() {
               )}
             </div>
 
-            {/* Grid de Categorias */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 bg-[#ffffff] w-full">
               {categorias.map((categoria) => (
                 <div
@@ -82,7 +82,6 @@ function ListaCategorias() {
 
                   {token && (
                     <div className="flex w-full mt-4">
-                      {/* Botão Editar */}
                       <Popup
                         trigger={
                           <button className="w-1/2 text-white bg-[#5A7D5A] hover:bg-[#466046] py-1 text-center text-sm font-medium rounded-bl-lg transition duration-200">
@@ -90,6 +89,7 @@ function ListaCategorias() {
                           </button>
                         }
                         modal
+                        closeOnDocumentClick
                         overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                       >
                         {(close: () => void) => (
@@ -101,7 +101,6 @@ function ListaCategorias() {
                         )}
                       </Popup>
 
-                      {/* Botão Deletar */}
                       <Popup
                         trigger={
                           <button className="w-1/2 text-white bg-[#B85042] hover:bg-[#92372E] py-1 text-center text-sm font-medium rounded-br-lg transition duration-200">
@@ -109,6 +108,7 @@ function ListaCategorias() {
                           </button>
                         }
                         modal
+                        closeOnDocumentClick
                         overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                       >
                         {(close: () => void) => (

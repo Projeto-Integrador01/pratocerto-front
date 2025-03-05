@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useContext, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
@@ -50,13 +48,6 @@ function ModalCategoriaEditar({
     }
   }, [categoriaId]);
 
-  function retornar() {
-    onClose();
-    setTimeout(() => {
-      navigate("/categorias");
-    }, 500);
-  }
-
   async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
@@ -90,8 +81,11 @@ function ModalCategoriaEditar({
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden shadow-md">
-      <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md relative">
+    <div className="fixed inset-0 flex items-center justify-center overflow-hidden shadow-md" onClick={onClose}>
+      <div
+        className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md relative"
+        onClick={(e) => e.stopPropagation()} // Evita fechar ao clicar dentro do modal
+      >
         <h2 className="text-2xl font-bold text-[#2F4F2F] text-center mb-4">
           {categoriaId ? "Editar Categoria" : "Cadastrar Categoria"}
         </h2>
@@ -127,23 +121,13 @@ function ModalCategoriaEditar({
             />
           </div>
 
-          <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={retornar}
-              className="bg-[#5A7D5A] text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-[#466046] transition"
-            >
-              Cancelar
-            </button>
-
+          {/* Botão "Atualizar" verde e centralizado */}
+          <div className="flex justify-center mt-4">
             <button
               type="submit"
               disabled={isLoading}
-              className={`bg-[#B85042] text-white px-6 py-2 rounded-lg text-lg font-semibold 
-              ${
-                isLoading
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#92372E] transition"
+              className={`bg-[#5A7D5A] text-white px-6 py-2 rounded-lg text-lg font-semibold ${
+                isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#466046] transition"
               }`}
             >
               {isLoading ? (
