@@ -16,9 +16,7 @@ function ListaCategorias() {
 
   async function buscarCategorias() {
     try {
-      await buscar("/categorias", setCategorias, {
-        headers: token ? { Authorization: token } : {},
-      });
+      await buscar("/categorias", setCategorias);
     } catch (error: any) {
       if (error.toString().includes("403")) {
         handleLogout();
