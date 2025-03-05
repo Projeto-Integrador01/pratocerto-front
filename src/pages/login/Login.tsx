@@ -4,88 +4,82 @@ import { AuthContext } from "../../contexts/AuthContext";
 import RestauranteLogin from "../../models/RestauranteLogin";
 import { RotatingLines } from "react-loader-spinner";
 
-function Login (){
-     
+function Login() {
+
     const navigate = useNavigate();
 
-    const {usuario, handleLogin, isLoading} = useContext(AuthContext)
+    const { usuario, handleLogin, isLoading } = useContext(AuthContext)
 
     const [restauranteLogin, setRestauranteLogin] = useState<RestauranteLogin>(
         {} as RestauranteLogin)
 
-    useEffect(()=>{
-        if (usuario.token !== ""){
+    useEffect(() => {
+        if (usuario.token !== "") {
             navigate('/home')
         }
-    },[usuario])
+    }, [usuario])
 
-     function atualizarEstado(e: ChangeEvent<HTMLInputElement>){
-         setRestauranteLogin({
+    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+        setRestauranteLogin({
             ...restauranteLogin,
-             [e.target.name]: e.target.value 
-            })
-     }
+            [e.target.name]: e.target.value
+        })
+    }
 
-     function login (e: ChangeEvent<HTMLFormElement>){
+    function login(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         handleLogin(restauranteLogin)
-     }
-     return (
+    }
+    return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 
-                    h-screen place-items-center font-bold ">
-                <form className="flex justify-center items-center flex-col w-1/2 gap-4"
-                    onSubmit={login}>
-                    <h2 className="text-heavyorange text-5xl ">Entrar</h2>
+            <div className="w-[60vh] h-[90vh] m-auto mt-5 bg-[#f2daac] rounded-[20px] border-8 border-[#327349] flex flex-col justify-between items-center p-8">
+                <div className="text-center">
+                    <h2 className="text-white text-5xl font-semibold tracking-wide">Seja</h2>
+                    <h2 className="text-[#327349] text-5xl font-semibold tracking-wider">Bem-vindo</h2>
+                </div>
+                <form className="flex flex-col w-full gap-6" onSubmit={login}>
                     <div className="flex flex-col w-full">
-                        <label htmlFor="usuario">E-mail</label>
+                        <label htmlFor="usuario" className="text-[#327349] font-bold text-2xl">E-mail</label>
                         <input
                             type="text"
                             id="usuario"
                             name="usuario"
-                            placeholder="Usuario"
-                            className="border-2 border-heavyorange rounded p-2"
+                            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white"
                             value={restauranteLogin.usuario}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
+
                     <div className="flex flex-col w-full">
-                        <label htmlFor="senha">Senha</label>
+                        <label htmlFor="senha" className="text-[#327349] font-bold text-1xl">Senha</label>
                         <input
                             type="password"
                             id="senha"
                             name="senha"
-                            placeholder="Senha"
-                            className="border-2 border-heavyorange rounded p-2"
+                            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white"
                             value={restauranteLogin.senha}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
-                    <button
-                        type='submit'
-                        className="rounded bg-black flex justify-center hover:bg-opacity-80 text-white w-1/2 py-2">
-                                    
-                        {isLoading ? <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        /> :
-                            <span>Entrar</span>
-                        }
+
+                    <button type='submit' className="rounded bg-[#327349] hover:bg-opacity-80 text-white w-auto py-2 font-semibold flex justify-center items-center">
+                        {isLoading ? <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} /> : <span>Entrar</span>}
                     </button>
-
-                    <hr className="border-heavyorange w-full" />
-
-                    <p>
-                        Ainda não tem uma conta?{' '}
-                        <Link to="/cadastro" className="text-black">
-                            Cadastre-se
-                        </Link>
-                    </p>
                 </form>
-                <div className="fundoLogin hidden lg:block"></div>
+
+                <hr className="border-[#327349] w-full mt-4" />
+
+                {/* Link de cadastro */}
+                <p className="text-white font-semibold text-center text-xl">
+                    Ainda não possui um cadastro? <br />
+                    <Link to="/cadastro" className="text-[#327349] font-bold">Clique aqui!</Link>
+                </p>
+
+                {/* Logo */}
+                <img
+                    src="https://ik.imagekit.io/7fyx55ocq/pratocertologin.svg?updatedAt=1740885408831"
+                    className="w-[113px] h-[50px] object-cover rounded-2xl mt-4"
+                />
             </div>
         </>
     );
