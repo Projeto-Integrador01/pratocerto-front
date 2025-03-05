@@ -22,19 +22,11 @@ function ListaVegano() {
     // Função que chama a service buscar() para receber e guardar as produtos
     async function buscarProdutos() {
         try {
-            await buscar('/produtos', setProdutos)
+            await buscar('/produtos/tipoalimento/tradicional', setProdutos)
         } catch (error: any) {
             ToastAlerta ("Produtos não tao vindo irmão", "erro")
         }
     }
-
-    // Esse useEffect verifica se quando o usuário acessou esse componente, ele tem um token válido
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta("Você precisa estar logado!", "info")
-            navigate('/');
-        }
-    }, [token])
 
     // Esse useEffect dispara a função de busca sempre quando o componente é renderizado
     useEffect(() => {
@@ -43,26 +35,38 @@ function ListaVegano() {
 
     return (
         <>
-            {produtos.length === 0 && ( // Se não houver temas ou estiver no momento de requisição mostre um Loader
-                <DNA
-                    visible={true}
-                    height="200"
-                    width="200"
-                    ariaLabel="dna-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="dna-wrapper mx-auto"
-                />
-            )}
-            <div className='container mx-auto my-4 
-                grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
-            >
-                {produtos.map((produto) => (
-                    <CardVegano key={produto.id} produto={produto} />
-                ))}
-
+        {produtos.length === 0 && (
+          <DNA
+            visible={true}
+            height="200"
+            width="200"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper mx-auto"
+          />
+        )}
+  
+        {/* Título e Botão de Cadastrar Produto */}
+        <div className="flex items-center mt-9 mx-25">
+          <h1 className="text-3xl font-bold mr-6">Produtos</h1>
+        </div>
+  
+        {/* Espaço entre o título e os cards */}
+        <div className="my-6"></div>
+  
+        {/* Lista de produtos */}
+        <div className="flex justify-center w-full">
+          <div className="container flex flex-col mx-2 relative">
+            {/* Cards */}
+            <div className="container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {produtos.map((produto) => (
+                <CardVegano key={produto.id} produto={produto} />
+              ))}
             </div>
-        </>
+          </div>
+        </div>
+      </>
     );
-}
+  }
 
 export default ListaVegano;

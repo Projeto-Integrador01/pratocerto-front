@@ -9,39 +9,54 @@ interface CardVeganoProps {
 
 function CardVegano({produto}: CardVeganoProps){
 
-    const {usuario} = useContext(AuthContext);
-
-    return(
-        <div className="w-[422px] h-[530px] bg-white rounded-[15px] border-4 border-[#327349]">
-
-            <div>
-                <div className="py-2 px-6 bg-darkorange text-white font-bold text-2xl">
-                    <h3 className='text-lg font-bold text-center uppercase'> 
-                        Nome do Prato: {produto.restaurante?.nome}
-                       <p>Classificação: {produto.tipoalimento.includes("vegano")}</p>
-                    </h3>
-                </div>
-            </div>
-
-            {
-                produto.restaurante?.id === usuario.id &&
-                (
-                    <div className="flex">
-                        <Link to={`/editarproduto/${produto.id}`}
-                            className='w-full text-slate-100 bg-heavyorange hover:bg-green-700
-                            flex items-center justify-center py-2'>
-                            <button>editar</button>
-                        </Link>
-                        <Link to={`/deletarproduto/${produto.id}`}
-                            className='text-slate-100 bg-heavyorange hover:bg-red-700 w-full 
-                            flex items-center justify-center'>
-                            <button>deletar</button>
-                        </Link>
-                    </div>
-                )
-            }
+    const { usuario } = useContext(AuthContext);
+    return (
+  
+      <div className="bg-white rounded-lg shadow-md overflow-hidden w-80 mx-auto border-4 border-green-700 flex flex-col">
+        {/* Imagem do Produto */}
+        <div className="relative p-4">
+          <img
+            src={produto.foto}
+            alt={produto.nome}
+            className="w-full h-48 object-cover rounded-lg border-2 border-gray-400"
+          />
         </div>
-    )
-}
-
+  
+        {/* Preço e Categoria */}
+        <div className="flex justify-between items-center p-4">
+          <p className="text-green-600 font-bold">R$ {produto.preco}</p>
+          <div className="text-sm text-gray-500">
+            {produto.categoria?.nome || "Sem categoria"}
+          </div>
+        </div>
+  
+        {/* Nome e Descrição do Produto */}
+        <div className="p-4 flex-grow">
+          <h3 className="text-xl font-semibold text-gray-800 mb-2">{produto.nome}</h3>
+          <h3 className="text-gray-600 text-sm">{String(produto.restaurante?.nome || "Restaurante desconhecido") }</h3>  
+  
+          <p className="text-gray-600 text-sm">{produto.descricao}</p>
+        </div>
+  
+        {/* Botões de Ação (Editar/Excluir) - Condicionalmente renderizado */}
+        {produto.restaurante?.id === usuario.id && (
+          <div className="flex gap-2 p-4">
+            <Link
+              to={`/editarproduto/${produto.id}`}
+              className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-center py-2 rounded-lg"
+            >
+              Editar
+            </Link>
+            <Link
+              to={`/deletarproduto/${produto.id}`}
+              className="flex-1 bg-red-500 hover:bg-red-600 text-white text-center py-2 rounded-lg"
+            >
+              Excluir
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
 export default CardVegano
