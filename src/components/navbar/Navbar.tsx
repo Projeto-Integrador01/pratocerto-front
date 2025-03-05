@@ -1,9 +1,23 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { ReactNode, useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Navbar() {
-    const { usuario } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation(); // Obtém a rota atual
+
+    const { usuario, handleLogout } = useContext(AuthContext);
+
+    function logout() {
+        handleLogout();
+        ToastAlerta("O Restaurante foi desconectado com sucesso!", "info");
+        navigate("/");
+    }
+
+    if (location.pathname === "/login" || location.pathname === "/cadastro") {
+        return null;
+    }
 
     return (
         <div className="w-full flex justify-center py-4 bg-yellow-500 text-black">
@@ -11,22 +25,22 @@ function Navbar() {
                 <span className="font-bold">Prato Certo</span>
 
                 <div className="flex gap-4">
-                    <span>Categorias</span>
-
-                    {usuario.id !== 0 && (
-                        <Link to="/produtos">Produto Logado</Link>
-                    )}
-                    {usuario.id === 0 && <Link to="/listarprodutos">Produto normal</Link>}
-
-                    <span>Vegetarianos</span>
-                    <span>Veganos</span>
-                    <span>Restaurantes</span>
-
-
-                    {usuario.id === 0 ? (
-                        <Link to="/login">Login</Link>
+                    <Link to="/categorias">Categorias</Link>
+                    {usuario.id !== 0 ? (
+                        <Link to="/produtoslogado">Meus Produtos</Link>
                     ) : (
-                        <button className="bg-red-500 px-3 py-1 rounded">Sair</button>
+                        <Link to="/produtos">Produtos</Link>
+                    )}
+                    <Link to="/veganos">Veganos</Link>
+                    <Link to="/vegetarianos">Vegetarianos</Link>
+                    <Link to="/restaurantes">Restaurantes</Link>
+
+                    {usuario.token !== "" ? (
+                        <button className="bg-red-500 px-3 py-1 rounded" onClick={logout}>
+                            Sair
+                        </button>
+                    ) : (
+                        <Link to="/login">Login</Link>
                     )}
                 </div>
             </div>

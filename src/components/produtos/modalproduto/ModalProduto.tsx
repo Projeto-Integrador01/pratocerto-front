@@ -18,7 +18,8 @@ function ModalProduto() {
 
   return (
     <>
-      {/* Botão "Novo Produto" para abrir o modal */}
+
+
       <button
         className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700"
         onClick={abrirModal}
@@ -26,7 +27,7 @@ function ModalProduto() {
         Cadastrar
       </button>
 
-      {/* Popup Modal */}
+
       <Popup
   open={isModalOpen}
   onClose={fecharModal}

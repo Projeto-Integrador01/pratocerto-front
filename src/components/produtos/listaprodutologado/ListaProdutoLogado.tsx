@@ -1,26 +1,40 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
-import { buscar} from "../../../services/Service";
+import { buscarLogado } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { DNA } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
+import ModalProduto from "../modalproduto/ModalProduto"; // Importando o ModalProduto
 
 function ListaProduto() {
   const navigate = useNavigate();
   const [produtos, setProdutos] = useState<Produto[]>([]);
+  const { usuario, handleLogout } = useContext(AuthContext);
+  const token = usuario.token;
 
   // Função para buscar os produtos
   async function buscarProdutos() {
     try {
-      await buscar("/produtos", setProdutos);
+      await buscarLogado("/produtos", setProdutos, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error: any) {
       if (error.toString().includes("403")) {
-        ToastAlerta("Erro ao fazer a requisição!", "info");
+        handleLogout();
       }
     }
   }
 
+  useEffect(() => {
+    if (token === "") {
+      ToastAlerta("Você precisa estar logado!", "info");
+      navigate("/");
+    }
+  }, [token]);
 
   useEffect(() => {
     buscarProdutos();
@@ -41,7 +55,8 @@ function ListaProduto() {
 
       {/* Título e Botão de Cadastrar Produto */}
       <div className="flex items-center mt-9 mx-25">
-        <h1 className="text-3xl font-bold mr-6">Produtos</h1>
+        <h1 className="text-3xl font-bold mr-6">Meus Produtos</h1>
+        <ModalProduto /> {/* Botão de abrir o modal */}
       </div>
 
       {/* Espaço entre o título e os cards */}
@@ -52,9 +67,11 @@ function ListaProduto() {
         <div className="container flex flex-col mx-2 relative">
           {/* Cards */}
           <div className="container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {produtos.map((produto) => (
-              <CardProdutos key={produto.id} produto={produto} />
-            ))}
+      {produtos
+        .filter((produto) => produto.restaurante?.id === usuario.id) // Filtrando os produtos
+        .map((produto) => (
+          <CardProdutos key={produto.id} produto={produto} />
+        ))}
           </div>
         </div>
       </div>
