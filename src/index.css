@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
 @import "tailwindcss";
@@ -32,3 +33,6 @@
   font-family: var(--font-Century);
   font-size: 20px;
 }
+=======
+@import "tailwindcss";
+>>>>>>> feature_categoria
