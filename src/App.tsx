@@ -17,6 +17,7 @@ function App() {
             <Routes>
              <Route path="/login" element={<Login />} />
              <Route path="/cadastro" element={<Cadastro />} />
+             <Route path="/" element={<Home />} />
             </Routes>
           <Footer />
       </BrowserRouter>
