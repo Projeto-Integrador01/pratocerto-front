@@ -4,88 +4,107 @@ import { AuthContext } from "../../contexts/AuthContext";
 import RestauranteLogin from "../../models/RestauranteLogin";
 import { RotatingLines } from "react-loader-spinner";
 
-function Login (){
-     
+function Login() {
+
     const navigate = useNavigate();
 
-    const {usuario, handleLogin, isLoading} = useContext(AuthContext)
+    const { usuario, handleLogin, isLoading } = useContext(AuthContext)
 
     const [restauranteLogin, setRestauranteLogin] = useState<RestauranteLogin>(
         {} as RestauranteLogin)
 
-    useEffect(()=>{
-        if (usuario.token !== ""){
+    useEffect(() => {
+        if (usuario.token !== "") {
             navigate('/home')
         }
-    },[usuario])
+    }, [usuario])
 
-     function atualizarEstado(e: ChangeEvent<HTMLInputElement>){
-         setRestauranteLogin({
+    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+        setRestauranteLogin({
             ...restauranteLogin,
-             [e.target.name]: e.target.value 
-            })
-     }
+            [e.target.name]: e.target.value
+        })
+    }
 
-     function login (e: ChangeEvent<HTMLFormElement>){
+    function login(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
         handleLogin(restauranteLogin)
-     }
-     return (
+    }
+    return (
         <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 
-                    h-screen place-items-center font-bold ">
-                <form className="flex justify-center items-center flex-col w-1/2 gap-4"
-                    onSubmit={login}>
-                    <h2 className="text-heavyorange text-5xl ">Entrar</h2>
+        {/* Container principal que cobre toda a tela */}
+        <div 
+                className="relative w-full h-screen flex justify-center items-center"
+                style={{
+                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                    backgroundSize: "60%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
+                    backgroundPosition: "45% 75%", // Centraliza a imagem
+                    backgroundRepeat: "no-repeat" // Evita repetições
+                  }}
+            >
+            <div className="w-[60vh] h-[90vh] bg-[#f2daac] rounded-[20px] border-4 border-[#327349] flex flex-col justify-between items-center p-8 z-10 shadow-lg">
+                <div className="text-center">
+                    <h2 className="text-verde-3 text-4xl font-semibold tracking-wide">Seja</h2>
+                    <h2 className="text-verde-3 text-4xl font-semibold tracking-wider">Bem-vindo</h2>
+                </div>
+                <form className="flex flex-col w-full gap-6" onSubmit={login}>
                     <div className="flex flex-col w-full">
-                        <label htmlFor="usuario">E-mail</label>
+                        <label htmlFor="usuario" className="text-[#327349] font-bold text-lg">E-mail</label>
                         <input
                             type="text"
                             id="usuario"
                             name="usuario"
-                            placeholder="Usuario"
-                            className="border-2 border-heavyorange rounded p-2"
+                            className="border-3 border-[#327349] rounded-[10px] p-2 bg-bege-2"
                             value={restauranteLogin.usuario}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
+
                     <div className="flex flex-col w-full">
-                        <label htmlFor="senha">Senha</label>
+                        <label htmlFor="senha" className="text-[#327349] font-bold text-lg">Senha</label>
                         <input
                             type="password"
                             id="senha"
                             name="senha"
-                            placeholder="Senha"
-                            className="border-2 border-heavyorange rounded p-2"
+                            className="border-3 border-[#327349] rounded-[10px] p-2 bg-bege-2"
                             value={restauranteLogin.senha}
                             onChange={(e: ChangeEvent<HTMLInputElement>) => atualizarEstado(e)}
                         />
                     </div>
-                    <button
-                        type='submit'
-                        className="rounded bg-black flex justify-center hover:bg-opacity-80 text-white w-1/2 py-2">
-                                    
-                        {isLoading ? <RotatingLines
-                            strokeColor="white"
-                            strokeWidth="5"
-                            animationDuration="0.75"
-                            width="24"
-                            visible={true}
-                        /> :
-                            <span>Entrar</span>
-                        }
+                    <div className="flex justify-center">
+                    <button type='submit' className="rounded bg-verde-2 hover:bg-opacity-80 text-white w-50 py-2 font-semibold flex justify-center items-center hover:bg-verde-1 transition duration-300 cursor-pointer">
+                        {isLoading ? <RotatingLines strokeColor="white" strokeWidth="5" animationDuration="0.75" width="24" visible={true} /> : <span>Entrar</span>}
                     </button>
-
-                    <hr className="border-heavyorange w-full" />
-
-                    <p>
-                        Ainda não tem uma conta?{' '}
-                        <Link to="/cadastro" className="text-black">
-                            Cadastre-se
-                        </Link>
-                    </p>
+                    </div>
                 </form>
-                <div className="fundoLogin hidden lg:block"></div>
+
+                <hr className="border-[#327349] w-full mt-4" /> 
+
+                {/* Link de cadastro */}
+                <p className="text-verde-1 font-normal text-center text-2x1">
+                    Ainda não possui um cadastro? <br />
+                    <Link to="/cadastro" className="text-verde-1 font-bold hover:text-verde-2  hover:scale-150 transition duration-300">Clique aqui!</Link>
+                </p>
+
+                {/* Logo */}
+                <div className="flex justify-between items-center">
+                        <div className="flex items-end gap-4">
+                            <img
+                                width="32px"
+                                height="32px"
+                                src="/src/assets/logo/logo_puro.svg"
+                                className="self-end"
+                                alt="Prato Certo Logo"
+                            />
+                            <div className="flex flex-col items-end space-y-0.5">
+                                <h2 className="font-bold">
+                                    <span className="logo font-normal text-preto">PRATO</span>
+                                    <span className="logo font-bold text-verde-2">CERTO</span>
+                                </h2>
+                               </div>
+                        </div>
+                     </div>
+            </div>
             </div>
         </>
     );
