@@ -1,16 +1,21 @@
 import { FacebookLogo, InstagramLogo, LinkedinLogo } from '@phosphor-icons/react'
 import { ReactNode, useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
+import { useLocation } from 'react-router-dom'
 
 function Footer() {
 
     const { usuario } = useContext(AuthContext)
     let data = new Date().getFullYear()
+    const location = useLocation(); // Obtém a rota atual
 
-    let component: ReactNode
+         // Ocultar a Navbar nas páginas de login e cadastro
+    if (location.pathname === "/login" || location.pathname === "/cadastro") {
+        return null;
+    }
 
-    if (usuario.token !== "") {
-        component = (
+    return (
+        <>
             <div className="bg-bege-2 text-white p-4">
                 <div className="container mx-auto py-8">
                     {/* Seção superior com os textos */}
@@ -95,12 +100,6 @@ function Footer() {
                     </div>
                 </div>
             </div>
-        )
-    }
-
-    return (
-        <>
-            {component}
         </>
     )
 }

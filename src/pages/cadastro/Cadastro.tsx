@@ -43,12 +43,10 @@ function Cadastro() {
   async function cadastrarNovoRestaurante(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-
     if (confirmaSenha === restaurante.senha && restaurante.senha.length >= 8) {
       setIsLoading(true);
-
       try {
-        await cadastrarRestaurante(`/restaurantes/cadastrar`, restaurante, setRestaurante);
+        await cadastrarRestaurante("/restaurantes/cadastrar", restaurante, setRestaurante);
         ToastAlerta("Restaurante foi cadastrado com sucesso!", "sucesso");
       } catch (error: any) {
         ToastAlerta("Erro ao cadastrar dados do restaurante!", "erro");
@@ -58,155 +56,140 @@ function Cadastro() {
       setRestaurante({ ...restaurante, senha: '' });
       setConfirmaSenha('');
     }
-
     setIsLoading(false);
   }
 
   return (
-    <div className="flex min-h-screen">
-    <div className="w-full md:w-1/2 bg-[#327349] p-10 flex flex-col">
-      <div className="flex justify-end items-center mb-8">
-        <Link to="/" className="text-white mr-88">
-          <ArrowLeft size={48} />
-        </Link>
-        <h1 className="text-white text-[60px] font-bold ml-4 text-right">Cadastro</h1>
-      </div>
-
-
-      <form className="flex-1 flex flex-col items-center justify-center text-center" onSubmit={cadastrarNovoRestaurante}>
-        <div className="mb-4 text-left mt-10">
-          <div className="w-80">
-          <label htmlFor="nome" className="block text-white font-bold text-lg mb-1">
-            Nome do restaurante
-          </label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={restaurante.nome}
-            onChange={atualizarEstado}
-            required
-          />
+    <div className=" overflow-hidden grid grid-cols-1 md:grid-cols-2 h-screen">
+      {/* Primeira coluna (formulário de cadastro) */}
+      <div className="bg-verde-2 p-8 flex flex-col justify-start items-center w-full">
+        <div className="flex items-center mb-6 w-full">
+          <Link to="/" className="text-white hover:scale-115 transition duration-300">
+            <ArrowLeft size={40} />
+          </Link>
+          <h1 className="text-white text-3xl font-bold ml-52">Cadastro</h1>
+        </div>
+        
+        <form className="w-full flex flex-col justify-center max-w-md space-y-4 mt-6" onSubmit={cadastrarNovoRestaurante}>
+          
+          {/* Campo Nome */}
+          <div className="mb-4 text-left">
+            <label htmlFor="nome" className="block text-white font-bold text-lg mb-1">
+              Nome
+            </label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={restaurante.nome}
+              onChange={atualizarEstado}
+              required
+            />
           </div>
-          
-          <label htmlFor="usuario" className="block text-white font-bold text-lg mb-1">
-            E-mail
-          </label>
-          <input
-            type="email"
-            id="usuario"
-            name="usuario"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={restaurante.usuario}
-            onChange={atualizarEstado}
-            required
-          />
-          
-        </div>
 
-        <div className="mb-4 text-left">
-          <label htmlFor="senha" className="block text-white font-bold text-lg mb-1">
-            Senha
-          </label>
-          <input
-            type="password"
-            id="senha"
-            name="senha"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={restaurante.senha}
-            onChange={atualizarEstado}
-            required
-            minLength={8}
-          />
-        </div>
+          {/* Campo E-mail */}
+          <div className="mb-4 text-left">
+            <label htmlFor="usuario" className="block text-white font-bold text-lg mb-1">
+              E-mail
+            </label>
+            <input
+              type="text"
+              id="usuario"
+              name="usuario"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={restaurante.usuario}
+              onChange={atualizarEstado}
+              required
+            />
+          </div>
 
-        <div className="mb-4 text-left">
-          <label htmlFor="confirmarSenha" className="block text-white font-bold text-lg mb-1">
-            Confirme sua senha
-          </label>
-          <input
-            type="password"
-            id="confirmarSenha"
-            name="confirmarSenha"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={confirmaSenha}
-            onChange={handleConfirmarSenha}
-            required
-            minLength={8}
-          />
-        </div>
+          {/* Campo Senha */}
+          <div className="mb-4 text-left">
+            <label htmlFor="senha" className="block text-white font-bold text-lg mb-1">
+              Senha
+            </label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={restaurante.senha}
+              onChange={atualizarEstado}
+              required
+              minLength={8}
+            />
+          </div>
 
-        <div className="mb-4 text-left">
-          <label htmlFor="endereco" className="block text-white font-bold text-lg mb-1">
-            Endereço
-          </label>
-          <input
-            type="text"
-            id="endereco"
-            name="endereco"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={restaurante.endereco}
-            onChange={atualizarEstado}
-            required
-          />
-        </div>
+          {/* Campo Confirmar Senha */}
+          <div className="mb-4 text-left">
+            <label htmlFor="confirmarSenha" className="block text-white font-bold text-lg mb-1">
+              Confirmar Senha
+            </label>
+            <input
+              type="password"
+              id="confirmarSenha"
+              name="confirmarSenha"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={confirmaSenha}
+              onChange={handleConfirmarSenha}
+              required
+            />
+          </div>
 
-        <div className="mb-4 text-left">
-          <label htmlFor="foto" className="block text-white font-bold text-lg mb-1">
-            Foto
-          </label>
-          <input
-            type="text"
-            id="foto"
-            name="foto"
-            className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-80"
-            value={restaurante.foto}
-            onChange={atualizarEstado}
-            placeholder="URL da imagem"
-          />
-        </div>
+          {/* Campo Endereço */}
+          <div className="mb-4 text-left">
+            <label htmlFor="endereco" className="block text-white font-bold text-lg mb-1">
+              Endereço
+            </label>
+            <input
+              type="text"
+              id="endereco"
+              name="endereco"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={restaurante.endereco}
+              onChange={atualizarEstado}
+              required
+            />
+          </div>
 
-        <div className="mt-auto flex justify-center">
-          <button
-            type="submit"
-            className="bg-[#f2daac] text-[#327349] font-bold py-2 px-8 rounded-lg hover:bg-opacity-90 transition-all"
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <RotatingLines strokeColor="#327349" strokeWidth="5" animationDuration="0.75" width="24" visible={true} />
-            ) : (
-              "Cadastrar"
-            )}
-          </button>
-        </div>
+          {/* Campo Foto */}
+          <div className="mb-4 text-left">
+            <label htmlFor="foto" className="block text-white font-bold text-lg mb-1">
+              Foto
+            </label>
+            <input
+              type="text"
+              id="foto"
+              name="foto"
+              className="border-3 border-[#327349] rounded-[10px] p-2 bg-white h-10 w-full"
+              value={restaurante.foto}
+              onChange={atualizarEstado}
+              required
+            />
+          </div>
 
-        <div className="mt-6 flex justify-center">
-          <img
-            src="https://ik.imagekit.io/7fyx55ocq/pratocertologin.svg?updatedAt=1740885408831"
-            alt="Prato Certo Logo"
-            className="h-12"
-          />
-        </div>
-      </form>
-    </div>
+          {/* Botão de Enviar */}
+          <div className="flex justify-center mt-4">
+            <button type="submit" className="flex items-center justify-center bg-bege-2 text-verde-2 font-bold py-2 px-6 rounded-lg hover:bg-verde-2 hover:text-bege-2 hover:border border-bege-2 transition-all w-40 cursor-pointer" disabled={isLoading}>
+              {isLoading ? <RotatingLines strokeColor="#327349" strokeWidth="5" animationDuration="0.75" width="24" visible={true} /> : "Cadastrar"}
+            </button>
+          </div>
+        </form>
+      </div>
 
-    <div className="hidden md:flex md:w-1/2 bg-white flex-col p-8">
-      <div className="max-w-md text-center text-4xl text-nowrap font-bold">
-          <h2 className="text-[#327349]">Opções saudáveis</h2>
-          <h2 className="text-[#f2daac]">ao seu alcance</h2>
+      {/* Segunda coluna (imagem e texto) */}
+      <div className="flex flex-col justify-start items-center w-full bg-white p-8 pt-12">
+        <div className="flex flex-col justify-center items-center mb-6">
+          <h2 className="text-[#327349] text-3xl font-bold">Opções saudáveis</h2>
+          <h2 className="text-[#f2daac] text-3xl font-bold">ao seu alcance</h2>
+        </div>
+        <div className= "flex items-end justify-end absolute bottom-0 ml-100">
+        <img src="/src/assets/img/comidasCadastro5.png" alt="Healthy Food" />
+        </div>
       </div>
     </div>
-    <div className="mt-4 flex ml-auto justify-start items-start ">
-      <img
-        src="https://ik.imagekit.io/7fyx55ocq/formaCadastroAlimentos.png?updatedAt=1741012373296"
-        alt="Healthy Food"
-        className="rounded-lg mx-auto"
-      />
-    </div>
-  </div>
   );
 }
 
 export default Cadastro;
-
