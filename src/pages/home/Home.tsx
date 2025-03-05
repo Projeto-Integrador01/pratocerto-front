@@ -13,10 +13,10 @@ function Home() {
       <div className="relative flex justify-center w-full">
         <div className="flex flex-col md:flex-row gap-8 p-8 max-w-7xl w-full relative z-10">
           {/* Seção de texto */}
-          <div className="flex-1">
+          <div className="flex-1 mt-12">
             <h1 className="text-4xl">PratoCerto!</h1>
-            <h2 className="text-3xl text-verde-2">Encontrar opções saudáveis nunca foi tão fácil</h2>
-            <div className="border-t border-preto my-4"></div>
+            <h2 className="text-3xl text-verde-2 mt-12">Encontrar opções saudáveis nunca foi tão fácil</h2>
+            <div className="border-t border-preto my-4 mt-12"></div>
             <p className="text-2xl">
               Facilitamos a busca por opções saudáveis. Encontre alimentos nutritivos,
               informações confiáveis sobre bem-estar e recursos para um lifestyle equilibrado,

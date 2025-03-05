@@ -26,7 +26,7 @@ const CardHome: React.FC<{ produto: Produto }> = ({ produto }) => {
                 {/* Botão Saiba Mais */}
                 <a 
                     href={produto.link} 
-                    className="text-blue-500 mt-4 inline-block self-start"
+                    className="text-verde-2 mt-4 inline-block self-start"
                 >
                     Saiba mais
                 </a>

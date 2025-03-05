@@ -1,9 +1,10 @@
 
-/* @import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Giga:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
-    /* --font-Lexend: ['"Lexend Giga"', 'sans-serif'], */
+    --font-Lexend: 'Lexend Giga', sans-serif;
+    --font-Century: 'Century Gothic', sans-serif;
 
     --color-verde-1: #025920;
     --color-verde-2: #327349;
@@ -22,3 +23,12 @@
     --color-vermelho: #DF5454;
 
   }
+
+  body {
+    font-family: var(--font-Lexend);
+}
+
+.logo {
+  font-family: var(--font-Century);
+  font-size: 20px;
+}
