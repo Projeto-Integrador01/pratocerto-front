@@ -71,16 +71,18 @@ function ListaCategorias() {
               )}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#ffffff] w-full">
+            {/* Grid de Categorias */}
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 bg-[#ffffff] w-full">
               {categorias.map((categoria) => (
                 <div
                   key={categoria.id}
-                  className="border p-4 rounded-lg shadow-md"
+                  className="bg-white p-6 rounded-2xl shadow-lg border-4 border-green-800"
                 >
                   <CardCategoria categoria={categoria} />
 
                   {token && (
                     <div className="flex w-full mt-4">
+                      {/* Botão Editar */}
                       <Popup
                         trigger={
                           <button className="w-1/2 text-white bg-[#5A7D5A] hover:bg-[#466046] py-1 text-center text-sm font-medium rounded-bl-lg transition duration-200">
@@ -99,6 +101,7 @@ function ListaCategorias() {
                         )}
                       </Popup>
 
+                      {/* Botão Deletar */}
                       <Popup
                         trigger={
                           <button className="w-1/2 text-white bg-[#B85042] hover:bg-[#92372E] py-1 text-center text-sm font-medium rounded-br-lg transition duration-200">
