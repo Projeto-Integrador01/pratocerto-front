@@ -33,7 +33,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     async function handleLogin (restauranteLogin: RestauranteLogin){
         setIsLoading(true)
         try{
-            await login ('/restaurante/logar', restauranteLogin, setUsuario)
+            await login ('/restaurantes/logar', restauranteLogin, setUsuario)
             ToastAlerta ("Usuário foi autenticado com sucedido!", "sucesso")
         } catch (error){
             ToastAlerta ("Os dados do Usuário estão inconsistentes", "erro")
