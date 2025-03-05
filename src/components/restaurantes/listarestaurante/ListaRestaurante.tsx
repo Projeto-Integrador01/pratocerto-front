@@ -3,6 +3,7 @@ import { buscar } from "../../../services/Service";
 import { Vortex } from "react-loader-spinner";
 import Restaurante from "../../../models/Restaurante";
 import CardRestaurantes from "../cardrestaurantes/CardRestaurantes";
+import './ListaRestaurantes.css'
 
 function ListaRestaurantes() {
     const [restaurantes, setRestaurantes] = useState<Restaurante[]>([]);
@@ -20,30 +21,29 @@ function ListaRestaurantes() {
     }, [restaurantes.length]);
 
     return (
-        <>
+        <div className="colocar fundo restaurantes">
             {restaurantes.length === 0 && (
-                (<Vortex
-                    visible={true}
-                    height="80"
-                    width="80"
-                    ariaLabel="vortex-loading"
-                    wrapperStyle={{}}
-                    wrapperClass="vortex-wrapper"
-                    colors={['#327349',  '#F2DAAC',  '#327349', '#F2DAAC',  '#F2DAAC',  '#327349']}
-                    />)
+            <div className="flex justify-center items-center h-screen">
+                <Vortex
+                visible={true}
+                height="120"
+                width="120"
+                ariaLabel="vortex-loading"
+                wrapperClass="vortex-wrapper"
+                colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                />
+            </div>
             )}
-            <div className="flex justify-center w-full my-4">
+            <div className="flex justify-center w-full my-4 mt-10 mb-15">
                 <div className="container flex flex-col mx-2">
-                    <div className='container mx-auto my-4 
-                        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'
-                    >
+                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
                         {restaurantes.map((restaurante) => (
-                            <CardRestaurantes key={restaurante.id} restaurante={restaurante} />
+                        <CardRestaurantes key={restaurante.id} restaurante={restaurante} />
                         ))}
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

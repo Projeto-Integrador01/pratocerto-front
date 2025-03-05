@@ -15,7 +15,7 @@ function Navbar() {
                         Vegetarianos
                         Veganos
                         <Link to='/restaurantes' className='hover:underline'>Restaurantes</Link>
-                        Login
+                        <Link to='/login' className='hover:underline'>Login</Link>
                         Sair
                     </div>
                 </div>
