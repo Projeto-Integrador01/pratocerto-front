@@ -30,34 +30,26 @@ function ModalCategoria() {
 
       <Popup
         open={isModalOpen}
+        onClose={fecharModal}
         modal
-        closeOnDocumentClick // Permite fechar ao clicar fora
         contentStyle={{
-          width: "600px",
-          maxWidth: "90%",
-          height: "auto",
-          maxHeight: "80%",
-          padding: "20px",
-          backgroundColor: "#fff",
-          borderRadius: "10px",
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          zIndex: 1050,
-          overflowY: "auto",
+          width: "600px",  // Aumentando a largura do modal
+          maxWidth: "90%", // Responsividade
+          height: "auto",  // Tamanho automático
+          maxHeight: "80%",  // Máxima altura do modal
+          padding: "20px",  // Padding interno para espaçar o conteúdo
+          backgroundColor: "#fff",  // Fundo branco
+          borderRadius: "10px",  // Cantos arredondados
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Sombra suave
+          zIndex: 1050,  // Modal sobre os outros elementos
+          overflowY: "auto",  // Permite rolagem se o conteúdo for grande
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 1040,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",  // Fundo semitransparente
+          zIndex: 1040,  // Overlay abaixo do modal
         }}
       >
-        <div>
-          <button
-            onClick={fecharModal}
-            className="absolute top-2 right-2 text-lg font-bold cursor-pointer"
-          >
-            &times;
-          </button>
-          <FormCategoria />
-        </div>
+        <FormCategoria />  {/* Formulário do Produto */}
       </Popup>
     </>
   );
