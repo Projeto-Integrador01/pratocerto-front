@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -56,3 +57,26 @@ function ModalExcluirProduto({ produtoId }: { produtoId: string }) {
 }
 
 export default ModalExcluirProduto;
+=======
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import './ModalPostagem.css';
+import DeletarProduto from '../deletarproduto/DeletarProduto';
+
+function ModalExcluirProduto() {
+  return (
+    <Popup
+      trigger={
+        <button className='border rounded px-4 py-2 hover:bg-white hover:text-indigo-800'>
+          Excluir Produto
+        </button>
+      }
+      modal
+    >
+      <DeletarProduto />
+    </Popup>
+  );
+}
+
+export default ModalExcluirProduto;
+>>>>>>> 2cca3fda2dd3a8574a4411b3e09f677597a2cdde

@@ -10,6 +10,7 @@ import Login from './pages/login/Login';
 import ListaProduto from './components/produtos/listaproduto/ListaProduto';
 import ListaProdutoLogado from './components/produtos/listaprodutologado/ListaProdutoLogado';
 import DeletarProduto from './components/produtos/deletarproduto/DeletarProduto';
+import FormProduto from './components/produtos/formprodutos/FormProduto';
 
 
 

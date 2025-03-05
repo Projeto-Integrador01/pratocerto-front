@@ -9,7 +9,6 @@ import Cadastro from './pages/cadastro/Cadastro';
 import Login from './pages/login/Login';
 import ListaProduto from './components/produtos/listaproduto/ListaProduto';
 import ListaProdutoLogado from './components/produtos/listaprodutologado/ListaProdutoLogado';
-import DeletarProduto from './components/produtos/deletarproduto/DeletarProduto';
 
 
 
@@ -32,7 +31,7 @@ function App() {
               <Route path="/produtoslogado" element={<ListaProdutoLogado />} />
               <Route path="/cadastrarproduto" element={<FormProduto />} />
               <Route path="/editarproduto/:id" element={<FormProduto />} />
-              <Route path="/deletarproduto/:id" element={<DeletarProduto />} />s
+              <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
 
             </Routes>
           </div>
