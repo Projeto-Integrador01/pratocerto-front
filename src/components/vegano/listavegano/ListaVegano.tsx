@@ -24,7 +24,7 @@ function ListaVegano() {
     // Função que chama a service buscar() para receber e guardar as produtos
     async function buscarProdutos() {
         try {
-            await buscarLogado("/produtos/tipoalimento/tradicional", setProdutos, {
+            await buscarLogado("/produtos/tipoalimento/vegetariano", setProdutos, {
               headers: {
                 Authorization: token,
               },
@@ -55,7 +55,7 @@ function ListaVegano() {
   
         {/* Título e Botão de Cadastrar Produto */}
         <div className="flex items-center mt-9 mx-25">
-          <h1 className="text-3xl font-bold mr-6">Produtos</h1>
+          <h1 className="text-3xl font-bold mr-6">Produtos Veganos</h1>
         </div>
   
         {/* Espaço entre o título e os cards */}
