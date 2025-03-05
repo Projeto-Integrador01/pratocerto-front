@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
 import Produto from "../../../models/Produtos";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useContext } from "react";
 
 interface CardProdutosProps {
   produto: Produto;
 }
 
 function CardProdutos({ produto }: CardProdutosProps) {
+
+  const { usuario } = useContext(AuthContext);
   return (
+
     <div className="bg-white rounded-lg shadow-md overflow-hidden w-80 mx-auto border-4 border-green-700 flex flex-col">
       {/* Imagem do Produto */}
       <div className="relative p-4">
@@ -28,11 +33,13 @@ function CardProdutos({ produto }: CardProdutosProps) {
       {/* Nome e Descrição do Produto */}
       <div className="p-4 flex-grow">
         <h3 className="text-xl font-semibold text-gray-800 mb-2">{produto.nome}</h3>
+        <h3 className="text-gray-600 text-sm">{String(produto.restaurante?.nome || "Restaurante desconhecido") }</h3>  
+
         <p className="text-gray-600 text-sm">{produto.descricao}</p>
       </div>
 
       {/* Botões de Ação (Editar/Excluir) - Condicionalmente renderizado */}
-      {produto.restaurante?.id === produto.restaurante?.id && (
+      {produto.restaurante?.id === usuario.id && (
         <div className="flex gap-2 p-4">
           <Link
             to={`/editarproduto/${produto.id}`}

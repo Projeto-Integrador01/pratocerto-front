@@ -9,10 +9,15 @@ import Produto from "../../../models/Produtos";
 
 function FormProduto() {
     const navigate = useNavigate();
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [categorias, setCategorias] = useState<Categoria[]>([]);
+
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+
     const { usuario, handleLogout } = useContext(AuthContext);
+
     const token = usuario.token;
     const { id } = useParams<{ id: string }>();
     const [produto, setProduto] = useState<Produto>({
@@ -23,7 +28,7 @@ function FormProduto() {
         foto: '',
         tipoAlimento: '',
         categoria: categoria,
-        restaurante: null,
+        restaurante: usuario,
     });
 
     async function buscarProdutoPorId(id: string) {
@@ -50,12 +55,17 @@ function FormProduto() {
         }
     }
 
-    useEffect(() => {
-        if (token === '') {
-            ToastAlerta('Você precisa estar logado!', 'info');
-            navigate('/');
+    async function buscarCategoriaPorId(id: string) {
+        try {
+            await buscarLogado(`/categorias/${id}`, setCategoria, {
+                headers: { Authorization: token }
+            })
+        } catch (error: any) {
+            if (error.toString().includes('403')) {
+                handleLogout()
+            }
         }
-    }, [token]);
+    }
 
     useEffect(() => {
         buscarCategorias();
@@ -64,37 +74,44 @@ function FormProduto() {
         }
     }, [id]);
 
-    const atualizarEstado = (e: ChangeEvent<HTMLInputElement>) => {
-        setProduto((prevProduto) => ({
-            ...prevProduto,
-            [e.target.name]: e.target.value,
-        }));
-    };
-
-    const handleCategoriaChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const categoriaSelecionada = categorias.find(c => c.id === parseInt(e.target.value));
-        if (categoriaSelecionada) {
-            setCategoria(categoriaSelecionada);
+    useEffect(() => {
+        if (token === '') {
+            ToastAlerta('Você precisa estar logado!', 'info');
+            navigate('/');
         }
-    };
-
+    }, [token]);
 
     function retornar() {
         navigate('/produtos');
     }
 
+    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+        setProduto({
+            ...produto,
+            [e.target.name]: e.target.value,
+            categoria: categoria,
+            restaurante: usuario,
+        });
+    }
+
+    function atualizarEstadoTipoAlimento(e: ChangeEvent<HTMLSelectElement>) {
+        setProduto({
+            ...produto,
+            [e.target.name]: e.target.value,
+            categoria: categoria,
+            restaurante: usuario,
+        });
+    }
+
+
     async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         setIsLoading(true);
 
-        const produtoComCategoria = {
-            ...produto,
-            categoria: categoria,
-        };
 
         if (id !== undefined) {
             try {
-                await atualizar(`/produtos`, produtoComCategoria, setProduto, {
+                await atualizar(`/produtos`, produto, setProduto, {
                     headers: {
                         Authorization: token,
                     },
@@ -109,7 +126,7 @@ function FormProduto() {
             }
         } else {
             try {
-                await cadastrar(`/produtos`, produtoComCategoria, setProduto, {
+                await cadastrar(`/produtos`, produto, setProduto, {
                     headers: {
                         Authorization: token,
                     },
@@ -195,26 +212,29 @@ function FormProduto() {
                 {/* Tipo de Alimento */}
                 <div className="flex flex-col gap-2">
                     <label htmlFor="tipoAlimento">Tipo de Alimento</label>
-                    <input
-                        type="text"
-                        placeholder="Tipo de Alimento"
+                    <select
                         name="tipoAlimento"
                         required
                         className="border-2 border-slate-700 rounded p-2"
                         value={produto.tipoAlimento}
-                        onChange={atualizarEstado}
-                    />
+                        onChange={atualizarEstadoTipoAlimento}
+                    >
+                        <option value="" disabled>Selecione um Tipo de Alimento</option>
+                        <option value="vegetariano">Vegetariano</option>
+                        <option value="vegano">Vegano</option>
+                        <option value="tradicional">Tradicional</option>
+                    </select>
                 </div>
 
                 {/* Categoria */}
                 <div className="flex flex-col gap-2">
                     <label htmlFor="categorias">Categoria do Produto</label>
                     <select
-                        name="categorias"
-                        id="categorias"
+                        name="categoria"
+                        id="categoria"
                         className="border p-2 border-slate-800 rounded"
-                        onChange={handleCategoriaChange}
-                        value={categoria.id || ''}
+                        value={categoria.id}
+                        onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
                     >
                         <option value="" disabled>Selecione uma Categoria</option>
                         {categorias.map((categoria) => (

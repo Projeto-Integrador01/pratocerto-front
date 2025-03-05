@@ -8,5 +8,5 @@ export default interface RestauranteLogin {
     foto: string;
     endereco:string;
     token: string;
-    produto?: Produto [] | null;
+    produto?: Produto | null;
 }

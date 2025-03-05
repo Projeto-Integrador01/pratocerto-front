@@ -20,10 +20,10 @@ function ModalProduto() {
     <>
       {/* Botão "Novo Produto" para abrir o modal */}
       <button
-        className="border rounded px-4 py-2 bg-green-900 text-white hover:bg-green-700"
+        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700"
         onClick={abrirModal}
       >
-        Novo Produto
+        Cadastrar
       </button>
 
       {/* Popup Modal */}

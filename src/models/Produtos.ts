@@ -1,4 +1,5 @@
 import Categoria from './Categoria';
+import Restaurante from './Restaurante';
 
 export default interface Produto {
   id: number;
@@ -8,8 +9,7 @@ export default interface Produto {
   foto: string;
   tipoAlimento: string;
   categoria: Categoria | null;
-  restaurante: any;
-
+  restaurante: Restaurante | null;
 }
 
 
