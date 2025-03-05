@@ -21,7 +21,7 @@ function FormProduto() {
     const token = usuario.token;
     const { id } = useParams<{ id: string }>();
     const [produto, setProduto] = useState<Produto>({
-        id: 0,
+        id: "",
         nome: '',
         descricao: '',
         preco: 0,
