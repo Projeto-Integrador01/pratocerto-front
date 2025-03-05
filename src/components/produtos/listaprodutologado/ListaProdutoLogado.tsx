@@ -6,7 +6,7 @@ import { buscarLogado } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { DNA } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
-import ModalProduto from "../modalproduto/ModalProduto";
+import ModalProduto from "../modalproduto/ModalProduto"; // Importando o ModalProduto
 
 function ListaProduto() {
   const navigate = useNavigate();
@@ -40,11 +40,6 @@ function ListaProduto() {
     buscarProdutos();
   }, [produtos.length]);
 
-  // 🔹 Filtrando produtos do restaurante logado
-  const produtosFiltrados = produtos.filter(
-    (produto) => produto.restaurante?.id === usuario.restaurante?.id
-  );
-
   return (
     <>
       {produtos.length === 0 && (
@@ -60,21 +55,23 @@ function ListaProduto() {
 
       {/* Título e Botão de Cadastrar Produto */}
       <div className="flex items-center mt-9 mx-25">
-        <h1 className="text-3xl font-bold mr-6">Produtos</h1>
+        <h1 className="text-3xl font-bold mr-6">Meus Produtos</h1>
         <ModalProduto /> {/* Botão de abrir o modal */}
       </div>
 
       {/* Espaço entre o título e os cards */}
       <div className="my-6"></div>
 
-      {/* Lista de produtos filtrados */}
+      {/* Lista de produtos */}
       <div className="flex justify-center w-full">
         <div className="container flex flex-col mx-2 relative">
           {/* Cards */}
           <div className="container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {produtosFiltrados.map((produto) => (
-              <CardProdutos key={produto.id} produto={produto} />
-            ))}
+      {produtos
+        .filter((produto) => produto.restaurante?.id === usuario.id) // Filtrando os produtos
+        .map((produto) => (
+          <CardProdutos key={produto.id} produto={produto} />
+        ))}
           </div>
         </div>
       </div>

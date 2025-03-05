@@ -1,40 +1,26 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
-import { buscarLogado } from "../../../services/Service";
+import { buscar} from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { DNA } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
-import ModalProduto from "../modalproduto/ModalProduto"; // Importando o ModalProduto
 
 function ListaProduto() {
   const navigate = useNavigate();
   const [produtos, setProdutos] = useState<Produto[]>([]);
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
 
   // Função para buscar os produtos
   async function buscarProdutos() {
     try {
-      await buscarLogado("/produtos", setProdutos, {
-        headers: {
-          Authorization: token,
-        },
-      });
+      await buscar("/produtos", setProdutos);
     } catch (error: any) {
       if (error.toString().includes("403")) {
-        handleLogout();
+        ToastAlerta("Erro ao fazer a requisição!", "info");
       }
     }
   }
 
-  useEffect(() => {
-    if (token === "") {
-      ToastAlerta("Você precisa estar logado!", "info");
-      navigate("/");
-    }
-  }, [token]);
 
   useEffect(() => {
     buscarProdutos();
@@ -56,7 +42,6 @@ function ListaProduto() {
       {/* Título e Botão de Cadastrar Produto */}
       <div className="flex items-center mt-9 mx-25">
         <h1 className="text-3xl font-bold mr-6">Produtos</h1>
-        <ModalProduto /> {/* Botão de abrir o modal */}
       </div>
 
       {/* Espaço entre o título e os cards */}

@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, cadastrar, buscarLogado } from "../../../services/Service";
 import { RotatingLines } from "react-loader-spinner";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -7,36 +7,29 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import Produto from "../../../models/Produtos";
 
-interface FormProdutoProps {
-    produtoId?: string; // O ID pode ser opcional
-}
-
-function FormProduto({ produtoId }: FormProdutoProps) {
+function FormProduto() {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(false);
-    const [categorias, setCategorias] = useState<Categoria[]>([]);
-    const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-    const { usuario, handleLogout } = useContext(AuthContext);
-    const token = usuario.token;
 
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const [categorias, setCategorias] = useState<Categoria[]>([]);
+
+    const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
+
+    const { usuario, handleLogout } = useContext(AuthContext);
+
+    const token = usuario.token;
+    const { id } = useParams<{ id: string }>();
     const [produto, setProduto] = useState<Produto>({
         id: "",
-        nome: "",
-        descricao: "",
+        nome: '',
+        descricao: '',
         preco: 0,
-        foto: "",
-        tipoAlimento: "",
+        foto: '',
+        tipoAlimento: '',
         categoria: categoria,
         restaurante: usuario,
     });
-
-    // Se tiver um ID, busca o produto para edição
-    useEffect(() => {
-        buscarCategorias();
-        if (produtoId) {
-            buscarProdutoPorId(produtoId);
-        }
-    }, [produtoId]);
 
     async function buscarProdutoPorId(id: string) {
         try {
@@ -44,7 +37,7 @@ function FormProduto({ produtoId }: FormProdutoProps) {
                 headers: { Authorization: token },
             });
         } catch (error: any) {
-            if (error.toString().includes("403")) {
+            if (error.toString().includes('403')) {
                 handleLogout();
             }
         }
@@ -52,11 +45,11 @@ function FormProduto({ produtoId }: FormProdutoProps) {
 
     async function buscarCategorias() {
         try {
-            await buscarLogado("/categorias", setCategorias, {
+            await buscarLogado('/categorias', setCategorias, {
                 headers: { Authorization: token },
             });
         } catch (error: any) {
-            if (error.toString().includes("403")) {
+            if (error.toString().includes('403')) {
                 handleLogout();
             }
         }
@@ -65,16 +58,41 @@ function FormProduto({ produtoId }: FormProdutoProps) {
     async function buscarCategoriaPorId(id: string) {
         try {
             await buscarLogado(`/categorias/${id}`, setCategoria, {
-                headers: { Authorization: token },
-            });
+                headers: { Authorization: token }
+            })
         } catch (error: any) {
-            if (error.toString().includes("403")) {
-                handleLogout();
+            if (error.toString().includes('403')) {
+                handleLogout()
             }
         }
     }
 
-    function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+    useEffect(() => {
+        buscarCategorias();
+        if (id !== undefined) {
+            buscarProdutoPorId(id);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (token === '') {
+            ToastAlerta('Você precisa estar logado!', 'info');
+            navigate('/');
+        }
+    }, [token]);
+
+    useEffect(() => {
+        setProduto({
+            ...produto,
+            categoria: categoria,
+        });
+    }, [categoria]);
+
+    function retornar() {
+        navigate('/produtos');
+    }
+
+    function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
         setProduto({
             ...produto,
             [e.target.name]: e.target.value,
@@ -83,55 +101,71 @@ function FormProduto({ produtoId }: FormProdutoProps) {
         });
     }
 
-    async function enviarFormulario(e: ChangeEvent<HTMLFormElement>) {
+    function atualizarEstadoTipoAlimento(e: ChangeEvent<HTMLSelectElement>) {
+        setProduto({
+            ...produto,
+            [e.target.name]: e.target.value,
+            categoria: categoria,
+            restaurante: usuario,
+        });
+    }
+
+    console.log(produto)
+
+    async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         setIsLoading(true);
 
-        try {
-            if (produtoId) {
-                await atualizar("/produtos", produto, setProduto, {
-                    headers: { Authorization: token },
+        if (id !== undefined) {
+            try {
+                await atualizar(`/produtos`, produto, setProduto, {
+                    headers: {
+                        Authorization: token,
+                    },
                 });
                 ToastAlerta("Produto atualizado com sucesso!", "sucesso");
-            } else {
-                await cadastrar("/produtos", produto, setProduto, {
-                    headers: { Authorization: token },
+            } catch (error: any) {
+                if (error.toString().includes('403')) {
+                    handleLogout();
+                } else {
+                    ToastAlerta("Erro ao atualizar produto!", "erro");
+                }
+            }
+        } else {
+            try {
+                await cadastrar(`/produtos`, produto, setProduto, {
+                    headers: {
+                        Authorization: token,
+                    },
                 });
                 ToastAlerta("Produto cadastrado com sucesso!", "sucesso");
-            }
-        } catch (error: any) {
-            if (error.toString().includes("403")) {
-                handleLogout();
-            } else {
-                ToastAlerta(`Erro ao ${produtoId ? "atualizar" : "cadastrar"} produto!`, "erro");
+            } catch (error: any) {
+                if (error.toString().includes('403')) {
+                    handleLogout();
+                } else {
+                    ToastAlerta("Erro ao cadastrar produto!", "erro");
+                }
             }
         }
 
         setIsLoading(false);
-        navigate("/produtos");
-    }
-
-    function atualizarEstadoTipoAlimento(event: ChangeEvent<HTMLSelectElement>): void {
-        setProduto({
-            ...produto,
-            tipoAlimento: event.target.value,
-        });
+        retornar();
     }
 
     return (
         <div className="container flex flex-col mx-auto items-center">
             <h1 className="text-4xl text-center my-8">
-                {produtoId ? "Editar Produto" : "Cadastrar Produto"}
+                {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
             </h1>
 
-            <form className="flex flex-col w-1/2 gap-4" onSubmit={enviarFormulario}>
-                {/* Nome */}
+            <form className="flex flex-col w-1/2 gap-4" onSubmit={gerarNovoProduto}>
+                {/* Nome do Produto */}
                 <div className="flex flex-col gap-2">
                     <label htmlFor="nome">Nome do Produto</label>
                     <input
                         type="text"
-                        name="nome"
                         placeholder="Nome do Produto"
+                        name="nome"
                         required
                         className="border-2 border-slate-700 rounded p-2"
                         value={produto.nome}
@@ -144,8 +178,8 @@ function FormProduto({ produtoId }: FormProdutoProps) {
                     <label htmlFor="descricao">Descrição do Produto</label>
                     <input
                         type="text"
+                        placeholder="Descrição do Produto"
                         name="descricao"
-                        placeholder="Descrição"
                         required
                         className="border-2 border-slate-700 rounded p-2"
                         value={produto.descricao}
@@ -159,6 +193,7 @@ function FormProduto({ produtoId }: FormProdutoProps) {
                     <input
                         type="number"
                         step="0.01"
+                        placeholder="Preço do Produto"
                         name="preco"
                         required
                         className="border-2 border-slate-700 rounded p-2"
@@ -167,8 +202,8 @@ function FormProduto({ produtoId }: FormProdutoProps) {
                     />
                 </div>
 
-                 {/* Foto */}
-                 <div className="flex flex-col gap-2">
+                {/* Foto */}
+                <div className="flex flex-col gap-2">
                     <label htmlFor="foto">Foto do Produto (URL)</label>
                     <input
                         type="text"
@@ -200,30 +235,32 @@ function FormProduto({ produtoId }: FormProdutoProps) {
 
                 {/* Categoria */}
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="categoria">Categoria</label>
+                <label htmlFor="categorias">Categoria do Produto</label>
                     <select
                         name="categoria"
+                        id="categorias"
+                        required
                         className="border-2 border-slate-700 rounded p-2"
-                        value={categoria.id}
-                        onChange={(e) => buscarCategoriaPorId(e.target.value)}
+                        value={categoria.id || ""}
+                        onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
                     >
                         <option value="" disabled>Selecione uma Categoria</option>
-                        {categorias.map((cat) => (
-                            <option key={cat.id} value={cat.id}>{cat.nome}</option>
+                        {categorias.map((categoria) => (
+                            <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
                         ))}
+
                     </select>
                 </div>
-
-                {/* Botão de Enviar */}
+                
                 <button
                     type="submit"
-                    className="rounded bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2"
+                    className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2"
                     disabled={isLoading}
                 >
                     {isLoading ? (
                         <RotatingLines strokeColor="white" width="24" />
                     ) : (
-                        <span>{produtoId ? "Atualizar Produto" : "Cadastrar Produto"}</span>
+                        <span>{id ? 'Atualizar Produto' : 'Cadastrar Produto'}</span>
                     )}
                 </button>
             </form>

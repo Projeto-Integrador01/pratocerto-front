@@ -8,6 +8,7 @@ import FormProduto from './components/produtos/formprodutos/FormProduto';
 import Cadastro from './pages/cadastro/Cadastro';
 import Login from './pages/login/Login';
 import ListaProduto from './components/produtos/listaproduto/ListaProduto';
+import ListaProdutoLogado from './components/produtos/listaprodutologado/ListaProdutoLogado';
 
 
 
@@ -26,6 +27,7 @@ function App() {
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path='/form' element={<FormProduto />} />
               <Route path="/produtos" element={<ListaProduto />} />
+              <Route path="/produtoslogado" element={<ListaProdutoLogado />} />
               <Route path="/cadastrarproduto" element={<FormProduto />} />
               <Route path="/cadastrarproduto/:id" element={<FormProduto />} />
               <Route path="/editarproduto/:id" element={<FormProduto />} />
