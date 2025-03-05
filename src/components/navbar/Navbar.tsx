@@ -32,7 +32,7 @@ function Navbar() {
                     )}
                     {usuario.id === 0 && <Link to="/listarprodutos">Produto normal</Link>}
 
-                    <span>Vegetarianos</span>
+                    <Link to="/veganos">Veganos</Link>
                     <span>Veganos</span>
                     <span>Restaurantes</span>
 

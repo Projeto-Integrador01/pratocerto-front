@@ -2,7 +2,7 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
-import { buscar } from "../../../services/Service";
+import { buscar, buscarLogado } from "../../../services/Service";
 import { DNA } from "react-loader-spinner";
 import CardVegano from "../cardvegano/CardVegano";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -15,19 +15,26 @@ function ListaVegano() {
     // Váriavel de Estado que recebe as produtos do back em um Array
     const [produtos, setProdutos] = useState<Produto[]>([]);
 
+
     // useContext acessa nosso contexto, buscando dele as informações necessárias para esse Componente
     const { usuario, handleLogout } = useContext(AuthContext);
     const token = usuario.token;
 
+
     // Função que chama a service buscar() para receber e guardar as produtos
     async function buscarProdutos() {
         try {
-            await buscar('/produtos/tipoalimento/tradicional', setProdutos)
-        } catch (error: any) {
-            ToastAlerta ("Produtos não tao vindo irmão", "erro")
+            await buscarLogado("/produtos/tipoalimento/tradicional", setProdutos, {
+              headers: {
+                Authorization: token,
+              },
+            });
+          } catch (error: any) {
+            if (error.toString().includes("403")) {
+              handleLogout();
+            }
+          }
         }
-    }
-
     // Esse useEffect dispara a função de busca sempre quando o componente é renderizado
     useEffect(() => {
         buscarProdutos()

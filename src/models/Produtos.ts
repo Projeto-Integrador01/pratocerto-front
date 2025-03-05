@@ -4,10 +4,10 @@ import Restaurante from './Restaurante';
 export default interface Produto {
   id: number;
   nome: string;
-  preco: string;
+  preco: Number;
   descricao: string;
   foto: string;
-  tipoalimento: string;
+  tipoAlimento: string;
   categoria: Categoria | null;
   restaurante: Restaurante | null;
 }
