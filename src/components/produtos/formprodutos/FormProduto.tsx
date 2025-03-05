@@ -81,6 +81,13 @@ function FormProduto() {
         }
     }, [token]);
 
+    useEffect(() => {
+        setProduto({
+            ...produto,
+            categoria: categoria,
+        });
+    }, [categoria]);
+
     function retornar() {
         navigate('/produtos');
     }
@@ -103,11 +110,11 @@ function FormProduto() {
         });
     }
 
+    console.log(produto)
 
     async function gerarNovoProduto(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         setIsLoading(true);
-
 
         if (id !== undefined) {
             try {
@@ -228,21 +235,23 @@ function FormProduto() {
 
                 {/* Categoria */}
                 <div className="flex flex-col gap-2">
-                    <label htmlFor="categorias">Categoria do Produto</label>
+                <label htmlFor="categorias">Categoria do Produto</label>
                     <select
                         name="categoria"
-                        id="categoria"
-                        className="border p-2 border-slate-800 rounded"
-                        value={categoria.id}
+                        id="categorias"
+                        required
+                        className="border-2 border-slate-700 rounded p-2"
+                        value={categoria.id || ""}
                         onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
                     >
                         <option value="" disabled>Selecione uma Categoria</option>
                         {categorias.map((categoria) => (
                             <option key={categoria.id} value={categoria.id}>{categoria.nome}</option>
                         ))}
+
                     </select>
                 </div>
-
+                
                 <button
                     type="submit"
                     className="rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto py-2"
