@@ -1,134 +1,65 @@
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
-import ModalCategoriaDeletar from "../modalcategoria/ModalCategoriaDeletar";
-import Popup from "reactjs-popup";
-import ModalCategoriaEditar from "../modalcategoria/ModalCategoriaEditar";
+import ModalCategoria from "../modalcategoria/ModalCategoria";
 
-function ListaCategorias() {
+function ListaCategoria() {
+  const navigate = useNavigate();
+
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
 
-  const { usuario } = useContext(AuthContext);
-  const token = usuario?.token || "";
-
-  useEffect(() => {
-    buscarCategorias();
-  }, []);
+  const { usuario, handleLogout } = useContext(AuthContext);
+  const token = usuario.token;
 
   async function buscarCategorias() {
     try {
-      setLoading(true);
-      await buscar("/categorias", setCategorias, {
-        headers: { Authorization: token || "" },
-      });
+      await buscar("/categorias", setCategorias);
     } catch (error: any) {
-      console.error("Erro ao buscar categorias:", error);
-    } finally {
-      setLoading(false);
+      if (error.toString().includes("403")) {
+        handleLogout();
+      }
     }
   }
 
+  useEffect(() => {
+    buscarCategorias();
+  }, [categorias.length]);
+
   return (
     <>
-      {loading && (
-        <div className="flex justify-center items-center min-h-screen">
-          <DNA
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="dna-loading"
-          />
-        </div>
+      {categorias.length === 0 && (
+        <DNA
+          visible={true}
+          height="200"
+          width="200"
+          ariaLabel="dna-loading"
+          wrapperStyle={{}}
+          wrapperClass="dna-wrapper mx-auto"
+        />
       )}
-
-      {!loading && (
-        <div className="flex justify-center w-full my-4">
-          <div className="container flex flex-col items-center">
-            <div className="flex px-8 py-4 w-full justify-start items-center gap-4">
-              <h1 className="text-2xl font-bold text-gray-800">Categorias</h1>
-              {token && (
-                <Popup
-                  trigger={
-                    <button className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-900 transition">
-                      Cadastrar
-                    </button>
-                  }
-                  modal
-                  closeOnDocumentClick
-                  overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
-                >
-                  {(close: () => void) => (
-                    <ModalCategoriaEditar
-                      categoriaId={""}
-                      onClose={close}
-                      atualizarLista={buscarCategorias}
-                    />
-                  )}
-                </Popup>
-              )}
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-8 bg-[#ffffff] w-full">
-              {categorias.map((categoria) => (
-                <div
-                  key={categoria.id}
-                  className="bg-white p-6 rounded-2xl shadow-lg border-4 border-green-800"
-                >
-                  <CardCategoria categoria={categoria} />
-
-                  {token && (
-                    <div className="flex w-full mt-4">
-                      <Popup
-                        trigger={
-                          <button className="w-1/2 text-white bg-[#5A7D5A] hover:bg-[#466046] py-1 text-center text-sm font-medium rounded-bl-lg transition duration-200">
-                            Editar
-                          </button>
-                        }
-                        modal
-                        closeOnDocumentClick
-                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
-                      >
-                        {(close: () => void) => (
-                          <ModalCategoriaEditar
-                            categoriaId={categoria.id.toString()}
-                            onClose={close}
-                            atualizarLista={buscarCategorias}
-                          />
-                        )}
-                      </Popup>
-
-                      <Popup
-                        trigger={
-                          <button className="w-1/2 text-white bg-[#B85042] hover:bg-[#92372E] py-1 text-center text-sm font-medium rounded-br-lg transition duration-200">
-                            Deletar
-                          </button>
-                        }
-                        modal
-                        closeOnDocumentClick
-                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
-                      >
-                        {(close: () => void) => (
-                          <ModalCategoriaDeletar
-                            categoriaId={categoria.id.toString()}
-                            onClose={close}
-                            atualizarLista={buscarCategorias}
-                          />
-                        )}
-                      </Popup>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+      <div className="flex justify-center w-full my-4">
+        <div className="container flex flex-col items-center">
+          <div className="flex justify-between w-full px-6 mb-4">
+            {token && (
+              <div className="flex items-center mt-9 mx-25">
+                <h1 className="text-3xl font-bold mr-6">Categorias</h1>
+                <ModalCategoria />
+              </div>
+            )}
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#f4f4f4] rounded-lg shadow-lg w-full">
+            {categorias.map((categoria) => (
+              <CardCategoria key={categoria.id} categoria={categoria} />
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
 
-export default ListaCategorias;
+export default ListaCategoria;

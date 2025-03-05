@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-wrapper-object-types */
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import axios from "axios";
 
 const api = axios.create({
@@ -21,11 +18,7 @@ export const login = async (url: string, dados: Object, setDados: Function) => {
   setDados(resposta.data);
 };
 
-export const buscar = async (
-  url: string,
-  setDados: Function,
-  p0: { headers: { Authorization: string } }
-) => {
+export const buscar = async (url: string, setDados: Function) => {
   const resposta = await api.get(url);
   setDados(resposta.data);
 };
