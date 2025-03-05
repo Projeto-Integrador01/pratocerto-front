@@ -48,30 +48,17 @@ function ListaCategorias() {
       {!loading && (
         <div className="flex justify-center w-full my-4">
           <div className="container flex flex-col items-center">
-            <div className="flex px-8 py-4 w-full justify-center items-center">
-              <h1
-                className="w-[364px] h-[74px] flex-shrink-0 text-green-800 text-center 
-                        font-lexend text-[28px] font-semibold leading-none 
-                        flex rounded-lg items-center"
-              >
-                Categorias
-              </h1>
-
+            <div className="flex px-8 py-4 w-full justify-start items-center gap-4">
+              <h1 className="text-2xl font-bold text-gray-800">Categorias</h1>
               {token && (
                 <Popup
                   trigger={
-                    <button
-                      className="w-[200px] h-[40px] bg-[#5A7D5A] text-white 
-                                text-center font-lexend text-[25px] font-semibold 
-                                rounded-lg transition items-center"
-                    >
-                      Nova Categoria
+                    <button className="bg-green-800 text-white px-4 py-2 rounded-lg hover:bg-green-900 transition">
+                      Cadastrar
                     </button>
                   }
                   modal
-                  overlayStyle={{
-                    background: "rgba(0, 0, 0, 0.5)",
-                  }}
+                  overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                 >
                   {(close: () => void) => (
                     <ModalCategoriaEditar
@@ -101,9 +88,7 @@ function ListaCategorias() {
                           </button>
                         }
                         modal
-                        overlayStyle={{
-                          background: "rgba(0, 0, 0, 0.5)", // Fundo semi-transparente
-                        }}
+                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                       >
                         {(close: () => void) => (
                           <ModalCategoriaEditar
@@ -121,17 +106,8 @@ function ListaCategorias() {
                           </button>
                         }
                         modal
-                        overlayStyle={{
-                          background: "rgba(0, 0, 0, 0.5)",
-                        }}
+                        overlayStyle={{ background: "rgba(0, 0, 0, 0.5)" }}
                       >
-                        {/* {(() => (
-                          <ModalCategoriaDeletar
-                            categoriaId={categoria.id.toString()}
-                            onClose={close}
-                            atualizarLista={buscarCategorias}
-                          />
-                        ))()} */}
                         {(close: () => void) => (
                           <ModalCategoriaDeletar
                             categoriaId={categoria.id.toString()}
