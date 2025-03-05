@@ -1,5 +1,3 @@
-import Produto from "./Produtos";
-
 export default interface RestauranteLogin {
     id: number;
     nome: string;
@@ -8,5 +6,4 @@ export default interface RestauranteLogin {
     foto: string;
     endereco:string;
     token: string;
-    produto?: Produto | null;
 }
