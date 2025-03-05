@@ -21,7 +21,7 @@ function ListaRestaurantes() {
     }, [restaurantes.length]);
 
     return (
-        <div className="colocar fundo restaurantes">
+        <div className="fundoRestaurantes">
             {restaurantes.length === 0 && (
             <div className="flex justify-center items-center h-screen">
                 <Vortex
