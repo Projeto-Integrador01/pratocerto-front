@@ -12,7 +12,7 @@ function CardProdutos({ produto }: CardProdutosProps) {
   const { usuario } = useContext(AuthContext);
   return (
 
-    <div className="bg-white rounded-lg shadow-md overflow-hidden w-80 mx-auto border-4 border-green-700 flex flex-col">
+    <div className="bg-white rounded-lg overflow-hidden w-80 shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300 mx-auto border-4 border-green-700 flex flex-col">
       {/* Imagem do Produto */}
       <div className="relative p-4">
         <img
@@ -43,13 +43,13 @@ function CardProdutos({ produto }: CardProdutosProps) {
         <div className="flex gap-2 p-4">
           <Link
             to={`/editarproduto/${produto.id}`}
-            className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-center py-2 rounded-lg"
+            className="flex-1 bg-verde-2 text-white hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center py-2 rounded-lg transition-all"
           >
             Editar
           </Link>
           <Link
             to={`/deletarproduto/${produto.id}`}
-            className="flex-1 bg-red-500 hover:bg-red-600 text-white text-center py-2 rounded-lg"
+            className="flex-1 bg-verde-2 text-white text-center hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 py-2 rounded-lg transition-all"
           >
             Excluir
           </Link>

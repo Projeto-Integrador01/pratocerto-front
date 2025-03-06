@@ -159,7 +159,7 @@ function FormProduto() {
     return (
         <div className="w-full h-screen bg-white flex justify-center items-center">
             {/* Formulário com fundo claro #F2DAAC e sombra verde */}
-            <form className="flex flex-col w-full max-w-2xl gap-4 border-4 border-green-900 bg-[#F2DAAC] p-6 rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.2),0_4px_20px_rgba(0,128,0,0.3)]" onSubmit={gerarNovoProduto}>
+            <form className="flex flex-col w-full max-w-2xl gap-4 border-4 border-verde-2 bg-bege-2 p-6 rounded-lg" onSubmit={gerarNovoProduto}>
                 <h1 className="text-2xl text-center my-4 text-green-900">
                     {id !== undefined ? 'Editar Produto' : 'Cadastrar Produto'}
                 </h1>
@@ -400,7 +400,7 @@ function FormProduto() {
                     <div className="flex justify-center mt-auto">
                         <button
                             type="submit"
-                            className="w-full rounded bg-green-900 text-white hover:bg-green-700 font-bold py-2 text-sm"
+                            className="w-full rounded bg-verde-2 text-white hover:bg-verde-3 font-bold py-2 text-sm cursor-pointer"
                             disabled={isLoading}
                         >
                             {isLoading ? (

@@ -1,7 +1,8 @@
-import { FacebookLogo, InstagramLogo, LinkedinLogo } from '@phosphor-icons/react'
+import { Envelope, FacebookLogo, GithubLogo, InstagramLogo, LinkedinLogo } from '@phosphor-icons/react'
 import { ReactNode, useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 import { useLocation } from 'react-router-dom'
+import Logo from '../Logo'
 
 function Footer() {
 
@@ -53,20 +54,21 @@ function Footer() {
 
                     {/* Rodapé com o logo do "Prato Certo" */}
                     <div className="flex justify-between items-center">
+                        <Logo/>
                         <div className="flex items-center gap-4">
-                            <img
+                            {/* <img
                                 width="40px"
                                 height="40px"
                                 src="/src/assets/logo/logo_puro.svg"
                                 className="self-start"
                                 alt="Prato Certo Logo"
-                            />
+                            /> */}
                             <div className="flex flex-col items-start space-y-0.5">
-                                <h2 className="font-bold">
+                                {/* <h2 className="font-bold">
                                     <span className="logo font-normal text-preto">PRATO</span>
                                     <span className="logo font-bold text-verde-2">CERTO</span>
-                                </h2>
-                                <span className='text-sm text-preto'>© {data} codArte</span>
+                                </h2> */}
+                                {/* <span className='text-sm text-preto'>© {data} codArte</span> */}
                             </div>
                         </div>
 
@@ -82,18 +84,17 @@ function Footer() {
                                     <LinkedinLogo size={32} weight="thin" />
                                 </a>
                                 <a
-                                    href="COLOCAR LINK"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-verde-2 hover:text-verde-3 hover:scale-110 transition-all duration-300">
-                                    <InstagramLogo size={32} weight="thin" />
+                                href="mailto:grupo1generation79@gmail.com"
+                                className="text-verde-2 hover:text-verde-3 hover:scale-110 transition-all duration-300"
+                                >
+                                <Envelope size={32} weight="thin" />
                                 </a>
                                 <a
-                                    href="COLOCAR LINK"
+                                    href="https://github.com/Projeto-Integrador01"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-verde-2 hover:text-verde-3 hover:scale-110 transition-all duration-300">
-                                    <FacebookLogo size={32} weight="thin" />
+                                    <GithubLogo size={32} weight="thin" />
                                 </a>
                             </div>
                         </div>

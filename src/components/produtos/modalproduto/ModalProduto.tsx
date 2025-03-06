@@ -21,7 +21,7 @@ function ModalProduto() {
   return (
     <>
       <button
-        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700 rounded-lg"  // Adicionando border-radius aqui
+        className="border px-4 py-2 bg-verde-2 text-white hover:bg-verde-1 rounded-lg cursor-pointer"  // Adicionando border-radius aqui
         onClick={abrirModal}
       >
         Cadastrar

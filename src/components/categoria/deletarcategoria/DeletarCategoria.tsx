@@ -72,8 +72,8 @@ function DeletarCategoria() {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90">
-      <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md relative">
-        <h2 className="text-2xl font-bold text-[#2F4F2F] text-center mb-4">
+      <div className="bg-bege-2 p-6 rounded-2xl shadow-lg w-full max-w-md relative">
+        <h2 className="text-2xl font-bold text-verde-2 text-center mb-4">
           Deletar Categoria
         </h2>
 
@@ -116,7 +116,7 @@ function DeletarCategoria() {
             <button
               type="button"
               onClick={retornar}
-              className="bg-[#5A7D5A] text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-[#466046] transition"
+              className="rounded-2xl text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center w-30 py-2 cursor-pointer"
             >
               Cancelar
             </button>
@@ -124,11 +124,13 @@ function DeletarCategoria() {
             <button
               type="submit"
               disabled={isLoading}
-              className={`bg-[#B85042] text-white px-6 py-2 rounded-lg text-lg font-semibold 
+              className={`flex justify-center rounded-2xl text-white bg-vermelho hover:bg-bege-2 hover:text-verde-2 hover:border-2 
+                border-verde-2 text-center w-30 py-2 cursor-pointer"
+ 
               ${
                 isLoading
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#92372E] transition"
+                  : "hover:bg-[#92372E] transition cursor-pointer"
               }`}
             >
               {isLoading ? (

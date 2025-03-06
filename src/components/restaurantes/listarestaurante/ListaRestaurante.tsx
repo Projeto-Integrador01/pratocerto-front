@@ -23,11 +23,11 @@ function ListaRestaurantes() {
     return (
         <div 
         className="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-no-repeat"
-        style={{
-            backgroundImage: "url('/public/background/ondaLesma2.svg')",
-            backgroundSize: "cover",  // Faz o fundo cobrir toda a tela
-            backgroundPosition: "center", // Centraliza a imagem
-        }}
+        // style={{
+        //     backgroundImage: "url('/public/background/ondaLesma2.svg')",
+        //     backgroundSize: "cover",  // Faz o fundo cobrir toda a tela
+        //     backgroundPosition: "center", // Centraliza a imagem
+        // }}
     >
         {restaurantes.length === 0 && (
             <div className="flex justify-center items-center h-screen">
@@ -41,7 +41,9 @@ function ListaRestaurantes() {
                 />
             </div>
         )}
-        
+         <div className="flex items-center mt-9 w-full pl-10">
+        <h1 className="text-3xl font-bold">Restaurantes</h1>
+        </div>
         <div className="w-full max-w-7xl my-4 mt-10 mb-16 px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {restaurantes.map((restaurante) => (

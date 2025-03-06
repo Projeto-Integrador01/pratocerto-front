@@ -72,15 +72,24 @@ function FormCategoria() {
   }
 
   return (
+    <div 
+                className="relative w-full h-screen flex justify-center items-center"
+                style={{
+                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                    backgroundSize: "45%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
+                    backgroundPosition: "45% 75%", // Centraliza a imagem
+                    backgroundRepeat: "no-repeat" // Evita repetições
+                  }}
+            >
     <div className="flex items-center justify-center min-h-screen">
-      <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-[#2F4F2F] text-center mb-4">
+      <div className="bg-bege-2 p-6 rounded-2xl w-full max-w-md border-2 border-verde-2">
+        <h2 className="text-2xl font-bold text-verde-2 text-center mb-4">
           {id !== undefined ? "Editar Categoria" : "Cadastrar Categoria"}
         </h2>
 
         <form onSubmit={gerarNovaCategoria} className="w-full">
           <div className="w-full mb-3">
-            <label className="block text-[#2F4F2F] text-lg font-semibold mb-1">
+            <label className="block text-verde-2 text-lg font-semibold mb-1">
               Nome
             </label>
             <input
@@ -91,13 +100,13 @@ function FormCategoria() {
                 atualizarEstado(e)
               }
               placeholder="Digite o nome"
-              className="w-full p-2 border-2 border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
+              className="w-full p-2 border-2 border-verde-2 rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
               required
             />
           </div>
 
           <div className="w-full mb-3">
-            <label className="block text-[#2F4F2F] text-lg font-semibold mb-1">
+            <label className="block text-verde-2 text-lg font-semibold mb-1">
               Foto
             </label>
             <input
@@ -108,7 +117,7 @@ function FormCategoria() {
                 atualizarEstado(e)
               }
               placeholder="URL da imagem"
-              className="w-full p-2 border-2 border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
+              className="w-full p-2 border-2 border-verde-2 rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
               required
             />
           </div>
@@ -117,7 +126,7 @@ function FormCategoria() {
           <div className="flex justify-center mt-4">
             <button
               type="submit"
-              className="rounded text-white bg-green-700 hover:bg-green-900 w-2/3 py-2"
+              className="rounded text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center w-2/3 py-2 cursor-pointer"
             >
               {isLoading ? (
                 <RotatingLines
@@ -134,6 +143,7 @@ function FormCategoria() {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }

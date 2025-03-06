@@ -28,6 +28,14 @@ function ListaCategorias() {
 
   return (
     <>
+    <div 
+        // className="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-no-repeat"
+        // style={{
+        //     backgroundImage: "url('/public/background/ondaViolao.svg')",
+        //     backgroundSize: "cover",  // Faz o fundo cobrir toda a tela
+        //     backgroundPosition: "bottom", // Centraliza a imagem
+        // }}
+    >
       {categorias.length === 0 && (
         <DNA
           visible={true}
@@ -42,18 +50,19 @@ function ListaCategorias() {
         <div className="container flex flex-col items-center">
           {/* Cabeçalho com título e botão de abrir o modal */}
           <div className="flex items-center justify-between w-full px-6 mb-4">
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold">Categorias</h1>
+            <div className="flex items-center">
+              <h1 className="text-2xl">Categorias</h1>
               {token && <ModalCategoria />} {/* Substitui o botão pelo modal */}
             </div>
           </div>
           {/* Lista de Categorias */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 bg-[#f4f4f4] rounded-lg shadow-lg w-full">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-12 rounded-lg w-full">
             {categorias.map((categoria) => (
               <CardCategoria key={categoria.id} categoria={categoria} />
             ))}
           </div>
         </div>
+      </div>
       </div>
     </>
   );
