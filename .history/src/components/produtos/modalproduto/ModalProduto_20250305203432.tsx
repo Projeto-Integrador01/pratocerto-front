@@ -37,7 +37,7 @@ function ModalProduto() {
           padding: "15px",
           backgroundColor: "transparent",
           border: "none",
-          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           zIndex: 1050,
           display: "flex",
           flexDirection: "column",

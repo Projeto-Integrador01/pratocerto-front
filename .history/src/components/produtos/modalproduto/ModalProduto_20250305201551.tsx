@@ -21,7 +21,7 @@ function ModalProduto() {
   return (
     <>
       <button
-        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700 rounded-lg"  // Adicionando border-radius aqui
+        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700 rounded-lg"
         onClick={abrirModal}
       >
         Cadastrar
@@ -32,20 +32,19 @@ function ModalProduto() {
         onClose={fecharModal}
         modal
         contentStyle={{
-          width: "30%",
-          height: "100vh",
-          padding: "15px",
-          backgroundColor: "transparent",
-          border: "none",
-          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
-          zIndex: 1050,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          overflow: "hidden",
+          width: "50%", // Ajusta a largura do modal
+          height: "100vh", // Define altura do popup
+          backgroundColor: "#fff", // Cor do fundo
+          borderRadius: "10px",  // Borda arredondada
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Sombra
+          zIndex: 1050, 
+          display: "flex",  // Flexbox para o conteúdo se ajustar
+          flexDirection: "column", 
+          justifyContent: "space-between",  // Garante que o conteúdo preencha o espaço
+          overflow: "hidden",  // Remove rolagem extra
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // Overlay escuro
           zIndex: 1040,
         }}
       >

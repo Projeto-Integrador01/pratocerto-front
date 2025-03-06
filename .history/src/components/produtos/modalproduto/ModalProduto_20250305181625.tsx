@@ -21,7 +21,7 @@ function ModalProduto() {
   return (
     <>
       <button
-        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700 rounded-lg"  // Adicionando border-radius aqui
+        className="border px-5 py-2 bg-green-900 text-white hover:bg-green-700"
         onClick={abrirModal}
       >
         Cadastrar
@@ -32,24 +32,22 @@ function ModalProduto() {
         onClose={fecharModal}
         modal
         contentStyle={{
-          width: "30%",
-          height: "100vh",
-          padding: "15px",
-          backgroundColor: "transparent",
-          border: "none",
-          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
-          zIndex: 1050,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          overflow: "hidden",
+          width: "600px",  
+          maxWidth: "90%", 
+          height: "auto",  
+          padding: "20px",  
+          backgroundColor: "#F2DAAC",  // Mudando a cor do fundo
+          borderRadius: "10px",  
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  
+          zIndex: 1050,  
+          overflow: "hidden", // Removendo a rolagem do modal
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 1040,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",  
+          zIndex: 1040,  
         }}
       >
-        <FormProduto />  {/* Seu formulário dentro do modal */}
+        <FormProduto />  
       </Popup>
     </>
   );

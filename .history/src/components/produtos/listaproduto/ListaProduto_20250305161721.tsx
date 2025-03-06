@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Produto from "../../../models/Produtos";
 import { buscar} from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
@@ -6,6 +7,7 @@ import { DNA } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
 
 function ListaProduto() {
+  const navigate = useNavigate();
   const [produtos, setProdutos] = useState<Produto[]>([]);
 
   // Função para buscar os produtos

@@ -32,21 +32,21 @@ function ModalProduto() {
         onClose={fecharModal}
         modal
         contentStyle={{
-          width: "30%",
-          height: "100vh",
-          padding: "15px",
-          backgroundColor: "transparent",
-          border: "none",
-          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
-          zIndex: 1050,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          overflow: "hidden",
+          width: "30%", 
+          height: "100vh",  
+          padding: "15px", 
+          backgroundColor: "", 
+          borderRadius: "10px",  
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  
+          zIndex: 1050, 
+          display: "flex", 
+          flexDirection: "column",  
+          justifyContent: "center",  
+          overflow: "hidden",  
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 1040,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",  
+          zIndex: 1040,  
         }}
       >
         <FormProduto />  {/* Seu formulário dentro do modal */}

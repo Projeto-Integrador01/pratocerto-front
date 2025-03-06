@@ -274,7 +274,6 @@ function FormProduto() {
     
 } else{
     return (
-        <div className="w-full h-screen bg-white flex justify-center items-center">
             {/* Camada extra com fundo branco e padding para centralizar o formulário */}
            
                 {/* Formulário com fundo claro #F2DAAC e sombra verde */}
@@ -411,7 +410,6 @@ function FormProduto() {
                         </button>
                     </div>
                 </form>
-            </div>
        
     );
     

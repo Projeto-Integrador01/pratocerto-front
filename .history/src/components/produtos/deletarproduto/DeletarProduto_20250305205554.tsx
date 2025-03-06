@@ -106,7 +106,7 @@ function DeletarProduto() {
                         </button>
 
                         <button
-                            className="text-white bg-red-600 hover:bg-red-700 w-1/2 py-2 rounded-lg flex justify-center items-center"
+                            className="text-white bg-red-600 hover:bg-red-700 w-1/2 py-2 rounded-lg"
                             onClick={deletarProduto}
                         >
                             {isLoading ? (
@@ -121,7 +121,6 @@ function DeletarProduto() {
                                 <span>Deletar</span>
                             )}
                         </button>
-
                     </div>
                 </div>
             </div>

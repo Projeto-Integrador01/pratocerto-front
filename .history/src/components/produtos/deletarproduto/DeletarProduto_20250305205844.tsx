@@ -106,21 +106,21 @@ function DeletarProduto() {
                         </button>
 
                         <button
-                            className="text-white bg-red-600 hover:bg-red-700 w-1/2 py-2 rounded-lg flex justify-center items-center"
-                            onClick={deletarProduto}
-                        >
-                            {isLoading ? (
-                                <RotatingLines
-                                    strokeColor="white"
-                                    strokeWidth="5"
-                                    animationDuration="0.75"
-                                    width="24"
-                                    visible={true}
-                                />
-                            ) : (
-                                <span>Deletar</span>
-                            )}
-                        </button>
+  className="text-white bg-red-600 hover:bg-red-700 w-1/2 py-2 rounded-lg flex justify-center items-center"
+  onClick={deletarProduto}
+>
+  {isLoading ? (
+    <RotatingLines
+      strokeColor="white"
+      strokeWidth="5"
+      animationDuration="0.75"
+      width="24"
+      visible={true}
+    />
+  ) : (
+    <span>Deletar</span>
+  )}
+</button>
 
                     </div>
                 </div>

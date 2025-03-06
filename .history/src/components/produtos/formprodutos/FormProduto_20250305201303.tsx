@@ -276,10 +276,10 @@ function FormProduto() {
     return (
         <div className="w-full h-screen bg-white flex justify-center items-center">
             {/* Camada extra com fundo branco e padding para centralizar o formulário */}
-           
+            <div className="w-full h-full max-w-xl flex flex-col justify-between bg-white p-4 rounded-lg">
                 {/* Formulário com fundo claro #F2DAAC e sombra verde */}
                 <form
-                    className="flex flex-col w-full h-full gap-4 bg-[#F2DAAC] p-6 rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.2),0_4px_20px_rgba(0,128,0,0.3)]"
+                    className="flex flex-col w-full h-full gap-4 bg-[#F2DAAC] p-8 rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.2),0_4px_20px_rgba(0,128,0,0.3)]"
                     onSubmit={gerarNovoProduto}
                 >
                     <h1 className="text-2xl text-center my-4 text-green-900">
@@ -296,7 +296,7 @@ function FormProduto() {
                             placeholder="Nome do Produto"
                             name="nome"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={produto.nome}
                             onChange={atualizarEstado}
                         />
@@ -312,7 +312,7 @@ function FormProduto() {
                             placeholder="Descrição do Produto"
                             name="descricao"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={produto.descricao}
                             onChange={atualizarEstado}
                         />
@@ -329,7 +329,7 @@ function FormProduto() {
                             placeholder="Preço do Produto"
                             name="preco"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={produto.preco.toString()}
                             onChange={atualizarEstado}
                         />
@@ -345,7 +345,7 @@ function FormProduto() {
                             placeholder="URL da Imagem"
                             name="foto"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={produto.foto}
                             onChange={atualizarEstado}
                         />
@@ -359,7 +359,7 @@ function FormProduto() {
                         <select
                             name="tipoAlimento"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={produto.tipoAlimento}
                             onChange={atualizarEstadoTipoAlimento}
                         >
@@ -381,7 +381,7 @@ function FormProduto() {
                             name="categoria"
                             id="categorias"
                             required
-                            className="border-2 border-green-900 text-green-900 rounded p-2 text-sm"
+                            className="border-2 border-green-900 text-green-900 rounded p-1 text-sm"
                             value={categoria.id || ""}
                             onChange={(e) => buscarCategoriaPorId(e.currentTarget.value)}
                         >
@@ -412,9 +412,8 @@ function FormProduto() {
                     </div>
                 </form>
             </div>
-       
+        </div>
     );
-    
     
     
     

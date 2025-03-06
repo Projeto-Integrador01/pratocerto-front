@@ -32,24 +32,26 @@ function ModalProduto() {
         onClose={fecharModal}
         modal
         contentStyle={{
-          width: "30%",
-          height: "100vh",
-          padding: "15px",
-          backgroundColor: "transparent",
-          border: "none",
-          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
-          zIndex: 1050,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          overflow: "hidden",
+          width: "550px",  // Definindo a largura do popup
+          height: "80vh",  // Definindo a altura do popup (80% da altura da tela)
+          padding: "15px", 
+          backgroundColor: "#ffffff", 
+          borderRadius: "10px",  // Borda arredondada
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Sombras suaves
+          zIndex: 1050, 
+          display: "flex", 
+          flexDirection: "column",  
+          justifyContent: "space-between",  // Para distribuir o espaço entre os itens
+          overflow: "hidden",  // Sem rolagem no modal
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          zIndex: 1040,
+          backgroundColor: "rgba(0, 0, 0, 0.5)",  // Fundo escurecido por trás do modal
+          zIndex: 1040,  
         }}
       >
-        <FormProduto />  {/* Seu formulário dentro do modal */}
+        <div className="flex flex-col h-full">
+          <FormProduto />  {/* Seu formulário dentro do modal */}
+        </div>
       </Popup>
     </>
   );

@@ -276,8 +276,8 @@ function FormProduto() {
     return (
         <div className="w-full h-screen bg-white flex justify-center items-center">
             {/* Camada extra com fundo branco e padding para centralizar o formulário */}
-           
-                {/* Formulário com fundo claro #F2DAAC e sombra verde */}
+            <div className="w-full h-full max-w-3xl flex flex-col justify-between bg-white p-4 rounded-lg">
+                {/* Formulário com fundo claro #ffffff e sombra verde */}
                 <form
                     className="flex flex-col w-full h-full gap-4 bg-[#F2DAAC] p-6 rounded-lg shadow-[0_4px_8px_rgba(0,0,0,0.2),0_4px_20px_rgba(0,128,0,0.3)]"
                     onSubmit={gerarNovoProduto}
@@ -412,7 +412,7 @@ function FormProduto() {
                     </div>
                 </form>
             </div>
-       
+        </div>
     );
     
     
