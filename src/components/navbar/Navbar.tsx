@@ -24,7 +24,7 @@ function Navbar() {
             <div className="w-full max-w-7xl flex justify-between items-center text-lg px-4">
                 {/* Nosso Logo */}
                 <div className="flex items-center gap-2">
-                    <img width="40px" height="40px" src="/src/assets/logo/logo_puro.svg" className="self-end" />
+                <Link to="/" className="hover:text-verde-1 hover:scale-105 transition duration-300"><img width="40px" height="40px" src="/src/assets/logo/logo_puro.svg" className="self-end" /></Link>
                     <h2 className="font-bold self-end">
                         <span className="logo font-normal text-preto">PRATO</span>
                         <span className="logo font-bold text-verde-2">CERTO</span>
