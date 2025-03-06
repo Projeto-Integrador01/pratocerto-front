@@ -21,29 +21,36 @@ function ListaRestaurantes() {
     }, [restaurantes.length]);
 
     return (
-        <div className="fundoRestaurantes">
-            {restaurantes.length === 0 && (
+        <div 
+        className="w-full min-h-screen flex flex-col justify-center items-center bg-cover bg-no-repeat"
+        style={{
+            backgroundImage: "url('/public/background/ondaLesma2.svg')",
+            backgroundSize: "cover",  // Faz o fundo cobrir toda a tela
+            backgroundPosition: "center", // Centraliza a imagem
+        }}
+    >
+        {restaurantes.length === 0 && (
             <div className="flex justify-center items-center h-screen">
                 <Vortex
-                visible={true}
-                height="120"
-                width="120"
-                ariaLabel="vortex-loading"
-                wrapperClass="vortex-wrapper"
-                colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                    visible={true}
+                    height="120"
+                    width="120"
+                    ariaLabel="vortex-loading"
+                    wrapperClass="vortex-wrapper"
+                    colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
                 />
             </div>
-            )}
-            <div className="flex justify-center w-full my-4 mt-10 mb-15">
-                <div className="container flex flex-col mx-2">
-                    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-items-center">
-                        {restaurantes.map((restaurante) => (
-                        <CardRestaurantes key={restaurante.id} restaurante={restaurante} />
-                        ))}
-                    </div>
-                </div>
+        )}
+        
+        <div className="w-full max-w-7xl my-4 mt-10 mb-16 px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {restaurantes.map((restaurante) => (
+                    <CardRestaurantes key={restaurante.id} restaurante={restaurante} />
+                ))}
             </div>
         </div>
+    </div>
+
     );
 }
 

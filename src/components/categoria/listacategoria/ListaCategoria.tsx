@@ -1,14 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { DNA } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
+import ModalCategoria from "../modalcategoria/ModalCategoria"; // Importando o Modal
 
-function ListaCategoria() {
-  const navigate = useNavigate();
-
+function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
   const { usuario, handleLogout } = useContext(AuthContext);
@@ -28,10 +26,6 @@ function ListaCategoria() {
     buscarCategorias();
   }, [categorias.length]);
 
-  function abrirCadastroCategoria() {
-    navigate("/cadastrarcategoria"); // Redireciona para a rota do formulário
-  }
-
   return (
     <>
       {categorias.length === 0 && (
@@ -46,18 +40,11 @@ function ListaCategoria() {
       )}
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col items-center">
-          {/* Cabeçalho com título e botão próximos */}
+          {/* Cabeçalho com título e botão de abrir o modal */}
           <div className="flex items-center justify-between w-full px-6 mb-4">
             <div className="flex items-center gap-2">
               <h1 className="text-2xl font-bold">Categorias</h1>
-              {token && (
-                <button
-                  onClick={abrirCadastroCategoria}
-                  className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-800"
-                >
-                  Nova Categoria
-                </button>
-              )}
+              {token && <ModalCategoria />} {/* Substitui o botão pelo modal */}
             </div>
           </div>
           {/* Lista de Categorias */}
@@ -72,4 +59,4 @@ function ListaCategoria() {
   );
 }
 
-export default ListaCategoria;
+export default ListaCategorias;

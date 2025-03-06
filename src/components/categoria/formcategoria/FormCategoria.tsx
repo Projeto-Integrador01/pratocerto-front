@@ -48,40 +48,32 @@ function FormCategoria() {
     });
   }
 
-  function retornar() {
-    navigate("/categorias");
-  }
-
   async function gerarNovaCategoria(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     setIsLoading(true);
 
-    if (id !== undefined) {
-      try {
+    try {
+      if (id !== undefined) {
         await atualizar(`/categorias`, categoria, setCategoria, {
           headers: { Authorization: token },
         });
         ToastAlerta("Categoria atualizada com sucesso", "sucesso");
-      } catch (error: any) {
-        ToastAlerta("Erro ao atualizar a Categoria", "erro");
-      }
-    } else {
-      try {
+      } else {
         await cadastrar(`/categorias`, categoria, setCategoria, {
           headers: { Authorization: token },
         });
         ToastAlerta("Categoria cadastrada com sucesso", "sucesso");
-      } catch (error: any) {
-        ToastAlerta("Erro ao cadastrar a Categoria", "erro");
       }
+    } catch (error: any) {
+      ToastAlerta("Erro ao cadastrar ou atualizar a Categoria", "erro");
     }
+
     setIsLoading(false);
-    retornar();
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center overflow-hidden shadow-md">
-      <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md relative">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-[#D1B890] p-6 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-[#2F4F2F] text-center mb-4">
           {id !== undefined ? "Editar Categoria" : "Cadastrar Categoria"}
         </h2>
@@ -121,22 +113,25 @@ function FormCategoria() {
             />
           </div>
 
-          <button
-            className="rounded text-slate-100 bg-heavyorange hover:bg-green-700 w-1/2 py-2 mx-auto flex justify-center"
-            type="submit"
-          >
-            {isLoading ? (
-              <RotatingLines
-                strokeColor="white"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="24"
-                visible={true}
-              />
-            ) : (
-              <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
-            )}
-          </button>
+          {/* Botão "Cadastrar" Centralizado */}
+          <div className="flex justify-center mt-4">
+            <button
+              type="submit"
+              className="rounded text-white bg-green-700 hover:bg-green-900 w-2/3 py-2"
+            >
+              {isLoading ? (
+                <RotatingLines
+                  strokeColor="white"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="24"
+                  visible={true}
+                />
+              ) : (
+                <span>{id === undefined ? "Cadastrar" : "Atualizar"}</span>
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,31 +1,31 @@
-import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css";
-import "./ModalCategoria.css";
-import FormCategoria from "../formcategoria/FormCategoria";
 import { useState } from "react";
+import Popup from "reactjs-popup";  // Importando o Popup
+
+import "reactjs-popup/dist/index.css"; // Importando o CSS do Popup
+import FormCategoria from "../formcategoria/FormCategoria";
 
 function ModalCategoria() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Função para abrir o modal
   const abrirModal = () => {
-    console.log("Modal abrindo");
     setIsModalOpen(true);
+    document.body.style.overflow = "hidden"; // Impede a rolagem da tela
   };
 
   // Função para fechar o modal
   const fecharModal = () => {
-    console.log("Modal fechando");
     setIsModalOpen(false);
+    document.body.style.overflow = "auto"; // Restaura a rolagem da tela
   };
 
   return (
     <>
       <button
-        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700"
+        className="border px-4 py-2 bg-green-900 text-white hover:bg-green-700 rounded-lg"  // Adicionando border-radius aqui
         onClick={abrirModal}
       >
-        Nova Categoria
+        Cadastrar Categoria
       </button>
 
       <Popup
@@ -33,23 +33,24 @@ function ModalCategoria() {
         onClose={fecharModal}
         modal
         contentStyle={{
-          width: "600px",  // Aumentando a largura do modal
-          maxWidth: "90%", // Responsividade
-          height: "auto",  // Tamanho automático
-          maxHeight: "80%",  // Máxima altura do modal
-          padding: "20px",  // Padding interno para espaçar o conteúdo
-          backgroundColor: "#fff",  // Fundo branco
-          borderRadius: "10px",  // Cantos arredondados
-          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",  // Sombra suave
-          zIndex: 1050,  // Modal sobre os outros elementos
-          overflowY: "auto",  // Permite rolagem se o conteúdo for grande
+          width: "30%",
+          height: "100vh",
+          padding: "15px",
+          backgroundColor: "transparent",
+          border: "none",
+          boxShadow: "0px 0px 0px rgba(0, 0, 0, 0.1)",
+          zIndex: 1050,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          overflow: "hidden",
         }}
         overlayStyle={{
-          backgroundColor: "rgba(0, 0, 0, 0.5)",  // Fundo semitransparente
-          zIndex: 1040,  // Overlay abaixo do modal
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          zIndex: 1040,
         }}
       >
-        <FormCategoria />  {/* Formulário do Produto */}
+        <FormCategoria />  {/* Seu formulário dentro do modal */}
       </Popup>
     </>
   );

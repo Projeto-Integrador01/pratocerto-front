@@ -24,7 +24,7 @@ function ListaVegano() {
     // Função que chama a service buscar() para receber e guardar as produtos
     async function buscarProdutos() {
         try {
-            await buscarLogado("/produtos/tipoalimento/vegetariano", setProdutos, {
+            await buscarLogado("/produtos/tipoalimento/vegano", setProdutos, {
               headers: {
                 Authorization: token,
               },
