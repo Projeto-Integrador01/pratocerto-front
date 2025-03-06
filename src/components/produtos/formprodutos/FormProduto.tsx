@@ -16,7 +16,7 @@ function FormProduto() {
 
     const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
 
-    const { usuario, handleLogout } = useContext(AuthContext);
+    const { usuario, handleLogout, setAtualizarDados } = useContext(AuthContext);
 
     const token = usuario.token;
     const { id } = useParams<{ id: string }>();
@@ -149,6 +149,7 @@ function FormProduto() {
         }
 
         setIsLoading(false);
+        setAtualizarDados(true);
         retornar();
     }
 
@@ -400,7 +401,7 @@ function FormProduto() {
                     <div className="flex justify-center mt-auto">
                         <button
                             type="submit"
-                            className="w-full rounded bg-verde-2 text-white hover:bg-verde-3 font-bold py-2 text-sm cursor-pointer"
+                            className="flex justify-center w-full rounded bg-verde-2 text-white hover:bg-verde-3 font-bold py-2 text-sm cursor-pointer"
                             disabled={isLoading}
                         >
                             {isLoading ? (

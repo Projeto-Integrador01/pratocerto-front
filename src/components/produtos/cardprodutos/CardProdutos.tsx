@@ -12,7 +12,7 @@ function CardProdutos({ produto }: CardProdutosProps) {
   const { usuario } = useContext(AuthContext);
   return (
 
-    <div className="bg-white rounded-lg overflow-hidden w-80 shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300 mx-auto border-4 border-green-700 flex flex-col">
+    <div className="bg-white rounded-lg overflow-hidden w-85 mb-8 shadow-lg hover:shadow-xl hover:scale-102 transition-all duration-300 mx-auto border-4 border-green-700 flex flex-col">
       {/* Imagem do Produto */}
       <div className="relative p-4">
         <img
@@ -20,6 +20,9 @@ function CardProdutos({ produto }: CardProdutosProps) {
           alt={produto.nome}
           className="w-full h-48 object-cover rounded-lg border-2 border-gray-400"
         />
+        <div className="absolute top-2 right-2 bg-verde-2 text-white text-sm font-semibold px-2 py-1 rounded-full">
+        {produto.tipoAlimento}
+      </div>
       </div>
 
       {/* Preço e Categoria */}
@@ -32,8 +35,9 @@ function CardProdutos({ produto }: CardProdutosProps) {
 
       {/* Nome e Descrição do Produto */}
       <div className="p-4 flex-grow">
-        <h3 className="text-xl font-semibold text-gray-800 mb-2">{produto.nome}</h3>
-        <h3 className="text-gray-600 text-sm">{String(produto.restaurante?.nome || "Restaurante desconhecido") }</h3>  
+        <h3 className="text-2xl text-gray-800 mb-2">{produto.nome}</h3>
+        <h3 className="text-verde-2 font-semibold text-lg">{String(produto.restaurante?.nome || "Restaurante desconhecido") }</h3>  
+        <hr className="my-4 border-t-2 border-cinza-2" />
 
         <p className="text-gray-600 text-sm">{produto.descricao}</p>
       </div>

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { DNA } from "react-loader-spinner";
+import { Vortex } from "react-loader-spinner";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
@@ -9,7 +9,7 @@ import ModalCategoria from "../modalcategoria/ModalCategoria"; // Importando o M
 function ListaCategorias() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, handleLogout , atualizarDados, setAtualizarDados} = useContext(AuthContext);
   const token = usuario.token;
 
   async function buscarCategorias() {
@@ -26,6 +26,14 @@ function ListaCategorias() {
     buscarCategorias();
   }, [categorias.length]);
 
+  useEffect(() => {
+    buscarCategorias();
+
+    if(atualizarDados){
+      setAtualizarDados(false);
+    }
+  }, [atualizarDados]);
+
   return (
     <>
     <div 
@@ -37,21 +45,23 @@ function ListaCategorias() {
         // }}
     >
       {categorias.length === 0 && (
-        <DNA
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
+       <div className="flex justify-center items-center h-screen">
+                       <Vortex
+                           visible={true}
+                           height="120"
+                           width="120"
+                           ariaLabel="vortex-loading"
+                           wrapperClass="vortex-wrapper"
+                           colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                       />
+                   </div>
       )}
       <div className="flex justify-center w-full my-4">
         <div className="container flex flex-col items-center">
           {/* Cabeçalho com título e botão de abrir o modal */}
           <div className="flex items-center justify-between w-full px-6 mb-4">
             <div className="flex items-center">
-              <h1 className="text-2xl">Categorias</h1>
+              <h1 className="text-3xl font-bold mt-4 ml-12">Categorias</h1>
               {token && <ModalCategoria />} {/* Substitui o botão pelo modal */}
             </div>
           </div>

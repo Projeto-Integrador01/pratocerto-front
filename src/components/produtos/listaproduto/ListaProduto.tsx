@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Produto from "../../../models/Produtos";
 import { buscar} from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
-import { DNA } from "react-loader-spinner";
+import { Vortex } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
 
 function ListaProduto() {
@@ -19,22 +19,24 @@ function ListaProduto() {
     }
   }
 
-
   useEffect(() => {
     buscarProdutos();
   }, [produtos.length]);
 
+
   return (
     <>
       {produtos.length === 0 && (
-        <DNA
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
+        <div className="flex justify-center items-center h-screen">
+                               <Vortex
+                                   visible={true}
+                                   height="120"
+                                   width="120"
+                                   ariaLabel="vortex-loading"
+                                   wrapperClass="vortex-wrapper"
+                                   colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                               />
+                           </div>
       )}
 
       

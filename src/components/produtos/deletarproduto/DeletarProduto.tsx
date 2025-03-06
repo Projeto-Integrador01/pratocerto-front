@@ -82,6 +82,15 @@ function DeletarProduto() {
     }
 
     return (
+        <div 
+                className="relative w-full h-screen flex justify-center items-center"
+                style={{
+                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                    backgroundSize: "40%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
+                    backgroundPosition: "50% 75%", // Centraliza a imagem
+                    backgroundRepeat: "no-repeat" // Evita repetições
+                  }}
+            >
         <div className="container w-1/3 mx-auto min-h-screen flex justify-center items-center">
             {/* Card de confirmação */}
             <div className="border flex flex-col rounded-2xl overflow-hidden bg-[#F2DAAC] w-full">
@@ -99,14 +108,14 @@ function DeletarProduto() {
                     {/* Botões dentro do card */}
                     <div className="flex gap-4 w-full justify-center">
                         <button
-                            className="text-white bg-green-900 hover:bg-green-700 w-1/2 py-2 rounded-lg border border-green-900"
+                            className="text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 w-1/2 py-2 rounded-lg border cursor-pointer"
                             onClick={retornar}
                         >
                             Cancelar
                         </button>
 
                         <button
-                            className="text-white bg-red-600 hover:bg-red-700 w-1/2 py-2 rounded-lg flex justify-center items-center"
+                            className="text-white bg-verde-2 hover:bg-vermelho w-1/2 py-2 rounded-lg flex justify-center items-center cursor-pointer"
                             onClick={deletarProduto}
                         >
                             {isLoading ? (
@@ -125,6 +134,7 @@ function DeletarProduto() {
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 

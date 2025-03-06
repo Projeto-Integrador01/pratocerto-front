@@ -88,21 +88,20 @@ function Login() {
 
                 {/* Logo */}
                 <div className="flex justify-between items-center">
-                        <div className="flex items-end gap-4">
-                            <img
+                <Link to="/" className="hover:text-verde-1 hover:scale-105 transition duration-300"><div className="flex items-end gap-4">
+                        <img
                                 width="32px"
                                 height="32px"
-                                src="/src/assets/logo/logo_puro.svg"
+                                src="/public/background/logoPuroUva.svg"
                                 className="self-end"
-                                alt="Prato Certo Logo"
-                            />
+                                alt="Prato Certo Logo"/>
                             <div className="flex flex-col items-end space-y-0.5">
                                 <h2 className="font-bold">
                                     <span className="logo font-normal text-preto">PRATO</span>
                                     <span className="logo font-bold text-verde-2">CERTO</span>
                                 </h2>
                                </div>
-                        </div>
+                        </div></Link>
                      </div>
             </div>
             </div>

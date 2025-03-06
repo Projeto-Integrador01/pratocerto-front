@@ -4,14 +4,14 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
 import { buscarLogado } from "../../../services/Service";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
-import { DNA } from "react-loader-spinner";
+import { Vortex } from "react-loader-spinner";
 import CardProdutos from "../cardprodutos/CardProdutos";
 import ModalProduto from "../modalproduto/ModalProduto"; // Importando o ModalProduto
 
 function ListaProdutoLogado() {
   const navigate = useNavigate();
   const [produtos, setProdutos] = useState<Produto[]>([]);
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, handleLogout, atualizarDados, setAtualizarDados } = useContext(AuthContext);
   const token = usuario.token;
 
   // Função para buscar os produtos
@@ -40,17 +40,27 @@ function ListaProdutoLogado() {
     buscarProdutos();
   }, [produtos.length]);
 
+  useEffect(() => {
+    buscarProdutos();
+
+    if(atualizarDados){
+      setAtualizarDados(false);
+    }
+  }, [atualizarDados]);
+
   return (
     <>
       {produtos.length === 0 && (
-        <DNA
-          visible={true}
-          height="200"
-          width="200"
-          ariaLabel="dna-loading"
-          wrapperStyle={{}}
-          wrapperClass="dna-wrapper mx-auto"
-        />
+        <div className="flex justify-center items-center h-screen">
+                                       <Vortex
+                                           visible={true}
+                                           height="120"
+                                           width="120"
+                                           ariaLabel="vortex-loading"
+                                           wrapperClass="vortex-wrapper"
+                                           colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                                       />
+                                   </div>
       )}
 
       <div className="flex items-center mt-9 mx-25">

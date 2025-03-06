@@ -16,6 +16,7 @@ import ListaProduto from './components/produtos/listaproduto/ListaProduto';
 import ListaProdutoLogado from './components/produtos/listaprodutologado/ListaProdutoLogado';
 import DeletarProduto from './components/produtos/deletarproduto/DeletarProduto';
 import FormProduto from './components/produtos/formprodutos/FormProduto';
+import Grupo from './pages/grupo/Grupo';
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
              <Route path="/cadastro" element={<Cadastro />} />
              <Route path="/restaurantes" element={<ListaRestaurantes/>} />
              <Route path="/formcategoria" element={<FormCategoria />} />
-            <Route path="/deletar" element={<DeletarCategoria />} />
+            <Route path="/deletarcategoria" element={<DeletarCategoria />} />
             <Route path="/categorias" element={<ListaCategoria/>} />
             <Route path="/cadastrarcategoria" element={<FormCategoria />} />
             <Route path="/editarcategoria/:id" element={<FormCategoria />} />
@@ -44,7 +45,8 @@ function App() {
             <Route path="/cadastrarproduto" element={<FormProduto />} />
             <Route path='/form' element={<FormProduto />} />
             <Route path="/editarproduto/:id" element={<FormProduto />} />
-            <Route path="/deletarproduto/:id" element={<DeletarProduto />} />s
+            <Route path="/deletarproduto/:id" element={<DeletarProduto />} />
+            <Route path="/sobre" element={<Grupo />} />
             </Routes>
           <Footer />
         </BrowserRouter>

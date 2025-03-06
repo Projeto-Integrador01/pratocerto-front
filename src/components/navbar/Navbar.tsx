@@ -2,6 +2,7 @@ import { ReactNode, useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ToastAlerta } from "../../utils/ToastAlerta";
+import Logo from "../Logo";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -21,15 +22,16 @@ function Navbar() {
 
     return (
         <div className="w-full flex justify-center py-4 bg-bege-2 text-black">
-            <div className="w-full max-w-7xl flex justify-between items-center text-lg px-4">
+            <div className="w-full max-w-7xl flex justify-between items-center text-lg">
                 {/* Nosso Logo */}
-                <Link to="/" className="hover:text-verde-1 hover:scale-105 transition duration-300"><div className="flex items-center gap-2">
+                <Link to="/" className="hover:text-verde-1 hover:scale-105 transition duration-300"><Logo/></Link>
+                {/* <div className="flex items-center gap-2">
                 <img width="40px" height="40px" src="/src/assets/logo/logo_puro.svg" className="self-end" />
                     <h2 className="font-bold self-end">
                         <span className="logo font-normal text-preto">PRATO</span>
                         <span className="logo font-bold text-verde-2">CERTO</span>
                     </h2>
-                </div></Link>
+                </div> */}
 
                 {/* Links do menu */}
                 <div className="flex gap-4 p-2">
@@ -54,7 +56,9 @@ function Navbar() {
                     <Link to="/restaurantes" className="hover:text-verde-1 hover:scale-105 transition duration-300">
                     Restaurantes
                     </Link>
+                    <div className="ml-22">
 
+                    </div>
                     {usuario.token !== "" ? (
                         <button onClick={logout} className="bg-verde-2 text-white px-4 py-0.5 rounded-md hover:bg-verde-1 transition duration-300 cursor-pointer">
                             Sair
@@ -65,7 +69,9 @@ function Navbar() {
                  Login
                 </button>
                 </Link>
+                
                     )}
+                    
                 </div>
             </div>
         </div>

@@ -15,36 +15,38 @@ interface Produto {
 const CardHome: React.FC<{ produto: Produto }> = ({ produto }) => {
     return (
         <div className="bg-white border-4 border-verde-2 p-6 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 min-h-[450px] flex flex-col">
-            {/* Imagem do produto */}
-            <img 
-                src={produto.foto} 
-                alt={produto.nome} 
-                className="w-full h-52 object-cover rounded-t-lg"
-            />
+    
+    {/* Imagem do produto + Selo */}
+    <div className="relative">
+        <img 
+            src={produto.foto} 
+            alt={produto.nome} 
+            className="w-full h-52 object-cover rounded-t-lg"
+        />
 
-            {/* Conteúdo do card */}
-            <div className="flex flex-col flex-grow">
-                <h3 className="text-xl font-semibold mt-4">{produto.nome}</h3>
-
-                {/* Nome do Restaurante */}
-                {produto.restaurante && (
-                    <p className="text-gray-600 mt-2 text-sm">{produto.restaurante.nome}</p>
-                )}
-
-                <p className="text-gray-600 mt-2 flex-grow">{produto.descricao}</p>
-
-                <p className="text-gray-600 mt-2 flex-grow">
-                Este é um Produto: {produto.tipoAlimento ? produto.tipoAlimento.charAt(0).toUpperCase() + produto.tipoAlimento.slice(1) : ""}</p>
-
-                {/* Botão Saiba Mais */}
-                {/* <a 
-                    href={produto.link} 
-                    className="text-verde-2 mt-4 inline-block self-start"
-                >
-                    Saiba mais
-                </a> */}
+        {/* Selo do Produto */}
+        {produto.tipoAlimento && (
+            <div className="absolute top-2 right-2 bg-green-700 text-white text-sm font-semibold px-2 py-1 rounded-full">
+                {produto.tipoAlimento}
             </div>
-        </div>
+        )}
+    </div>
+
+    {/* Conteúdo do card */}
+    <div className="flex flex-col flex-grow">
+        <h3 className="text-xl font-semibold mt-4">{produto.nome}</h3>
+
+        {/* Nome do Restaurante */}
+        {produto.restaurante && (
+            <p className="text-gray-600 mt-2 text-sm">{produto.restaurante.nome}</p>
+        )}
+
+        <p className="text-gray-600 mt-2 flex-grow">{produto.descricao}</p>
+    </div>
+
+    <a href="/produtos" className="ml-52 hover:text-verde-1 hover:scale-110 transition duration-300">Saiba mais</a>
+</div>
+
     );
 };
 

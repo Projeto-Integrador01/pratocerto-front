@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
 import {buscar, buscarLogado } from "../../../services/Service";
-import { DNA } from "react-loader-spinner";
+import { DNA, Vortex } from "react-loader-spinner";
 import CardVegano from "../cardvegetariano/CardVegetariano";
 import { ToastAlerta } from "../../../utils/ToastAlerta";
 import CardVegetariano from "../cardvegetariano/CardVegetariano";
@@ -34,14 +34,16 @@ function ListaVegetariano() {
     return (
         <>
         {produtos.length === 0 && (
-          <DNA
-            visible={true}
-            height="200"
-            width="200"
-            ariaLabel="dna-loading"
-            wrapperStyle={{}}
-            wrapperClass="dna-wrapper mx-auto"
-          />
+          <div className="flex justify-center items-center h-screen">
+                                 <Vortex
+                                     visible={true}
+                                     height="120"
+                                     width="120"
+                                     ariaLabel="vortex-loading"
+                                     wrapperClass="vortex-wrapper"
+                                     colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                                 />
+                             </div>
         )}
   
         {/* Título e Botão de Cadastrar Produto */}

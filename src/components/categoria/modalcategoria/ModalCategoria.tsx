@@ -22,7 +22,7 @@ function ModalCategoria() {
   return (
     <>
       <button
-        className="border ml-6 px-4 py-2 bg-verde-2 text-white hover:bg-verde-1 rounded-lg cursor-pointer"  // Adicionando border-radius aqui
+        className="mt-5 border ml-6 px-4 py-2 bg-verde-2 text-white hover:bg-verde-1 rounded-lg cursor-pointer"  // Adicionando border-radius aqui
         onClick={abrirModal}
       >
         Cadastrar Categoria

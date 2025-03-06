@@ -1,155 +1,118 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useContext, useEffect, ChangeEvent } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AuthContext } from "../../../contexts/AuthContext";
 import Categoria from "../../../models/Categoria";
+import { AuthContext } from "../../../contexts/AuthContext";
 import { buscarLogado, deletar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 import { RotatingLines } from "react-loader-spinner";
 
 function DeletarCategoria() {
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [categoria, setCategoria] = useState<Categoria>({} as Categoria);
-  const { id } = useParams<{ id: string }>();
-  const { usuario, handleLogout } = useContext(AuthContext);
-  const token = usuario.token;
+    const navigate = useNavigate()
+    const { id } = useParams<{ id: string }>();
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [categoria, setCategoria] = useState<Categoria>({} as Categoria)
+    const { usuario, handleLogout } = useContext(AuthContext)
+    const token = usuario.token
 
-  async function buscarCategoriaPorId(id: string) {
-    try {
-      await buscarLogado(`/categorias/${id}`, setCategoria, {
-        headers: { Authorization: token },
-      });
-    } catch (error: any) {
-      if (error.toString().includes("403")) {
-        handleLogout();
-      }
+    async function buscarCategoriaPorId(id: string) {
+        try {
+            await buscarLogado(`/categorias/${id}`, setCategoria, {
+                headers: {
+                    'Authorization': token
+                }
+            })
+        } catch (error: any) {
+            if (error.toString().includes('403')) {
+                handleLogout()
+            }
+        }
     }
-  }
 
-  useEffect(() => {
-    if (id !== undefined) {
-      buscarCategoriaPorId(id);
+    useEffect(() => {
+        if (token === '') {
+            ToastAlerta('Você precisa estar logado!', 'info')
+            navigate('/')
+        }
+    }, [token])
+
+    useEffect(() => {
+        if (id !== undefined) {
+            buscarCategoriaPorId(id)
+        }
+    }, [id])
+
+    async function deletarCategoria() {
+        setIsLoading(true)
+        try {
+            await deletar(`/categorias/${id}`, {
+                headers: {
+                    'Authorization': token
+                }
+            })
+            ToastAlerta("Categoria apagada com sucesso!", "sucesso")
+        } catch (error: any) {
+            if (error.toString().includes('403')) {
+                handleLogout()
+            } else {
+                ToastAlerta("Erro ao deletar a categoria!", "erro")
+            }
+        }
+        setIsLoading(false)
+        retornar()
     }
-  }, [id]);
 
-  async function deletarCategoria(event: React.FormEvent) {
-    event.preventDefault();
-    setIsLoading(true);
-
-    try {
-      await deletar(`/categorias/${id}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
-
-      alert("Categoria apagada com sucesso");
-
-      setIsLoading(false);
-      retornar();
-    } catch (error: any) {
-      if (error.toString().includes("403")) {
-        handleLogout();
-      } else {
-        alert("Erro ao deletar a categoria.");
-      }
-      setIsLoading(false);
+    function retornar() {
+        navigate("/categorias")
     }
-  }
 
-  function retornar() {
-    setTimeout(() => {
-      navigate("/categorias");
-    }, 500);
-  }
-
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
-    setCategoria({
-      ...categoria,
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-90">
-      <div className="bg-bege-2 p-6 rounded-2xl shadow-lg w-full max-w-md relative">
-        <h2 className="text-2xl font-bold text-verde-2 text-center mb-4">
-          Deletar Categoria
-        </h2>
-
-        <p className="text-[#2F4F2F] text-center mb-4">
-          Tem certeza que deseja apagar esta categoria?
-        </p>
-
-        <form onSubmit={deletarCategoria} className="w-full">
-          <div className="w-full mb-3">
-            <label className="block text-[#2F4F2F] text-lg font-semibold mb-1">
-              Nome
-            </label>
-            <input
-              type="text"
-              name="nome"
-              value={categoria.nome}
-              onChange={atualizarEstado}
-              placeholder="Digite o nome"
-              className="w-full p-2 border border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
-              disabled
-            />
-          </div>
-
-          <div className="w-full mb-3">
-            <label className="block text-[#2F4F2F] text-lg font-semibold mb-1">
-              Foto
-            </label>
-            <input
-              type="text"
-              name="foto"
-              value={categoria.foto}
-              onChange={atualizarEstado}
-              placeholder="URL da imagem"
-              className="w-full p-2 border border-[#2F4F2F] rounded-md bg-transparent text-[#2F4F2F] outline-none focus:ring-2 focus:ring-[#5A7D5A]"
-              disabled
-            />
-          </div>
-
-          <div className="flex justify-between mt-4">
-            <button
-              type="button"
-              onClick={retornar}
-              className="rounded-2xl text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center w-30 py-2 cursor-pointer"
-            >
-              Cancelar
-            </button>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className={`flex justify-center rounded-2xl text-white bg-vermelho hover:bg-bege-2 hover:text-verde-2 hover:border-2 
-                border-verde-2 text-center w-30 py-2 cursor-pointer"
- 
-              ${
-                isLoading
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#92372E] transition cursor-pointer"
-              }`}
-            >
-              {isLoading ? (
-                <RotatingLines
-                  strokeColor="white"
-                  strokeWidth="5"
-                  animationDuration="0.75"
-                  width="24"
-                  visible={true}
-                />
-              ) : (
-                "Deletar"
-              )}
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+    return (
+        <div 
+            className="relative w-full h-screen flex justify-center items-center"
+            style={{
+                backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                backgroundSize: "40%",
+                backgroundPosition: "50% 75%",
+                backgroundRepeat: "no-repeat"
+            }}
+        >
+            <div className="container w-1/3 mx-auto min-h-screen flex justify-center items-center">
+                <div className="border flex flex-col rounded-2xl overflow-hidden bg-[#F2DAAC] w-full">
+                    <header className="text-center py-2 px-6 text-green-900 font-bold text-2xl">
+                        Deletar Categoria
+                    </header>
+                    <div className="p-6 flex flex-col items-center justify-center">
+                        <p className="text-center text-green-900 font-semibold mb-4 text-xl">
+                            Você tem certeza de que deseja apagar a categoria a seguir?
+                        </p>
+                        <div className="flex gap-4 w-full justify-center">
+                            <button
+                                className="text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 w-1/2 py-2 rounded-lg border cursor-pointer"
+                                onClick={retornar}
+                            >
+                                Cancelar
+                            </button>
+                            <button
+                                className="text-white bg-verde-2 hover:bg-vermelho w-1/2 py-2 rounded-lg flex justify-center items-center cursor-pointer"
+                                onClick={deletarCategoria}
+                            >
+                                {isLoading ? (
+                                    <RotatingLines
+                                        strokeColor="white"
+                                        strokeWidth="5"
+                                        animationDuration="0.75"
+                                        width="24"
+                                        visible={true}
+                                    />
+                                ) : (
+                                    <span>Deletar</span>
+                                )}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default DeletarCategoria;

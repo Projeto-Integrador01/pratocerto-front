@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import CardHome from "../../components/cardhome/CardHome";
 import { buscar } from "../../services/Service";
 import { ToastAlerta } from "../../utils/ToastAlerta";
-import { DNA } from "react-loader-spinner";
+import { Vortex } from "react-loader-spinner";
 
 function Home() {
   const [produtos, setProdutos] = useState<any[]>([]); // Ajuste para tipar como array de produtos
@@ -70,7 +70,7 @@ function Home() {
 
       {/* Seção de produtos */}
       <div className="relative z-10 max-w-7xl mx-auto p-8 w-full">
-        <h2 className="text-3xl text-start mb-10">Produtos</h2>
+        <h2 className="text-3xl text-start mb-12">Produtos</h2>
       </div>
 
       {/* Container para os produtos com a onda no fundo */}
@@ -85,13 +85,16 @@ function Home() {
         {/* Seção dos produtos */}
         <div className="relative z-10 max-w-7xl mx-auto p-8">
           {loading ? (
-            <DNA
-              visible={true}
-              height="200"
-              width="200"
-              ariaLabel="dna-loading"
-              wrapperClass="dna-wrapper mx-auto"
-            />
+           <div className="flex justify-center items-center h-screen">
+                                          <Vortex
+                                              visible={true}
+                                              height="120"
+                                              width="120"
+                                              ariaLabel="vortex-loading"
+                                              wrapperClass="vortex-wrapper"
+                                              colors={['#327349', '#F2DAAC', '#327349', '#F2DAAC', '#F2DAAC', '#327349']}
+                                          />
+                                      </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {produtosAleatorios.map((produto) => (

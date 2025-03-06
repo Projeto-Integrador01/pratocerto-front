@@ -13,7 +13,7 @@ function FormCategoria() {
 
   const { id } = useParams<{ id: string }>();
 
-  const { usuario, handleLogout } = useContext(AuthContext);
+  const { usuario, handleLogout, setAtualizarDados} = useContext(AuthContext);
   const token = usuario.token;
 
   async function buscarCategoriaPorId(id: string) {
@@ -69,17 +69,20 @@ function FormCategoria() {
     }
 
     setIsLoading(false);
+    setAtualizarDados(true);
   }
+
+  
 
   return (
     <div 
                 className="relative w-full h-screen flex justify-center items-center"
-                style={{
-                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
-                    backgroundSize: "45%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
-                    backgroundPosition: "45% 75%", // Centraliza a imagem
-                    backgroundRepeat: "no-repeat" // Evita repetições
-                  }}
+                // style={{
+                //     backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                //     backgroundSize: "45%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
+                //     backgroundPosition: "45% 75%", // Centraliza a imagem
+                //     backgroundRepeat: "no-repeat" // Evita repetições
+                //   }}
             >
     <div className="flex items-center justify-center min-h-screen">
       <div className="bg-bege-2 p-6 rounded-2xl w-full max-w-md border-2 border-verde-2">
@@ -126,7 +129,7 @@ function FormCategoria() {
           <div className="flex justify-center mt-4">
             <button
               type="submit"
-              className="rounded text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center w-2/3 py-2 cursor-pointer"
+              className="flex justify-center rounded text-white bg-verde-2 hover:bg-bege-2 hover:text-verde-2 hover:border-2 border-verde-2 text-center w-2/3 py-2 cursor-pointer"
             >
               {isLoading ? (
                 <RotatingLines

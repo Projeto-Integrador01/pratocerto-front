@@ -22,19 +22,19 @@ function Footer() {
                     {/* Seção superior com os textos */}
                     <div className="flex justify-between items-start pb-4 text-verde-2">
                         <div className="flex flex-col">
-                            <a href="COLOCAR LINK" target="_blank" rel="noopener noreferrer" 
+                            <a href="/sobre" rel="noopener noreferrer" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Sobre nós
                             </a>
-                            <a href="COLOCAR LINK" target="_blank" rel="noopener noreferrer" 
+                            <a href="https://www.canva.com/design/DAGgTFMmAPI/Imc1jJLVaxkX6CjEyjqjBQ/view?utm_content=DAGgTFMmAPI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h039975e787" target="_blank" rel="noopener noreferrer" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Nosso Objetivo
                             </a>
-                            <a href="COLOCAR LINK" target="_blank" rel="noopener noreferrer" 
+                            <a href="https://brazil.generation.org/" target="_blank" rel="noopener noreferrer" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Agradecimentos
                             </a>
-                            <a href="COLOCAR LINK" target="_blank" rel="noopener noreferrer" 
+                            <a href="mailto:grupo1generation79@gmail.com" target="_blank" rel="noopener noreferrer" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Fale Conosco
                             </a>
