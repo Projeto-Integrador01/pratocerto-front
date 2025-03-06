@@ -25,3 +25,10 @@ yarn install  # ou npm install
 yarn dev  # ou npm run dev
 
 Acesse em http://localhost:5173/ 🎉
+
+👥 Autores
+📌 Beatriz Novais
+📌 Danilo Almeida
+📌 Gabriel Nogueira
+📌 Gustavo Correa
+📌 Rosilene Farias
