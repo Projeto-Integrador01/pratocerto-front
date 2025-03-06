@@ -2,7 +2,7 @@ import Categoria from './Categoria';
 import Restaurante from './Restaurante';
 
 export default interface Produto {
-  id: number;
+  id: string;
   nome: string;
   preco: Number;
   descricao: string;
@@ -11,3 +11,7 @@ export default interface Produto {
   categoria: Categoria | null;
   restaurante: Restaurante | null;
 }
+
+
+
+

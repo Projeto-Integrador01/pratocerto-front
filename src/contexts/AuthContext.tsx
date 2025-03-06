@@ -25,21 +25,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
         senha: "",
         foto: "",
         endereco: "",
-        token: ""
+        token: "", 
     })
 
+    
+      
     const [isLoading, setIsLoading] = useState(false)
 
-    async function handleLogin (restauranteLogin: RestauranteLogin){
-        setIsLoading(true)
-        try{
-            await login ('/restaurantes/logar', restauranteLogin, setUsuario)
-            ToastAlerta ("Usuário foi autenticado com sucedido!", "sucesso")
-        } catch (error){
-            ToastAlerta ("Os dados do Usuário estão inconsistentes", "erro")
+    async function handleLogin(restauranteLogin: RestauranteLogin) {
+        setIsLoading(true);
+        try {
+            await login('/restaurantes/logar', restauranteLogin, setUsuario); // Aqui você vai preencher o 'usuario' com os dados do restaurante
+            ToastAlerta("Usuário foi autenticado com sucesso!", "sucesso");
+        } catch (error) {
+            ToastAlerta("Os dados do Usuário estão inconsistentes", "erro");
         }
-        setIsLoading(false)
+        setIsLoading(false);
     }
+    
 
     function handleLogout(){
         setUsuario({
@@ -54,7 +57,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading }}>
+        <AuthContext.Provider value={{ usuario,  handleLogin, handleLogout, isLoading }}>
             {children}
         </AuthContext.Provider>
     )
