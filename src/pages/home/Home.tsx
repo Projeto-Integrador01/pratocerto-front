@@ -60,7 +60,7 @@ function Home() {
           {/* Seção de imagem */}
           <div className="flex-1">
             <img
-              src="/public/background/fundo_home.png"
+              src="https://i.ibb.co/QjK2dLz7/fundo-Home.jpg"
               alt="Imagem da Página Home"
               className="w-full h-auto"
             />
@@ -77,7 +77,7 @@ function Home() {
       <div className="relative mt-[-90px]">
         {/* Onda de fundo */}
         <img
-          src="/public/background/ondaSimplesCima2.svg"
+          src="https://files.catbox.moe/22ek93.svg"
           alt="Onda de fundo"
           className="absolute top-[10px] left-0 w-full h-full z-0" 
         />

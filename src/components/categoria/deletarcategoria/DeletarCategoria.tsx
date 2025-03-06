@@ -69,7 +69,7 @@ function DeletarCategoria() {
         <div 
             className="relative w-full h-screen flex justify-center items-center"
             style={{
-                backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                backgroundImage: "url('https://files.catbox.moe/uu45t4.svg')",
                 backgroundSize: "40%",
                 backgroundPosition: "50% 75%",
                 backgroundRepeat: "no-repeat"

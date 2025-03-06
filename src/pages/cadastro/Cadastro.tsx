@@ -185,7 +185,7 @@ function Cadastro() {
           <h2 className="text-[#f2daac] text-3xl font-bold">ao seu alcance</h2>
         </div>
         <div className= "flex items-end justify-end absolute bottom-0 ml-100">
-        <img src="/src/assets/comidasCadastro5.png" alt="Healthy Food" />
+        <img src="https://i.ibb.co/prbLShxm/fundo-Cadastro.png" alt="Healthy Food" />
         </div>
       </div>
     </div>

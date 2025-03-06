@@ -1,7 +1,7 @@
 import { Envelope, FacebookLogo, GithubLogo, InstagramLogo, LinkedinLogo } from '@phosphor-icons/react'
 import { ReactNode, useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Logo from '../Logo'
 
 function Footer() {
@@ -22,10 +22,10 @@ function Footer() {
                     {/* Seção superior com os textos */}
                     <div className="flex justify-between items-start pb-4 text-verde-2">
                         <div className="flex flex-col">
-                            <a href="/sobre" rel="noopener noreferrer" 
+                            <Link to="/sobre" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Sobre nós
-                            </a>
+                            </Link>
                             <a href="https://www.canva.com/design/DAGgTFMmAPI/Imc1jJLVaxkX6CjEyjqjBQ/view?utm_content=DAGgTFMmAPI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h039975e787" target="_blank" rel="noopener noreferrer" 
                                 className="text-lg hover:text-verde-1 hover:scale-105 transition-colors duration-300">
                                 | Nosso Objetivo
@@ -42,7 +42,7 @@ function Footer() {
                         <div className="flex items-center gap-4">
                             <img
                                 width="100px"
-                                src="/src/assets/logo/logo_gen_preto.svg"
+                                src="https://files.catbox.moe/afwcgx.svg"
                                 alt="Generation"
                                 className="self-start"
                             />

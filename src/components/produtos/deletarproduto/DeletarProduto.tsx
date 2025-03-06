@@ -85,7 +85,7 @@ function DeletarProduto() {
         <div 
                 className="relative w-full h-screen flex justify-center items-center"
                 style={{
-                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                    backgroundImage: "url('https://files.catbox.moe/uu45t4.svg')",
                     backgroundSize: "40%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
                     backgroundPosition: "50% 75%", // Centraliza a imagem
                     backgroundRepeat: "no-repeat" // Evita repetições

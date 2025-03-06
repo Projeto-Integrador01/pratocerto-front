@@ -10,7 +10,7 @@ function CardGrupo() {
         <p className="p-8 text-3xl bg-slate-200 h-full">
           <div className="flex justify-center mb-4">
             <img
-              src="/src/assets/integrantes/beatriz.jpg"
+              src="https://files.catbox.moe/9mftx4.jpeg"
               alt="Foto do Integrante"
               className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-lg"
             />
@@ -50,7 +50,7 @@ function CardGrupo() {
         <p className="p-8 text-3xl bg-slate-200 h-full">
           <div className="flex justify-center mb-4">
             <img
-              src="/src/assets/integrantes/danilo.jpeg"
+              src="https://files.catbox.moe/n1v37x.jpeg"
               alt="Foto do Integrante"
               className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-lg"
             />
@@ -90,7 +90,7 @@ function CardGrupo() {
         <p className="p-8 text-3xl bg-slate-200 h-full">
           <div className="flex justify-center mb-4">
             <img
-              src="/src/assets/integrantes/gabriel.jpeg"
+              src="https://files.catbox.moe/x2to7g.jpeg"
               alt="Foto do Integrante"
               className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-lg"
             />
@@ -128,7 +128,7 @@ function CardGrupo() {
         <p className="p-8 text-3xl bg-slate-200 h-full">
           <div className="flex justify-center mb-4">
             <img
-              src="/src/assets/integrantes/gustavo.jpeg"
+              src="https://files.catbox.moe/twx52j.jpeg"
               alt="Foto do Integrante"
               className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-lg"
             />
@@ -167,7 +167,7 @@ function CardGrupo() {
         <p className="p-8 text-3xl bg-slate-200 h-full">
           <div className="flex justify-center mb-4">
             <img
-              src="/src/assets/integrantes/rosilene.jpeg"
+              src="https://files.catbox.moe/grfftp.jpeg"
               alt="Foto do Integrante"
               className="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-lg"
             />

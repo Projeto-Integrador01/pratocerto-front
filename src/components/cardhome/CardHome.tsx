@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Produto {
     id: number;
@@ -44,7 +45,7 @@ const CardHome: React.FC<{ produto: Produto }> = ({ produto }) => {
         <p className="text-gray-600 mt-2 flex-grow">{produto.descricao}</p>
     </div>
 
-    <a href="/produtos" className="ml-52 hover:text-verde-1 hover:scale-110 transition duration-300">Saiba mais</a>
+    <Link to="/produtos" className="ml-52 hover:text-verde-1 hover:scale-110 transition duration-300">Saiba mais</Link>
 </div>
 
     );

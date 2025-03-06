@@ -36,7 +36,7 @@ function Login() {
         <div 
                 className="relative w-full h-screen flex justify-center items-center"
                 style={{
-                    backgroundImage: "url('/src/assets/ondaAmoebaTeste.svg')",
+                    backgroundImage: "url('https://files.catbox.moe/uu45t4.svg')",
                     backgroundSize: "60%",  // Ajusta o tamanho da imagem para 50% do seu tamanho original
                     backgroundPosition: "45% 75%", // Centraliza a imagem
                     backgroundRepeat: "no-repeat" // Evita repetições
@@ -92,7 +92,7 @@ function Login() {
                         <img
                                 width="32px"
                                 height="32px"
-                                src="/public/background/logoPuroUva.svg"
+                                src="https://files.catbox.moe/agxjwu.svg"
                                 className="self-end"
                                 alt="Prato Certo Logo"/>
                             <div className="flex flex-col items-end space-y-0.5">
