@@ -16,6 +16,7 @@ O **PratoCerto** ajuda restaurantes a organizarem seus cardápios de forma rápi
 ## 🛠 Tecnologias
 
 - 🚀 **ReactJS + TypeScript**
+- 🎨 **CSS + HTML**
 - 🎨 **TailwindCSS** (design moderno)
 - 🔄 **Context API** (gestão de estado)
 - 📡 **Axios** (integração com API)
