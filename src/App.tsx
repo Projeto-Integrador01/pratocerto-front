@@ -28,9 +28,9 @@ function App() {
              <Route path="/login" element={<Login />} />
              <Route path="/cadastro" element={<Cadastro />} />
              <Route path="/restaurantes" element={<ListaRestaurantes/>} />
-             <Route path="/form" element={<FormCategoria />} />
+             <Route path="/formcategoria" element={<FormCategoria />} />
             <Route path="/deletar" element={<DeletarCategoria />} />
-            <Route path="/categorias" element={<ListaCategoria />} />
+            <Route path="/categorias" element={<ListaCategoria/>} />
             <Route path="/cadastrarcategoria" element={<FormCategoria />} />
             <Route path="/editarcategoria/:id" element={<FormCategoria />} />
             <Route path="/deletarcategoria/:id"element={<DeletarCategoria />}/>

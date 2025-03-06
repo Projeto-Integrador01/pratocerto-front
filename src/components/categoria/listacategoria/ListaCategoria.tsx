@@ -6,7 +6,7 @@ import Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
 
-function ListaCategorias() {
+function ListaCategoria() {
   const navigate = useNavigate();
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -72,4 +72,4 @@ function ListaCategorias() {
   );
 }
 
-export default ListaCategorias;
+export default ListaCategoria;
