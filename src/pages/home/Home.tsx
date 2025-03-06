@@ -1,6 +1,5 @@
 import CardHome from "../../components/cardhome/CardHome";
 
-<<<<<<< HEAD
 const produtos = [
   { id: 1, nome: "Produto 1", descricao: "Descrição do produto 1", imagem: "/caminho/para/imagem1.jpg", link: "#" },
   { id: 2, nome: "Produto 2", descricao: "Descrição do produto 2", imagem: "/caminho/para/imagem2.jpg", link: "#" },
@@ -62,15 +61,6 @@ function Home() {
 
        </div>
   );
-=======
-                    <div className="max-w-7xl flex flex-col items-center">
-                        
-                    </div>
-                </div>
-            </div>
-        </>
-    )
->>>>>>> feature_produtos
 }
 
 export default Home;
