@@ -260,7 +260,7 @@ function FormProduto() {
                 {/* Botão */}
                 <button
                     type="submit"
-                    className="rounded bg-green-900 text-white hover:bg-green-700 font-bold py-1 text-sm"
+                    className="flex justify-center rounded bg-green-900 text-white hover:bg-green-700 font-bold py-1 text-sm cursor-pointer"
                     disabled={isLoading}
                 >
                     {isLoading ? (
