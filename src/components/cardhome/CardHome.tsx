@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Produto from "../../models/Produtos";
 
-interface Produto {
-    id: number;
-    nome: string;
-    descricao: string;
-    foto: string;
-    link: string;
-    tipoAlimento: string;
-    restaurante?: {
-        nome: string;
-    };
+interface CardHomeProps {
+    produto: Produto;
 }
 
 const CardHome: React.FC<{ produto: Produto }> = ({ produto }) => {

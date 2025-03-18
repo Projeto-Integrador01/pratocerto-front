@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+ baseURL: "https://pratocerto.onrender.com/"
 });
 
 export const cadastrarRestaurante = async (url:string, dados: object, setDados: Function) => {
