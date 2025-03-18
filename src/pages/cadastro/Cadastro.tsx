@@ -64,7 +64,7 @@ function Cadastro() {
       {/* Primeira coluna (formulário de cadastro) */}
       <div className="bg-verde-2 p-8 flex flex-col justify-start items-center w-full">
         <div className="flex items-center mb-6 w-full">
-          <Link to="/" className="text-white hover:scale-115 transition duration-300">
+          <Link to="/login" className="text-white hover:scale-115 transition duration-300">
             <ArrowLeft size={40} />
           </Link>
           <h1 className="text-white text-3xl font-bold ml-52">Cadastro</h1>

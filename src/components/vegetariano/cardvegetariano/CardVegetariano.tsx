@@ -1,14 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
 import { Link } from "react-router-dom";
+import ModalProdutoPopup from "../../produtos/modalprodutopopup/ModalProdutoPopup";
 
 interface CardVegetarianoProps {
     produto: Produto
 }
 
 function CardVegetariano({produto}: CardVegetarianoProps){
-
+    const [openModal, setOpenModal] = useState(false); // Controle do modal  
     const { usuario } = useContext(AuthContext);
     return (
       
@@ -21,7 +22,7 @@ function CardVegetariano({produto}: CardVegetarianoProps){
           className="w-full h-48 object-cover rounded-lg border-2 border-gray-400"
         />
 
-    <div className="absolute top-2 right-2 bg-verde-2 text-white text-sm font-semibold px-2 py-1 rounded-full">
+    <div className="absolute top-2 right-2 bg-[#CD8D00] text-white text-sm font-semibold px-2 py-1 rounded-full">
       {produto.tipoAlimento}
    </div>
       </div>
@@ -42,6 +43,16 @@ function CardVegetariano({produto}: CardVegetarianoProps){
 
         <p className="text-gray-600 text-sm">{produto.descricao}</p>
       </div>
+
+      <button
+        onClick={() => setOpenModal(true)}
+        className="flex justify-end text-sm p-3 hover:text-verde-1 transition duration-300 cursor-pointer"
+      >
+        Saiba mais
+      </button>
+
+      {/* Modal Produto Popup */}
+      <ModalProdutoPopup produto={produto} open={openModal} onClose={() => setOpenModal(false)} />
 
       {/* Botões de Ação (Editar/Excluir) - Condicionalmente renderizado */}
       {produto.restaurante?.id === usuario.id && (

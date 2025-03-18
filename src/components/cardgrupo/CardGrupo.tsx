@@ -194,7 +194,7 @@ function CardGrupo() {
               className="hover:scale-110 hover:text-[#181717] transition-transform duration-300"
             >
               <GithubLogo size={48} weight="thin" />
-            </a>
+            </a>  
           </div>
         </p>
       </div>

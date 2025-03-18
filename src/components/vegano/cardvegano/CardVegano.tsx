@@ -1,14 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import Produto from "../../../models/Produtos";
 import { Link } from "react-router-dom";
+import ModalProdutoPopup from "../../produtos/modalprodutopopup/ModalProdutoPopup";
 
 interface CardVeganoProps {
     produto: Produto
 }
 
 function CardVegano({produto}: CardVeganoProps){
-
+    const [openModal, setOpenModal] = useState(false); // Controle do modal   
     const { usuario } = useContext(AuthContext);
     return (
   
@@ -42,6 +43,16 @@ function CardVegano({produto}: CardVeganoProps){
     <hr className="my-4 border-t-2 border-cinza-2" />
     <p className="text-gray-600 text-sm">{produto.descricao}</p>
   </div>
+
+  <button
+        onClick={() => setOpenModal(true)}
+        className="flex justify-end text-sm p-3 hover:text-verde-1 transition duration-300 cursor-pointer"
+      >
+        Saiba mais
+      </button>
+
+      {/* Modal Produto Popup */}
+      <ModalProdutoPopup produto={produto} open={openModal} onClose={() => setOpenModal(false)} />
 
   {/* Botões de Ação (Editar/Excluir) - Condicionalmente renderizado */}
   {produto.restaurante?.id === usuario.id && (

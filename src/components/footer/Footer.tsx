@@ -77,7 +77,7 @@ function Footer() {
                             <p className="text-lg text-verde-2">Redes Sociais</p>
                             <div className="flex gap-4">
                                 <a
-                                    href="COLOCAR LINK"
+                                    href="/sobre"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-verde-2 hover:text-verde-3 hover:scale-110 transition-all duration-300">

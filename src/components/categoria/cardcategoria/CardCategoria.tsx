@@ -14,11 +14,13 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
   {/* Imagem da Categoria */}
   <div className="w-full h-52 rounded-lg overflow-hidden">
     {categoria.foto ? (
+      <Link to={`/produtos?categoria=${categoria.nome}`}>
       <img
         src={categoria.foto}
         alt={categoria.nome}
         className="w-full h-full object-cover rounded-t-lg border-2 border-gray-300"
       />
+      </Link>
     ) : (
       <div className="w-full h-full flex items-center justify-center bg-gray-200">
         <span className="text-gray-500 text-sm font-medium">Sem imagem</span>
@@ -28,8 +30,10 @@ function CardCategoria({ categoria }: CardCategoriasProps) {
 
   {/* Nome da Categoria */}
   <div className="flex-grow">
-    <h3 className="text-xl font-semibold text-verde-1 mt-4 text-center">
+    <h3 className="text-xl font-semibold text-verde-1 mt-4 text-center hover:scale-110 transition-all duration-300">
+    <Link to={`/produtos?categoria=${categoria.nome}`}>
       {categoria.nome}
+      </Link>
     </h3>
   </div>
 

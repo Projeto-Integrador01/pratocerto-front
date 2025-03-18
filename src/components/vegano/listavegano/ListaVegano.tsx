@@ -20,6 +20,11 @@ function ListaVegano() {
     const { usuario, handleLogout } = useContext(AuthContext);
     const token = usuario.token;
 
+    const [quantidadeExibida, setQuantidadeExibida] = useState(6); // Quantidade inicial de produtos
+
+    const carregarMais = () => {
+      setQuantidadeExibida((prev) => prev + 6);
+    };
 
     // Função que chama a service buscar() para receber e guardar as produtos
     async function buscarProdutos() {
@@ -68,10 +73,21 @@ function ListaVegano() {
           <div className="container flex flex-col mx-2 relative">
             {/* Cards */}
             <div className="container mx-auto my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {produtos.map((produto) => (
+              {produtos.slice(0, quantidadeExibida).map((produto) => (
                 <CardVegano key={produto.id} produto={produto} />
               ))}
             </div>
+                      {/* Botão "Ver Mais" */}
+          {quantidadeExibida < produtos.length && (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={carregarMais}
+                className="px-6 py-3 mb-10 bg-verde-2 text-white text-lg font-bold rounded-lg hover:bg-green-700 transition-all"
+              >
+                Ver Mais
+              </button>
+            </div>
+          )}
           </div>
         </div>
       </>
