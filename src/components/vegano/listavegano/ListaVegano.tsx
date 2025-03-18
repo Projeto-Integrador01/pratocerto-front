@@ -82,7 +82,7 @@ function ListaVegano() {
             <div className="flex justify-center mt-6">
               <button
                 onClick={carregarMais}
-                className="px-6 py-3 mb-10 bg-verde-2 text-white text-lg font-bold rounded-lg hover:bg-green-700 transition-all"
+                className="px-6 py-3 mb-10 bg-verde-2 text-white text-lg font-bold rounded-lg hover:bg-verde-1 transition-all cursor-pointer"
               >
                 Ver Mais
               </button>
